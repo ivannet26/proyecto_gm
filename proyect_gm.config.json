@@ -7,7 +7,7 @@
     "host": "mysql-a21bb78-sistemasnet26-321c.k.aivencloud.com",
     "port": "10658",
     "user": "avnadmin",
-    "pass": ""
+    "pass": "AVNS_3EXlVnZgr-iQnJNfzBM"
   },
   "actualizador": {
     "url_github": "https://api.github.com/repos/DiegoChu0434/Sistema-Inventario/releases/latest",

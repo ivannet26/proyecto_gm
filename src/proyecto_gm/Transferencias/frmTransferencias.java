@@ -125,6 +125,7 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
         btnGuardar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("TRANSFERENCIAS");
 
         jLabel6.setText("Fecha:");

@@ -38,6 +38,7 @@ public class frmGestionBD extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         cboBasedatos = new javax.swing.JComboBox<>();
 
+        setClosable(true);
         setTitle("Backup base de datos");
 
         btnConectar.setText("Conectar");

@@ -56,6 +56,8 @@ public class fmrListarCajaChica extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCajaChica = new javax.swing.JTable();
 
+        setClosable(true);
+
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jToolBar1.setRollover(true);

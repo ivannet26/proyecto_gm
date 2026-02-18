@@ -47,6 +47,8 @@ public class frmListarCabecera extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCabecera = new javax.swing.JTable();
 
+        setClosable(true);
+
         escritorio.setBackground(new java.awt.Color(242, 242, 242));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);

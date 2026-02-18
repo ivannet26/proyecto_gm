@@ -128,6 +128,8 @@ public class frmContactos extends javax.swing.JInternalFrame {
         btnRegresar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
 
+        setClosable(true);
+
         txtNota.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNotaKeyTyped(evt);

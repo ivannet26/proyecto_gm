@@ -35,6 +35,7 @@ public class frmRespaldarBD extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
+        setClosable(true);
         setTitle("Respaldar");
 
         jLabel4.setText("Base de datos");

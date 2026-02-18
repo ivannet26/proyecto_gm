@@ -109,6 +109,7 @@ private void configurarEstadoInicial() {
         jLabel2.setText("Descripción:");
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setForeground(java.awt.Color.white);
         setTitle("PERFIL");
@@ -229,7 +230,7 @@ private void configurarEstadoInicial() {
                         .addGap(32, 32, 32)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPerfil))
+                        .addComponent(txtPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
                     .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
