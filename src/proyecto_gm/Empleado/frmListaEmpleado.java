@@ -49,7 +49,7 @@ import proyecto_gm.ConexionBD; // Asegúrate de importar tu conexión
 
 
 public class frmListaEmpleado extends javax.swing.JInternalFrame {
-
+    private static frmListaEmpleado instancia;
     static JDesktopPane panelPadre;
 
     public frmListaEmpleado(JDesktopPane panel) {
@@ -58,6 +58,19 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         cargarAreas();
     }
     
+    public static frmListaEmpleado getInstancia(JDesktopPane panel) {
+        if (instancia == null) {
+            instancia = new frmListaEmpleado(panel);
+        }
+        return instancia;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
+    }
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -295,8 +308,8 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();

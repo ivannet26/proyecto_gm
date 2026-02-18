@@ -33,7 +33,7 @@ import proyecto_gm.ImpAsistencias;
  * @author jeanv
  */
 public class frmAsistencias extends javax.swing.JInternalFrame {
-
+    private static frmAsistencias instancia;
     Asistencia a = new Asistencia();
     static Connection conn = ConexionBD.getConnection();
 
@@ -68,6 +68,19 @@ public class frmAsistencias extends javax.swing.JInternalFrame {
 
         RowsRenderer renderer = new RowsRenderer(0);
         tblAsistencias.setDefaultRenderer(Object.class, renderer);
+    }
+    
+    public static frmAsistencias getInstancia() {
+        if (instancia == null) {
+            instancia = new frmAsistencias();
+        }
+        return instancia;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
     }
 
     private ArrayList<String> listaEmpleados = new ArrayList<>();

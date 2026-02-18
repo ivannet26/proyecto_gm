@@ -238,8 +238,8 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcontrasenaActionPerformed
    void TraerPerfil(String nombreUsuario){
         try{
-            CallableStatement cstmt = conn.prepareCall("call listar_perfilxusuario(?,?)");
-            cstmt.setString(1, "01");
+            CallableStatement cstmt = conn.prepareCall("{call listar_perfilxusuario(?,?)}");
+            cstmt.setString(1, "01"); 
             cstmt.setString(2, nombreUsuario);
             ResultSet rs = cstmt.executeQuery();
             while(rs.next()){

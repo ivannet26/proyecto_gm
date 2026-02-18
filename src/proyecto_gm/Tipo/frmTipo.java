@@ -13,7 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class frmTipo extends javax.swing.JInternalFrame {
-
+    private static frmTipo instancia;
+    
     boolean esNuevo = false;
 
     public frmTipo() {
@@ -44,6 +45,19 @@ public class frmTipo extends javax.swing.JInternalFrame {
 
         tblTipo.setCellSelectionEnabled(false);
         tblTipo.setRowSelectionAllowed(true);
+    }
+    
+    public static frmTipo getInstancia() {
+        if (instancia == null) {
+            instancia = new frmTipo();
+        }
+        return instancia;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
     }
 
     @SuppressWarnings("unchecked")
@@ -108,6 +122,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator1);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.setFocusable(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -121,6 +136,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEditar);
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnAgregar.setToolTipText("Nuevo");
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.setFocusable(false);
         btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -134,6 +150,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
         jToolBar1.add(btnAgregar);
 
         btnDeshacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
+        btnDeshacer.setToolTipText("Cancelar");
         btnDeshacer.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDeshacer.setFocusable(false);
         btnDeshacer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -147,6 +164,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
         jToolBar1.add(btnDeshacer);
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
+        btnGuardar.setToolTipText("Guardar");
         btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGuardar.setFocusable(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -160,6 +178,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
         jToolBar1.add(btnGuardar);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

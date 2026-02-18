@@ -13,14 +13,26 @@ import javax.swing.ImageIcon;
  * @author sistemas
  */
 public class frmAsistenciaImagen extends javax.swing.JInternalFrame {
-
+    private static frmAsistenciaImagen instancia;
     /**
      * Creates new form frmVerAsistenciaImagen
      */
     public frmAsistenciaImagen() {
         initComponents();
     }
+    
+    public static frmAsistenciaImagen getInstancia() {
+        if (instancia == null) {
+            instancia = new frmAsistenciaImagen();
+        }
+        return instancia;
+    }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

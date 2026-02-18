@@ -42,10 +42,8 @@ import proyecto_gm.Facultades.DatosFacultades;
  *
  */
 public class frmListaComunicacion extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form frmListaComunicacion
-     */
+    private static frmListaComunicacion instancia;
+    
     TableRowSorter<TableModel> rowSorter;
     JDesktopPane panelPadre;
 
@@ -85,6 +83,19 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
         DatosComunicacion.cargarCombo(cboFlujo, DatosComunicacion.CargarComboFlujo());
         DatosComunicacion.cargarCombo(cboEstado, DatosComunicacion.CargarComboEstado());
     }
+    
+    public static frmListaComunicacion getInstancia() {
+        if (instancia == null) {
+            instancia = new frmListaComunicacion();
+        }
+        return instancia;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,10 +110,19 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jToolBar1 = new javax.swing.JToolBar();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        btnAgregar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        rbVerTodo = new javax.swing.JRadioButton();
+        rbVerFiltrado = new javax.swing.JRadioButton();
         txtOrigenFiltro = new javax.swing.JTextField();
-        txtDestinoFiltro = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        txtDestinoFiltro = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cboFlujo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -111,15 +131,6 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
         txtFechaInicialFiltro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtFechaFinalFiltro = new javax.swing.JTextField();
-        rbVerTodo = new javax.swing.JRadioButton();
-        rbVerFiltrado = new javax.swing.JRadioButton();
-        jPanel1 = new javax.swing.JPanel();
-        jToolBar1 = new javax.swing.JToolBar();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        btnAgregar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
 
         setClosable(true);
         setForeground(java.awt.Color.lightGray);
@@ -127,6 +138,8 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("COMUNICACIONES");
         setToolTipText("");
+        setMaximumSize(new java.awt.Dimension(1381, 487));
+        setMinimumSize(new java.awt.Dimension(1381, 487));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
@@ -166,66 +179,14 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
         tblDatos.setShowGrid(true);
         jScrollPane1.setViewportView(tblDatos);
 
-        jLabel1.setText("Origen");
-
-        txtOrigenFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtOrigenFiltroKeyTyped(evt);
-            }
-        });
-
-        txtDestinoFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDestinoFiltroKeyTyped(evt);
-            }
-        });
-
-        jLabel2.setText("Destino");
-
-        jLabel3.setText("Flujo");
-
-        jLabel4.setText("Estado");
-
-        jLabel6.setText("Fecha inicial");
-
-        txtFechaInicialFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFechaInicialFiltroKeyTyped(evt);
-            }
-        });
-
-        jLabel7.setText("Fecha Final");
-
-        txtFechaFinalFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFechaFinalFiltroKeyTyped(evt);
-            }
-        });
-
-        buttonGroup1.add(rbVerTodo);
-        rbVerTodo.setText("Ver registros");
-        rbVerTodo.setName("opciones"); // NOI18N
-        rbVerTodo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbVerTodoActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(rbVerFiltrado);
-        rbVerFiltrado.setText("Ver registros filtrado");
-        rbVerFiltrado.setName("opciones"); // NOI18N
-        rbVerFiltrado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbVerFiltradoActionPerformed(evt);
-            }
-        });
-
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jToolBar1.setRollover(true);
         jToolBar1.add(jSeparator1);
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnAgregar.setToolTipText("Nuevo");
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.setFocusable(false);
         btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -238,6 +199,7 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
         jToolBar1.add(btnAgregar);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.setFocusable(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -250,6 +212,7 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEditar);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -278,7 +241,9 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,54 +252,114 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        buttonGroup1.add(rbVerTodo);
+        rbVerTodo.setText("Ver registros");
+        rbVerTodo.setName("opciones"); // NOI18N
+        rbVerTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbVerTodoActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rbVerFiltrado);
+        rbVerFiltrado.setText("Ver registros filtrado");
+        rbVerFiltrado.setName("opciones"); // NOI18N
+        rbVerFiltrado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbVerFiltradoActionPerformed(evt);
+            }
+        });
+
+        txtOrigenFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtOrigenFiltroKeyTyped(evt);
+            }
+        });
+
+        jLabel1.setText("Origen");
+
+        jLabel2.setText("Destino");
+
+        txtDestinoFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDestinoFiltroKeyTyped(evt);
+            }
+        });
+
+        jLabel3.setText("Flujo");
+
+        jLabel4.setText("Estado");
+
+        jLabel6.setText("Fecha inicial");
+
+        txtFechaInicialFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaInicialFiltroKeyTyped(evt);
+            }
+        });
+
+        jLabel7.setText("Fecha Final");
+
+        txtFechaFinalFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaFinalFiltroKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1357, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rbVerTodo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rbVerFiltrado)
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtOrigenFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addGap(2, 2, 2)
-                                .addComponent(txtDestinoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboFlujo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtFechaInicialFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtFechaFinalFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1357, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(13, 13, 13))
+                        .addComponent(rbVerTodo)
+                        .addGap(76, 76, 76)
+                        .addComponent(rbVerFiltrado)
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtOrigenFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtDestinoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboFlujo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaInicialFiltro)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFechaFinalFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rbVerFiltrado)
+                        .addComponent(rbVerTodo))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -350,10 +375,8 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
                             .addComponent(txtFechaInicialFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(txtOrigenFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rbVerFiltrado)
-                        .addComponent(rbVerTodo)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtOrigenFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -461,20 +484,6 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
     }//GEN-LAST:event_formInternalFrameActivated
 
-    private void txtOrigenFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOrigenFiltroKeyTyped
-    }//GEN-LAST:event_txtOrigenFiltroKeyTyped
-
-    private void txtDestinoFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDestinoFiltroKeyTyped
-    }//GEN-LAST:event_txtDestinoFiltroKeyTyped
-
-    private void txtFechaInicialFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaInicialFiltroKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaInicialFiltroKeyTyped
-
-    private void txtFechaFinalFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaFinalFiltroKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaFinalFiltroKeyTyped
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String origen = txtOrigenFiltro.getText().trim();
         String destino = txtDestinoFiltro.getText().trim();
@@ -512,15 +521,31 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void rbVerFiltradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbVerFiltradoActionPerformed
-        HabilitarFiltros(true);
-    }//GEN-LAST:event_rbVerFiltradoActionPerformed
-
     private void rbVerTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbVerTodoActionPerformed
         HabilitarFiltros(false);      // Desactiva todos los filtros de búsqueda
         RefrescarTabla();             // Muestra todos los registros
         //
     }//GEN-LAST:event_rbVerTodoActionPerformed
+
+    private void rbVerFiltradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbVerFiltradoActionPerformed
+        HabilitarFiltros(true);
+    }//GEN-LAST:event_rbVerFiltradoActionPerformed
+
+    private void txtOrigenFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOrigenFiltroKeyTyped
+
+    }//GEN-LAST:event_txtOrigenFiltroKeyTyped
+
+    private void txtDestinoFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDestinoFiltroKeyTyped
+
+    }//GEN-LAST:event_txtDestinoFiltroKeyTyped
+
+    private void txtFechaInicialFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaInicialFiltroKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaInicialFiltroKeyTyped
+
+    private void txtFechaFinalFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaFinalFiltroKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaFinalFiltroKeyTyped
    
     private void HabilitarFiltros(boolean habilitar) {
         txtOrigenFiltro.setEnabled(habilitar);

@@ -240,7 +240,7 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Asunto");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(20, 180, 38, 16);
+        jLabel9.setBounds(20, 190, 38, 16);
 
         txtAsunto.setColumns(20);
         txtAsunto.setRows(5);
@@ -248,7 +248,7 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtAsunto);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(70, 180, 690, 80);
+        jScrollPane1.setBounds(70, 190, 690, 80);
 
         jLabel12.setText("Estado");
         getContentPane().add(jLabel12);
@@ -274,11 +274,12 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         getContentPane().add(cboFlujo1);
         cboFlujo1.setBounds(660, 70, 100, 22);
 
-        jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jToolBar1.setRollover(true);
         jToolBar1.add(jSeparator1);
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnAgregar.setToolTipText("Nuevo");
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,6 +289,7 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         jToolBar1.add(btnAgregar);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,6 +299,7 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEditar);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,6 +309,7 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEliminar);
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
+        btnGuardar.setToolTipText("Guardar");
         btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,6 +319,7 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         jToolBar1.add(btnGuardar);
 
         btnDeshacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
+        btnDeshacer.setToolTipText("Cancelar");
         btnDeshacer.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDeshacer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,7 +331,7 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(10, 0, 750, 30);
 
-        setBounds(0, 0, 789, 353);
+        setBounds(0, 0, 780, 349);
     }// </editor-fold>//GEN-END:initComponents
     enum TipoMensaje {
         INFORMACION,

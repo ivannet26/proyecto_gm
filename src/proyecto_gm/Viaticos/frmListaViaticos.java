@@ -8,12 +8,25 @@ import javax.swing.table.*;
 import proyecto_gm.Utilitario;
 
 public class frmListaViaticos extends javax.swing.JInternalFrame {
-
+    private static frmListaViaticos instancia;
     public frmListaViaticos() {
         initComponents();
         personalizarTabla();
         cargarDatos();
     }
+    public static frmListaViaticos getInstancia() {
+        if (instancia == null) {
+            instancia = new frmListaViaticos();
+        }
+        return instancia;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
+    }
+    
 
     public void cargarDatos() {
         DefaultTableModel modelo = (DefaultTableModel) tblViatico.getModel();
@@ -94,12 +107,13 @@ public class frmListaViaticos extends javax.swing.JInternalFrame {
             tblViatico.getColumnModel().getColumn(5).setPreferredWidth(60);
         }
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jToolBar1.setRollover(true);
         jToolBar1.add(jSeparator1);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnNuevo.setToolTipText("Guardar");
         btnNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevo.setFocusable(false);
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -113,6 +127,7 @@ public class frmListaViaticos extends javax.swing.JInternalFrame {
         jToolBar1.add(btnNuevo);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.setFocusable(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -126,6 +141,7 @@ public class frmListaViaticos extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEditar);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

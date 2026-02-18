@@ -13,11 +13,24 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class fmrListarCajaChica extends javax.swing.JInternalFrame {
-    
+    private static fmrListarCajaChica instancia;
     public fmrListarCajaChica() {
         initComponents();
         personalizarHeader();
         refrescarTabla();
+    }
+    
+    public static fmrListarCajaChica getInstancia() {
+        if (instancia == null) {
+            instancia = new fmrListarCajaChica();
+        }
+        return instancia;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
     }
 
     public void refrescarTabla() {
@@ -25,7 +38,8 @@ public class fmrListarCajaChica extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         DatosCajaChica.Mostrar(modelo);
     }
-
+    
+    
     private void personalizarHeader() {
         JTableHeader header = tblCajaChica.getTableHeader();
         header.setDefaultRenderer(new DefaultTableCellRenderer() {
@@ -64,6 +78,7 @@ public class fmrListarCajaChica extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator2);
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnAgregar.setToolTipText("Nuevo");
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAgregar.setName("agregar"); // NOI18N
@@ -76,6 +91,7 @@ public class fmrListarCajaChica extends javax.swing.JInternalFrame {
         jToolBar1.add(btnAgregar);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -87,6 +103,7 @@ public class fmrListarCajaChica extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEditar);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setName("eliminar"); // NOI18N

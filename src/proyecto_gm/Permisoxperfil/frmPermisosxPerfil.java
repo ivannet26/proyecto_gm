@@ -9,13 +9,25 @@ import proyecto_gm.Utilitario;
 import proyecto_gm.Perfil.*;
 
 public class frmPermisosxPerfil extends javax.swing.JInternalFrame {
-
+    private static frmPermisosxPerfil instancia;
     private List<Perfil> listaPerfiles;
 
     public frmPermisosxPerfil() {
         initComponents();
     }
+    
+    public static frmPermisosxPerfil getInstancia() {
+        if (instancia == null) {
+            instancia = new frmPermisosxPerfil();
+        }
+        return instancia;
+    }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -9,7 +9,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableColumn;
 
 public class frmListaProveedores extends javax.swing.JInternalFrame {
-
+    private static frmListaProveedores instancia;
     private TableRowSorter<DefaultTableModel> sorter;
     private JDesktopPane panelPadre;
     private DatosProveedores datos = new DatosProveedores();
@@ -49,6 +49,20 @@ public frmListaProveedores(JDesktopPane panel) {
     txtBusqueda.addActionListener(e -> filtrarProveedores(txtBusqueda.getText().trim()));
     cargarTabla();
 }
+
+    public static frmListaProveedores getInstancia(JDesktopPane panel) {
+        if (instancia == null) {
+            instancia = new frmListaProveedores(panel);
+        }
+        return instancia;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
+    }
+
 public void cargarTabla() {
     modelo.setRowCount(0);
     List<Proveedores> lista = datos.listar();
@@ -129,6 +143,7 @@ public void cargarTabla() {
         jToolBar1.add(jSeparator2);
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnAgregar.setToolTipText("Nuevo");
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.setFocusable(false);
         btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -142,6 +157,7 @@ public void cargarTabla() {
         jToolBar1.add(btnAgregar);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.setFocusable(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -155,7 +171,7 @@ public void cargarTabla() {
         jToolBar1.add(btnEditar);
 
         btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-doc-25.png"))); // NOI18N
-        btnReporte.setToolTipText("Reporte");
+        btnReporte.setToolTipText("Generar Reporte");
         btnReporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnReporte.setFocusable(false);
         btnReporte.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -168,6 +184,7 @@ public void cargarTabla() {
         jToolBar1.add(btnReporte);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Elminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -288,7 +305,7 @@ public void cargarTabla() {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

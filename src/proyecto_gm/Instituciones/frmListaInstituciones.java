@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import proyecto_gm.Exportar;
 
 public class frmListaInstituciones extends javax.swing.JInternalFrame {
-
+    private static frmListaInstituciones instancia;
     Exportar obj;
     DefaultTableModel modelo;
 
@@ -39,6 +39,19 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
                 }
             }
         });
+    }
+    
+    public static frmListaInstituciones getInstancia() {
+        if (instancia == null) {
+            instancia = new frmListaInstituciones();
+        }
+        return instancia;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
     }
 
 
@@ -82,12 +95,13 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jToolBar1.setRollover(true);
         jToolBar1.add(jSeparator1);
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnAgregar.setToolTipText("Nuevo");
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.setFocusable(false);
         btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -100,6 +114,7 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
         jToolBar1.add(btnAgregar);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.setFocusable(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -112,6 +127,7 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEditar);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -124,7 +140,7 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEliminar);
 
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-doc-25.png"))); // NOI18N
-        btnExportar.setToolTipText("Exportar Datos");
+        btnExportar.setToolTipText("exportar Datos");
         btnExportar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnExportar.setFocusable(false);
         btnExportar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -139,7 +155,7 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
         jToolBar1.add(btnExportar);
 
         btnImportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-importar-25.png"))); // NOI18N
-        btnImportar.setToolTipText("Importar");
+        btnImportar.setToolTipText("importar datos");
         btnImportar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnImportar.setFocusable(false);
         btnImportar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

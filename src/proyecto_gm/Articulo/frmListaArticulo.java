@@ -23,6 +23,7 @@ import proyecto_gm.Categoria.DatosCategoria;
 import proyecto_gm.ConexionBD;
 
 public class frmListaArticulo extends javax.swing.JInternalFrame {
+    private static frmListaArticulo instancia;   
     
     DefaultTableModel modelo;
     List<Articulo> listaArticulos;
@@ -46,6 +47,19 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
  
         cargarDatos();
         cargarComboCategorias();
+    }
+    
+    public static frmListaArticulo getInstancia() {
+        if (instancia == null) {
+            instancia = new frmListaArticulo();
+        }
+        return instancia;
+    }
+    
+    @Override
+    public void dispose() {
+        super.dispose();
+        instancia = null;
     }
     
     public void cargarDatos() {
@@ -189,6 +203,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator2);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnNuevo.setToolTipText("Nuevo");
         btnNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,6 +213,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         jToolBar1.add(btnNuevo);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +223,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         jToolBar1.add(btnEditar);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +234,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator1);
 
         btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-doc-25.png"))); // NOI18N
+        btnReporte.setToolTipText("Generar Reporte");
         btnReporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnReporte.setFocusable(false);
         btnReporte.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

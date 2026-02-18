@@ -30,6 +30,7 @@ import proyecto_gm.Departamentos.frmDepartamentos;
 import proyecto_gm.credencial.frmCredencial;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import proyecto_gm.Archivos.frmArchivos;
 import proyecto_gm.Asistencias.frmAsistenciaImagen;
 import proyecto_gm.Empleado.frmListaEmpleado;
 import proyecto_gm.Proveedores.frmListaProveedores;
@@ -361,6 +362,7 @@ public class menu extends javax.swing.JFrame {
         subMenuModulos = new javax.swing.JMenuItem();
         subMenuDepartamentos = new javax.swing.JMenuItem();
         subMenuCredencial = new javax.swing.JMenuItem();
+        subMenuArchivos = new javax.swing.JMenuItem();
         menuSeguridad = new javax.swing.JMenu();
         subMenuUsuario = new javax.swing.JMenuItem();
         subMenuPermisosxPerfil = new javax.swing.JMenuItem();
@@ -693,6 +695,14 @@ public class menu extends javax.swing.JFrame {
         });
         menuConfiguracion.add(subMenuCredencial);
 
+        subMenuArchivos.setText("Archivos");
+        subMenuArchivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subMenuArchivosActionPerformed(evt);
+            }
+        });
+        menuConfiguracion.add(subMenuArchivos);
+
         jMenuBar1.add(menuConfiguracion);
 
         menuSeguridad.setText("Seguridad");
@@ -728,22 +738,47 @@ public class menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-            private void Abrirareas(){
-             frmArea verventana = new frmArea();
-        escritorio.add(verventana);
-        verventana.show();
-        }
+           private void Abrirareas() {
+                frmArea verventana = frmArea.getInstancia();
+                if (verventana.getParent() == null) {
+                    escritorio.add(verventana);
+                }
+                try {
+                    verventana.setVisible(true);
+                    verventana.setSelected(true);
+                    verventana.toFront();
+                } catch (java.beans.PropertyVetoException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this, e.getMessage());
+                }
+            }
         
         private void Abrirarticulos(){
-         frmListaArticulo verventana = new frmListaArticulo();
-        escritorio.add(verventana);
-        verventana.show();
+            frmListaArticulo verventana = frmListaArticulo.getInstancia();
+            if (verventana.getParent() == null) {
+                escritorio.add(verventana);
+            }
+            try {
+                verventana.setVisible(true);
+                verventana.setSelected(true);
+                verventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, e.getMessage());
+            }
         }
         
-        private void Abrirasistencias(){
-           frmAsistencias verventana = new frmAsistencias();
-        escritorio.add(verventana);
-        verventana.show(); 
+        private void Abrirasistencias() {
+            frmAsistencias verventana = frmAsistencias.getInstancia();
+
+            if (verventana.getParent() == null) {
+                escritorio.add(verventana);
+            }
+            try {
+                verventana.setVisible(true);
+                verventana.setSelected(true);
+                verventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            }
         }
         
         
@@ -756,29 +791,62 @@ public class menu extends javax.swing.JFrame {
         
         verventana.show();
         }
-        
+
         private void Abrircajachica(){
-             fmrListarCajaChica verventana = new fmrListarCajaChica();
-            escritorio.add((verventana));
-            verventana.show();
+            fmrListarCajaChica ventana = fmrListarCajaChica.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir Caja Chica: " + e.getMessage());
+            }
         }
         
-        private void Abrircargos(){
-        frmCargo verventana = new frmCargo();
-        escritorio.add(verventana);
-        verventana.show();
+        private void Abrircargos() {
+            frmCargo verventana = frmCargo.getInstancia();
+
+            if (verventana.getParent() == null) {
+                escritorio.add(verventana);
+            }
+            try {
+                verventana.setVisible(true);
+                verventana.setSelected(true);
+                verventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                Utilitario.MostrarMensaje(e.getMessage(), Utilitario.TipoMensaje.error);
+            }
         }
         
         private void Abrircarreras(){
-         frmCarreras verventana = new frmCarreras();
-        escritorio.add(verventana);
-        verventana.show();
+            frmCarreras ventana = frmCarreras.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                Utilitario.MostrarMensaje("Error al abrir módulo: " + e.getMessage(), Utilitario.TipoMensaje.error);
+            }
         }
         
         private void Abrircategorias(){
-         frmCategoria verventana = new frmCategoria();
-        escritorio.add(verventana);
-        verventana.show();
+            frmCategoria ventana = frmCategoria.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al acceder: " + e.getMessage());
+            }
         }
         private void Abrircomprobantes(){}
         private void Abrirclientes(){
@@ -786,17 +854,33 @@ public class menu extends javax.swing.JFrame {
         }
         
         private void Abrircomunicaciones(){
-        
-            frmListaComunicacion verventana = new frmListaComunicacion();
-            escritorio.add(verventana);
-            verventana.AsignarPadre(escritorio);
-            verventana.show();
+            frmListaComunicacion ventana = frmListaComunicacion.getInstancia();
+            ventana.AsignarPadre(escritorio);
+
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir comunicaciones: " + e.getMessage());
+            }
         }
         
         private void Abrircontactos(){
-        frmListaContacto verventana = new frmListaContacto();
-        escritorio.add(verventana);
-        verventana.show();
+            frmListaContacto ventana = frmListaContacto.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al abrir lista de contactos: " + e.getMessage());
+            }
         }
         
         private void Abrircontratos(){
@@ -804,16 +888,32 @@ public class menu extends javax.swing.JFrame {
         }
         
         private void Abrircuentasbancarias(){
-        frmListaCuentas verventana = new frmListaCuentas();
-        escritorio.add(verventana);
-        verventana.show();
+            frmListaCuentas ventana = frmListaCuentas.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir cuentas: " + e.getMessage());
+            }
         }
         
         private void Abrirdepartamentos(){
-        frmDepartamentos verventana = new frmDepartamentos();
-        escritorio.add(verventana);
-        verventana.setVisible(true);
-        
+            frmDepartamentos ventana = frmDepartamentos.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir departamentos: " + e.getMessage());
+            }
         }
         
         private void Abrirdetalles_asistencia(){
@@ -821,13 +921,17 @@ public class menu extends javax.swing.JFrame {
         }
         
         private void Abrirempleados(){
-//        frmEmpleado verventana = new frmEmpleado();
-//        escritorio.add(verventana);
-//        verventana.show();
-            frmListaEmpleado verventana = new frmListaEmpleado(escritorio);
-            escritorio.add(verventana);
-            verventana.show();
-        
+            frmListaEmpleado ventana = frmListaEmpleado.getInstancia(escritorio);
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir lista de empleados: " + e.getMessage());
+            }
         }
         
         private void Abrirexperiencialaboral(){
@@ -835,68 +939,147 @@ public class menu extends javax.swing.JFrame {
         }
         
         private void Abrirfacultades(){
-        frmFacultades verventana = new frmFacultades();
-        escritorio.add(verventana);
-        verventana.show();
+            frmFacultades ventana = frmFacultades.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir facultades: " + e.getMessage());
+            }
         }
         
         private void AbrirHorarios(){
-         frmListaHorarios verventana = new frmListaHorarios();
-        escritorio.add(verventana);
-        verventana.show();
+            frmListaHorarios ventana = frmListaHorarios.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al abrir lista de horarios: " + e.getMessage());
+            }
         }
         
         
         private void Abririnstitucioneseducativas(){
-         frmListaInstituciones verventana = new frmListaInstituciones();
-        escritorio.add(verventana);
-        verventana.show();
+            frmListaInstituciones ventana = frmListaInstituciones.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al abrir instituciones: " + e.getMessage());
+            }
         }
         
         private void Abrirmodulos(){
-        frmModulo verventana = new frmModulo();
-        escritorio.add(verventana);
-        verventana.show();
+            frmModulo ventana = frmModulo.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir: " + e.getMessage());
+            }
         }
         
         private void Abrirperiodos(){
-        frmPeriodos verventana = new frmPeriodos();
-        escritorio.add(verventana);
-        verventana.show();
+            frmPeriodos ventana = frmPeriodos.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir periodos: " + e.getMessage());
+            }
         }
         
         private void Abrirproveedores(){
-            frmListaProveedores verventana = new frmListaProveedores(escritorio);
-            escritorio.add(verventana);
-             //frmProveedores verventana = new frmProveedores();
-            //escritorio.add(verventana);
-        
-            verventana.show();
+            frmListaProveedores ventana = frmListaProveedores.getInstancia(escritorio);
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al abrir proveedores: " + e.getMessage());
+            }
         }
         
         private void Abrirreciboshonorarios(){
-         frmListaRecibosHonorarios verventana = new frmListaRecibosHonorarios();
-        escritorio.add(verventana);
-        verventana.show();
+            frmListaRecibosHonorarios ventana = frmListaRecibosHonorarios.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, e.getMessage());
+            }
         }
         
         private void Abrirtiposdocumentos(){
-            frmTipoDocumento verventana = new frmTipoDocumento();
-            escritorio.add(verventana);
-            verventana.show();
+            frmTipoDocumento ventana = frmTipoDocumento.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                Utilitario.MostrarMensaje("Error al abrir: " + e.getMessage(), Utilitario.TipoMensaje.error);
+            }
         }
         
         private void Abrirtiposempleados(){
-            
-         frmTipo verventana = new frmTipo();
-        escritorio.add(verventana);
-        verventana.show();
+            frmTipo ventana = frmTipo.getInstancia();
+
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir Tipos: " + e.getMessage());
+            }
         }
         
         private void Abrirtransferenciasbancarias(){
-            frmListaTransferencias verventana = new frmListaTransferencias(); // <-- CORRECCIÓN
-            escritorio.add(verventana);
-            verventana.show();
+            frmListaTransferencias ventana = frmListaTransferencias.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al acceder al módulo: " + e.getMessage());
+            }
         }
         
         private void Abrirusuarios(){
@@ -904,42 +1087,113 @@ public class menu extends javax.swing.JFrame {
         }
         
         private void Abrirviaticos(){
-            frmListaViaticos verventana = new frmListaViaticos(); // <-- CORRECCIÓN
-            escritorio.add(verventana);
-            verventana.show();
+            frmListaViaticos ventana = frmListaViaticos.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                Utilitario.MostrarMensaje("Error al abrir viáticos: " + e.getMessage(), Utilitario.TipoMensaje.error);
+            }
         }
         
         private void Abrircredencial(){
-            proyecto_gm.credencial.frmCredencial verventana = new frmCredencial();
-            escritorio.add(verventana);
-            verventana.show();
+            frmCredencial ventana = frmCredencial.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                Utilitario.MostrarMensaje("Error al abrir: " + e.getMessage(), Utilitario.TipoMensaje.error);
+            }
         }
         private void AbrirAsistenciaImagen(){
-            proyecto_gm.Asistencias.frmAsistenciaImagen verventana = new frmAsistenciaImagen();
-            escritorio.add(verventana);
-            verventana.show();
+            frmAsistenciaImagen ventana = frmAsistenciaImagen.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al abrir visor: " + e.getMessage());
+            }
         }
         
         private void AbrirUsuario(){
-            proyecto_gm.Usuario.frmUsuario verventana = new frmUsuario();
-            escritorio.add(verventana);
-            verventana.show();
+            frmUsuario ventana = frmUsuario.getInstancia();
+            if (ventana.getParent() == null) {
+                    escritorio.add(ventana);
+                try {
+                    ventana.setVisible(true);
+                    ventana.setSelected(true);
+                    ventana.toFront();
+                } catch (java.beans.PropertyVetoException e) {
+                    JOptionPane.showMessageDialog(this, "Error al abrir usuarios: " + e.getMessage());
+                }
+            }
         }
         private void AbrirMenuxperfil()
         {
-            proyecto_gm.Permisoxperfil.frmPermisosxPerfil verventana = new frmPermisosxPerfil();
-            escritorio.add(verventana);
-            verventana.show();
+            frmPermisosxPerfil ventana = frmPermisosxPerfil.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir gestión de permisos.");
+            }
         }
         private void AbrirCajaChica (){
-            proyecto_gm.CajaChica.fmrListarCajaChica verventana = new fmrListarCajaChica();
-            escritorio.add(verventana);
-            verventana.show();
+            fmrListarCajaChica ventana = fmrListarCajaChica.getInstancia();
+
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al abrir Caja Chica: " + e.getMessage());
+            }
         }
         private void AbrirPerfil(){
-            proyecto_gm.Perfil.frmPerfil verventana = new frmPerfil();
-            escritorio.add(verventana);
+            frmPerfil ventana = frmPerfil.getInstancia();
+            if (ventana.getParent() == null) {
+                escritorio.add(ventana);
+            }
+            try {
+                ventana.setVisible(true);
+                ventana.setSelected(true);
+                ventana.toFront();
+            } catch (java.beans.PropertyVetoException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir perfiles: " + e.getMessage());
+            }
+        }
+        
+       private void AbrirArchivos() {
+            proyecto_gm.Archivos.frmArchivos verventana = proyecto_gm.Archivos.frmArchivos.getInstancia();
+            if (!verventana.isShowing()) {
+                    escritorio.add(verventana);
+            }
+            try {
             verventana.show();
+            verventana.setSelected(true);
+            } catch (java.beans.PropertyVetoException e) {
+              System.err.println("Error al enfocar la ventana: " + e.getMessage());
+            }
         }
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         /*    
@@ -1097,6 +1351,10 @@ public class menu extends javax.swing.JFrame {
         AbrirHorarios();
     }//GEN-LAST:event_subMenuHorariosActionPerformed
 
+    private void subMenuArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuArchivosActionPerformed
+        AbrirArchivos();
+    }//GEN-LAST:event_subMenuArchivosActionPerformed
+
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1144,6 +1402,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JMenu menuSeguridad;
     private javax.swing.JMenu menuTesoreria;
     private javax.swing.JPanel pnlEstado;
+    private javax.swing.JMenuItem subMenuArchivos;
     private javax.swing.JMenuItem subMenuAreas;
     private javax.swing.JMenuItem subMenuArticulos;
     private javax.swing.JMenuItem subMenuBancos;
