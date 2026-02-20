@@ -45,7 +45,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import proyecto_gm.ConexionBD; // Asegúrate de importar tu conexión
+import proyecto_gm.ConexionBD; 
+import proyecto_gm.ControladorExportar;
 
 
 public class frmListaEmpleado extends javax.swing.JInternalFrame {
@@ -88,6 +89,7 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         cmbArea = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnImportar = new javax.swing.JButton();
+        btnExportarExcel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
@@ -222,17 +224,27 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btnImportar);
 
+        btnExportarExcel.setText("Excel");
+        btnExportarExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExportarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnExportarExcel)
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -636,12 +648,17 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnImportarActionPerformed
 
+    private void btnExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExcelActionPerformed
+      proyecto_gm.ControladorExportar.exportarTablaExcel(tblEmpleados); 
+    }//GEN-LAST:event_btnExportarExcelActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     public static javax.swing.JButton btnEditar;
     public static javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnExportarExcel;
     private javax.swing.JButton btnImportar;
     public static javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRefrescar;

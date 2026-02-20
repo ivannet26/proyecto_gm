@@ -21,6 +21,8 @@ import net.sf.jasperreports.view.JasperViewer;
 import proyecto_gm.Categoria.Categoria;
 import proyecto_gm.Categoria.DatosCategoria;
 import proyecto_gm.ConexionBD;
+import proyecto_gm.ControladorExportar;
+
 
 public class frmListaArticulo extends javax.swing.JInternalFrame {
     private static frmListaArticulo instancia;   
@@ -127,6 +129,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnReporte = new javax.swing.JButton();
         cmbCategoria = new javax.swing.JComboBox<>();
+        btnExportarExcel = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -253,17 +256,27 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(cmbCategoria);
 
+        btnExportarExcel.setText("Exportar");
+        btnExportarExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExportarExcel)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnExportarExcel)
         );
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
@@ -405,6 +418,10 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         gen.mostrarReporte("RPTArticulos", parametros);
     }//GEN-LAST:event_btnReporteActionPerformed
 
+    private void btnExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExcelActionPerformed
+        proyecto_gm.ControladorExportar.exportarTablaExcel(tblarticulo);
+    }//GEN-LAST:event_btnExportarExcelActionPerformed
+
     // Método para filtrar por descripción, categoría o marca
     private void filtrarArticulos(String texto) {
         try {
@@ -424,6 +441,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnExportarExcel;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
     private javax.swing.JComboBox<String> cboEstado;
