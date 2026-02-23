@@ -1378,39 +1378,39 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuProveedoresActionPerformed
 
     private void subMenuEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuEmpleadosActionPerformed
-        Abrirempleados();
+        cargarFormulario(() -> frmListaEmpleado.getInstancia(escritorio));
     }//GEN-LAST:event_subMenuEmpleadosActionPerformed
 
     private void subMenuBancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuBancosActionPerformed
-        Abrirbancos();
+        /* cargarFormulario(() -> frmBancos.getInstancia()); */
     }//GEN-LAST:event_subMenuBancosActionPerformed
 
     private void subMenuFlujoCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuFlujoCajaActionPerformed
-        Abrircajachica();
+        cargarFormulario(() -> fmrListarCajaChica.getInstancia());
     }//GEN-LAST:event_subMenuFlujoCajaActionPerformed
 
     private void subMenuCuentasBancariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuCuentasBancariasActionPerformed
-        Abrircuentasbancarias();
+        cargarFormulario(() -> frmListaCuentas.getInstancia());
     }//GEN-LAST:event_subMenuCuentasBancariasActionPerformed
 
     private void subMenuViaticosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuViaticosActionPerformed
-        Abrirviaticos();
+        cargarFormulario(() -> frmListaViaticos.getInstancia());
     }//GEN-LAST:event_subMenuViaticosActionPerformed
 
     private void subMenuPeriodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuPeriodosActionPerformed
-        Abrirperiodos();
+        cargarFormulario(() -> frmPeriodos.getInstancia());
     }//GEN-LAST:event_subMenuPeriodosActionPerformed
 
     private void subMenuCredencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuCredencialActionPerformed
-        Abrircredencial();
+        cargarFormulario(() -> frmCredencial.getInstancia());
     }//GEN-LAST:event_subMenuCredencialActionPerformed
 
     private void subMenuDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuDepartamentosActionPerformed
-        Abrirdepartamentos();
+        cargarFormulario(() -> frmDepartamentos.getInstancia());
     }//GEN-LAST:event_subMenuDepartamentosActionPerformed
 
     private void subMenuModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuModulosActionPerformed
-        Abrirmodulos();
+         cargarFormulario(() -> frmModulo.getInstancia());
     }//GEN-LAST:event_subMenuModulosActionPerformed
 
     private void subMenuRelojActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuRelojActividadActionPerformed
@@ -1418,27 +1418,27 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuRelojActividadActionPerformed
 
     private void subMenuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuUsuarioActionPerformed
-        AbrirUsuario();
+        cargarFormulario(() -> frmUsuario.getInstancia());
     }//GEN-LAST:event_subMenuUsuarioActionPerformed
 
     private void subMenuPermisosxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuPermisosxPerfilActionPerformed
-        AbrirMenuxperfil();
+        cargarFormulario(() -> frmPermisosxPerfil.getInstancia());
     }//GEN-LAST:event_subMenuPermisosxPerfilActionPerformed
 
     private void subMenuCajaChicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuCajaChicaActionPerformed
-        AbrirCajaChica();
+        cargarFormulario(() -> fmrListarCajaChica.getInstancia());
     }//GEN-LAST:event_subMenuCajaChicaActionPerformed
 
     private void subMenuPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuPerfilActionPerformed
-        AbrirPerfil();
+         cargarFormulario(() -> frmPerfil.getInstancia());
     }//GEN-LAST:event_subMenuPerfilActionPerformed
 
     private void subMenuHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuHorariosActionPerformed
-        AbrirHorarios();
+        cargarFormulario(() -> frmListaHorarios.getInstancia());
     }//GEN-LAST:event_subMenuHorariosActionPerformed
 
     private void subMenuArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuArchivosActionPerformed
-        AbrirArchivos();
+       cargarFormulario(() -> proyecto_gm.Archivos.frmArchivos.getInstancia());
     }//GEN-LAST:event_subMenuArchivosActionPerformed
 
    
