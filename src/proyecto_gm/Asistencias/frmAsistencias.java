@@ -60,6 +60,7 @@ public class frmAsistencias extends javax.swing.JInternalFrame {
                 setFont(getFont().deriveFont(Font.BOLD, 13));
                 return this;
             }
+            
         });
 
         // Cargar empleados
@@ -69,7 +70,7 @@ public class frmAsistencias extends javax.swing.JInternalFrame {
         RowsRenderer renderer = new RowsRenderer(0);
         tblAsistencias.setDefaultRenderer(Object.class, renderer);
     }
-    
+
     public static frmAsistencias getInstancia() {
         if (instancia == null) {
             instancia = new frmAsistencias();

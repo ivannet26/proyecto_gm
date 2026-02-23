@@ -306,6 +306,49 @@ public class menu extends javax.swing.JFrame {
     }
     
     
+    
+  
+    private void cargarFormulario(java.util.function.Supplier<javax.swing.JInternalFrame> cargador) {
+        // 1. Mostrar Splash inmediatamente
+        proyecto_gm.SplashCarga splash = new proyecto_gm.SplashCarga();
+        splash.setVisible(true);
+        splash.setLocationRelativeTo(null);
+
+        new Thread(() -> {
+            try {
+                for (int i = 0; i <= 15; i++) {
+                    Thread.sleep(5);
+                    splash.progreso.setValue(i);
+                }
+
+                javax.swing.JInternalFrame ventana = cargador.get();
+
+
+                for (int i = 16; i <= 100; i++) {
+                    Thread.sleep(3);
+                    splash.progreso.setValue(i);
+                }
+
+                java.awt.EventQueue.invokeLater(() -> {
+                    splash.dispose();
+                    if (ventana.getParent() == null) {
+                        escritorio.add(ventana);
+                    }
+                    try {
+                        ventana.setVisible(true);
+                        ventana.setSelected(true);
+                        ventana.toFront();
+                    } catch (java.beans.PropertyVetoException e) {
+                        System.err.println("Error de foco: " + e.getMessage());
+                    }
+                });
+            } catch (Exception e) {
+                splash.dispose();
+                JOptionPane.showMessageDialog(null, "Error al cargar: " + e.getMessage());
+            }
+        }).start();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -767,18 +810,61 @@ public class menu extends javax.swing.JFrame {
         }
         
         private void Abrirasistencias() {
-            frmAsistencias verventana = frmAsistencias.getInstancia();
+            for (javax.swing.JInternalFrame frame : escritorio.getAllFrames()) {
+                if (frame instanceof frmAsistencias) {
+                    try {
+                        frame.setSelected(true);
+                        frame.toFront();
+                        return; // Si ya existe, salimos y no mostramos splash
+                    } catch (java.beans.PropertyVetoException e) {}
+                }
+            }
 
-            if (verventana.getParent() == null) {
-                escritorio.add(verventana);
-            }
-            try {
-                verventana.setVisible(true);
-                verventana.setSelected(true);
-                verventana.toFront();
-            } catch (java.beans.PropertyVetoException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-            }
+
+            proyecto_gm.SplashCarga splash = new proyecto_gm.SplashCarga();
+            splash.setVisible(true);
+            splash.setLocationRelativeTo(null);
+
+            Thread hilo = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        // Progreso inicial simulado para dar feedback visual
+                        for (int i = 0; i <= 20; i++) {
+                            Thread.sleep(5);
+                            splash.progreso.setValue(i);
+                        }
+
+                        // 3. CARGA PESADA: Aquí ocurre la demora de la BD
+                        // Al estar dentro de run(), el Splash sigue visible y animado
+                        frmAsistencias verventana = frmAsistencias.getInstancia();
+
+                        // Progreso final tras obtener la instancia
+                        for (int i = 21; i <= 100; i++) {
+                            Thread.sleep(5);
+                            splash.progreso.setValue(i);
+                        }
+
+                        // 4. Mostrar el formulario en el hilo de despacho de eventos
+                        java.awt.EventQueue.invokeLater(() -> {
+                            splash.dispose();
+                            if (verventana.getParent() == null) {
+                                escritorio.add(verventana);
+                            }
+                            try {
+                                verventana.setVisible(true);
+                                verventana.setSelected(true);
+                                verventana.toFront();
+                            } catch (java.beans.PropertyVetoException e) {
+                                javax.swing.JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+                            }
+                        });
+                    } catch (Exception e) {
+                        splash.dispose();
+                    }
+                }
+            };
+            hilo.start();
         }
         
         
@@ -1211,15 +1297,15 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void subMenuTipoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuTipoEmpleadoActionPerformed
-        Abrirtiposempleados();
+        cargarFormulario(() -> frmTipo.getInstancia());
     }//GEN-LAST:event_subMenuTipoEmpleadoActionPerformed
 
     private void subMenuCargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuCargosActionPerformed
-        Abrircargos();
+        cargarFormulario(() -> frmCargo.getInstancia());
     }//GEN-LAST:event_subMenuCargosActionPerformed
 
     private void subMenuAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuAreasActionPerformed
-        Abrirareas();
+        cargarFormulario(() -> frmArea.getInstancia());
     }//GEN-LAST:event_subMenuAreasActionPerformed
 
     private void submenuAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submenuAsistenciaActionPerformed
@@ -1227,7 +1313,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_submenuAsistenciaActionPerformed
 
     private void subMenuTipoDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuTipoDocumentoActionPerformed
-        Abrirtiposdocumentos();
+        cargarFormulario(() -> frmTipoDocumento.getInstancia());
     }//GEN-LAST:event_subMenuTipoDocumentoActionPerformed
 
     private void submenuContratosPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submenuContratosPersonalActionPerformed
@@ -1235,35 +1321,35 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_submenuContratosPersonalActionPerformed
 
     private void subMenuReciboHonorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuReciboHonorarioActionPerformed
-        Abrirreciboshonorarios();
+        cargarFormulario(() -> frmListaRecibosHonorarios.getInstancia());
     }//GEN-LAST:event_subMenuReciboHonorarioActionPerformed
 
     private void subMenuComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuComprobanteActionPerformed
-        Abrircomprobantes();
+         /* cargarFormulario(() -> frmComprobantes.getInstancia()); */ 
     }//GEN-LAST:event_subMenuComprobanteActionPerformed
 
     private void subMenuTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuTransferenciaActionPerformed
-        Abrirtransferenciasbancarias();
+        cargarFormulario(() -> frmListaTransferencias.getInstancia());
     }//GEN-LAST:event_subMenuTransferenciaActionPerformed
 
     private void subMenuCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuCategoriaActionPerformed
-        Abrircategorias();
+        cargarFormulario(() -> frmCategoria.getInstancia());
     }//GEN-LAST:event_subMenuCategoriaActionPerformed
 
     private void subMenuArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuArticulosActionPerformed
-        Abrirarticulos();
+        cargarFormulario(() -> frmListaArticulo.getInstancia());
     }//GEN-LAST:event_subMenuArticulosActionPerformed
 
     private void subMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuClientesActionPerformed
-        Abrirclientes();
+        /* cargarFormulario(() -> frmClientes.getInstancia()); */
     }//GEN-LAST:event_subMenuClientesActionPerformed
 
     private void subMenuComunicacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuComunicacionesActionPerformed
-        Abrircomunicaciones();
+        cargarFormulario(() -> frmListaComunicacion.getInstancia());
     }//GEN-LAST:event_subMenuComunicacionesActionPerformed
 
     private void subMenuContactosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuContactosActionPerformed
-        Abrircontactos();
+         cargarFormulario(() -> frmListaContacto.getInstancia());
         
     }//GEN-LAST:event_subMenuContactosActionPerformed
 
@@ -1276,19 +1362,19 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuExpLaboralActionPerformed
 
     private void subMenuCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuCarrerasActionPerformed
-        Abrircarreras();
+        cargarFormulario(() -> frmCarreras.getInstancia());
     }//GEN-LAST:event_subMenuCarrerasActionPerformed
 
     private void subMenuInstitucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuInstitucionesActionPerformed
-        Abririnstitucioneseducativas();
+       cargarFormulario(() -> frmListaInstituciones.getInstancia());
     }//GEN-LAST:event_subMenuInstitucionesActionPerformed
 
     private void subMenuFacultadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuFacultadesActionPerformed
-        Abrirfacultades();
+        cargarFormulario(() -> frmFacultades.getInstancia());
     }//GEN-LAST:event_subMenuFacultadesActionPerformed
 
     private void subMenuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuProveedoresActionPerformed
-        Abrirproveedores();
+        cargarFormulario(() -> frmListaProveedores.getInstancia(escritorio));
     }//GEN-LAST:event_subMenuProveedoresActionPerformed
 
     private void subMenuEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuEmpleadosActionPerformed

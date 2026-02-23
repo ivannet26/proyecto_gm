@@ -495,7 +495,7 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblEmpleados.getModel();
         DatosEmpleados.Listar(modelo);
 
-        if (tblEmpleados.getColumnCount() > 12) {
+        if (tblEmpleados.getColumnCount() > 15) {
             TableColumnModel tcm = tblEmpleados.getColumnModel();
             tcm.removeColumn(tcm.getColumn(14)); 
             tcm.removeColumn(tcm.getColumn(11)); 
@@ -528,8 +528,45 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        Cargar();
-        cargarFiltroTabla();                             
+            proyecto_gm.SplashCarga splash = new proyecto_gm.SplashCarga();
+            splash.setVisible(true);
+
+            Thread hiloCarga = new Thread() {
+                @Override
+                public void run() {
+                    try {
+               
+                        for (int i = 0; i <= 80; i++) {
+                            Thread.sleep(15);
+                            splash.progreso.setValue(i);
+                        }
+
+                        java.awt.EventQueue.invokeLater(() -> {
+                            Cargar();
+                            cargarFiltroTabla();
+                        });
+
+                    
+                        for (int i = 81; i <= 100; i++) {
+                            Thread.sleep(10);
+                            splash.progreso.setValue(i);
+                        }
+
+                   
+                        java.awt.EventQueue.invokeLater(() -> {
+                            splash.dispose();
+                        });
+
+                    } catch (Exception e) {
+                        java.awt.EventQueue.invokeLater(() -> {
+                            splash.dispose();
+                        });
+                    }
+                }
+            };
+
+            hiloCarga.start();
+                                
     }//GEN-LAST:event_formInternalFrameOpened
    
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

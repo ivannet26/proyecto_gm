@@ -367,12 +367,19 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int fila = tblarticulo.getSelectedRow();
         if (fila >= 0) {
-            // Obtenemos el objeto completo de la lista
-            Articulo artSeleccionado = listaArticulos.get(fila);
-
+            int filaModelo = tblarticulo.convertRowIndexToModel(fila);
+            Articulo artSeleccionado = listaArticulos.get(filaModelo);
             frmArticulo frm = new frmArticulo(this, artSeleccionado);
+
             JDesktopPane desktopPane = getDesktopPane();
             desktopPane.add(frm);
+            frm.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
+                @Override
+                public void internalFrameClosed(javax.swing.event.InternalFrameEvent e) {
+                    cargarDatos();
+                }
+            });
+
             frm.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un artículo para editar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
