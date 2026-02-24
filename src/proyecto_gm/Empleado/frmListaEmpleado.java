@@ -85,11 +85,13 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnRefrescar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        btnReporte = new javax.swing.JToggleButton();
-        cmbArea = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        jLabel4 = new javax.swing.JLabel();
         btnImportar = new javax.swing.JButton();
         btnExportarExcel = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        cmbArea = new javax.swing.JComboBox<>();
+        btnReporte = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
@@ -188,34 +190,24 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnRefrescar);
+
+        jSeparator1.setMinimumSize(new java.awt.Dimension(100, 10));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(10, 0));
         jToolBar1.add(jSeparator1);
 
-        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-doc-25.png"))); // NOI18N
-        btnReporte.setToolTipText("Generar reporte");
-        btnReporte.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnReporte.setFocusable(false);
-        btnReporte.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnReporte.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReporteActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnReporte);
-
-        cmbArea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbAreaActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(cmbArea);
+        jSeparator2.setPreferredSize(new java.awt.Dimension(10, 0));
         jToolBar1.add(jSeparator2);
+
+        jLabel4.setText("Importar informacion");
+        jToolBar1.add(jLabel4);
 
         btnImportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-importar-25.png"))); // NOI18N
         btnImportar.setToolTipText("Importar datos");
         btnImportar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnImportar.setFocusable(false);
         btnImportar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnImportar.setMaximumSize(new java.awt.Dimension(25, 25));
+        btnImportar.setMinimumSize(new java.awt.Dimension(25, 25));
         btnImportar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnImportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,20 +223,60 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setText("Ver reporte");
+
+        cmbArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAreaActionPerformed(evt);
+            }
+        });
+
+        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-doc-25.png"))); // NOI18N
+        btnReporte.setToolTipText("Generar reporte");
+        btnReporte.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnReporte.setFocusable(false);
+        btnReporte.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnReporte.setMaximumSize(new java.awt.Dimension(25, 25));
+        btnReporte.setMinimumSize(new java.awt.Dimension(25, 25));
+        btnReporte.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbArea, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExportarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 386, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnExportarExcel)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExportarExcel)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(cmbArea, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -316,11 +348,11 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -704,6 +736,8 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
