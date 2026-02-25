@@ -3,6 +3,9 @@ package proyecto_gm.Horarios;
 public class Horarios {
     private int idhorario;
     private String dni;
+    private String Nombre_apellidos;
+    private int Idcarrera;
+    private String Descripcion;
     private String celular;
     private String lunes_he, lunes_hs;
     private String martes_he, martes_hs;
@@ -64,4 +67,17 @@ public class Horarios {
 
     public String getDomingo_hs() { return domingo_hs; }
     public void setDomingo_hs(String domingo_hs) { this.domingo_hs = domingo_hs; }
+    
+    public String getNombre_apellidos() { return Nombre_apellidos; }
+    public void setNombre_apellidos(String Nombre_apellidos) { this.Nombre_apellidos = Nombre_apellidos; }
+    
+    public int getIdcarrera() { return Idcarrera; }
+    public void setIdcarrera(int Idcarrera) { this.Idcarrera = Idcarrera; }
+
+    public String getDescripcion() {  return Descripcion; }
+    public void setDescripcion(String Descripcion) { this.Descripcion = Descripcion; }
+    
+    
+    
+    
 }

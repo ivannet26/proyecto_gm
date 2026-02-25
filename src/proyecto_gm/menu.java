@@ -309,7 +309,7 @@ public class menu extends javax.swing.JFrame {
     
   
     private void cargarFormulario(java.util.function.Supplier<javax.swing.JInternalFrame> cargador) {
-        // 1. Mostrar Splash inmediatamente
+            
         proyecto_gm.SplashCarga splash = new proyecto_gm.SplashCarga();
         splash.setVisible(true);
         splash.setLocationRelativeTo(null);
@@ -322,7 +322,8 @@ public class menu extends javax.swing.JFrame {
                 }
 
                 javax.swing.JInternalFrame ventana = cargador.get();
-
+                
+                
 
                 for (int i = 16; i <= 100; i++) {
                     Thread.sleep(3);

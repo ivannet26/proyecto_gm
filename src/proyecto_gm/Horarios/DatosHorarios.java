@@ -21,6 +21,8 @@ public class DatosHorarios {
                 Horarios h = new Horarios();
                 h.setIdhorario(rs.getInt("idhorario"));
                 h.setDni(rs.getString("dni"));
+                h.setNombre_apellidos(rs.getString("nombre_completo")); 
+                h.setDescripcion(rs.getString("descripcion")); 
                 h.setCelular(rs.getString("celular"));
                 h.setLunes_he(rs.getString("lunes_he"));
                 h.setLunes_hs(rs.getString("lunes_hs"));
@@ -39,63 +41,66 @@ public class DatosHorarios {
                 lista.add(h);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al listar horarios: " + e.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al listar horarios: " + e.getMessage());
         }
         return lista;
     }
 
     public static void insertar(Horarios h) {
         Connection conn = ConexionBD.getConnection();
-
-        try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_horario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_horario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             cstmt.setString(1, h.getDni());
-            cstmt.setString(2, h.getCelular());
-            cstmt.setString(3, h.getLunes_he());
-            cstmt.setString(4, h.getLunes_hs());
-            cstmt.setString(5, h.getMartes_he());
-            cstmt.setString(6, h.getMartes_hs());
-            cstmt.setString(7, h.getMiercoles_he());
-            cstmt.setString(8, h.getMiercoles_hs());
-            cstmt.setString(9, h.getJueves_he());
-            cstmt.setString(10, h.getJueves_hs());
-            cstmt.setString(11, h.getViernes_he());
-            cstmt.setString(12, h.getViernes_hs());
-            cstmt.setString(13, h.getSabado_he());
-            cstmt.setString(14, h.getSabado_hs());
-            cstmt.setString(15, h.getDomingo_he());
-            cstmt.setString(16, h.getDomingo_hs());
+            cstmt.setString(2, h.getNombre_apellidos()); 
+            cstmt.setInt(3, h.getIdcarrera());          
+            cstmt.setString(4, h.getCelular());
+            cstmt.setString(5, h.getLunes_he());
+            cstmt.setString(6, h.getLunes_hs());
+            cstmt.setString(7, h.getMartes_he());
+            cstmt.setString(8, h.getMartes_hs());
+            cstmt.setString(9, h.getMiercoles_he());
+            cstmt.setString(10, h.getMiercoles_hs());
+            cstmt.setString(11, h.getJueves_he());
+            cstmt.setString(12, h.getJueves_hs());
+            cstmt.setString(13, h.getViernes_he());
+            cstmt.setString(14, h.getViernes_hs());
+            cstmt.setString(15, h.getSabado_he());
+            cstmt.setString(16, h.getSabado_hs());
+            cstmt.setString(17, h.getDomingo_he());
+            cstmt.setString(18, h.getDomingo_hs());
             cstmt.execute();
-            JOptionPane.showMessageDialog(null, "Horario registrado exitosamente.", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Horario registrado exitosamente.");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al insertar horario: " + ex.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al insertar: " + ex.getMessage());
         }
     }
 
     public static void actualizar(Horarios h) {
         Connection conn = ConexionBD.getConnection();
-
-        try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_horario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
+ 
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_horario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             cstmt.setInt(1, h.getIdhorario());
             cstmt.setString(2, h.getDni());
-            cstmt.setString(3, h.getCelular());
-            cstmt.setString(4, h.getLunes_he());
-            cstmt.setString(5, h.getLunes_hs());
-            cstmt.setString(6, h.getMartes_he());
-            cstmt.setString(7, h.getMartes_hs());
-            cstmt.setString(8, h.getMiercoles_he());
-            cstmt.setString(9, h.getMiercoles_hs());
-            cstmt.setString(10, h.getJueves_he());
-            cstmt.setString(11, h.getJueves_hs());
-            cstmt.setString(12, h.getViernes_he());
-            cstmt.setString(13, h.getViernes_hs());
-            cstmt.setString(14, h.getSabado_he());
-            cstmt.setString(15, h.getSabado_hs());
-            cstmt.setString(16, h.getDomingo_he());
-            cstmt.setString(17, h.getDomingo_hs());
+            cstmt.setString(3, h.getNombre_apellidos()); 
+            cstmt.setInt(4, h.getIdcarrera());          
+            cstmt.setString(5, h.getCelular());
+            cstmt.setString(6, h.getLunes_he());
+            cstmt.setString(7, h.getLunes_hs());
+            cstmt.setString(8, h.getMartes_he());
+            cstmt.setString(9, h.getMartes_hs());
+            cstmt.setString(10, h.getMiercoles_he());
+            cstmt.setString(11, h.getMiercoles_hs());
+            cstmt.setString(12, h.getJueves_he());
+            cstmt.setString(13, h.getJueves_hs());
+            cstmt.setString(14, h.getViernes_he());
+            cstmt.setString(15, h.getViernes_hs());
+            cstmt.setString(16, h.getSabado_he());
+            cstmt.setString(17, h.getSabado_hs());
+            cstmt.setString(18, h.getDomingo_he());
+            cstmt.setString(19, h.getDomingo_hs());
             cstmt.execute();
-            JOptionPane.showMessageDialog(null, "Horario actualizado exitosamente.", "Actualización Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Horario actualizado exitosamente.");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar horario: " + ex.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al actualizar: " + ex.getMessage());
         }
     }
 

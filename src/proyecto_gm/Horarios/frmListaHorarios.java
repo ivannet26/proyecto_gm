@@ -21,6 +21,8 @@ public frmListaHorarios() {
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Celular");
+        modelo.addColumn("Nombres y Apellidos");
+        modelo.addColumn("Carrera");
         modelo.addColumn("Lunes");
         modelo.addColumn("Martes");
         modelo.addColumn("Miércoles");
@@ -59,9 +61,11 @@ public frmListaHorarios() {
 
         for (Horarios h : listaHorarios) {
             modelo.addRow(new Object[]{
-                h.getIdhorario(),
-                h.getDni(),
-                h.getCelular(),
+                h.getIdhorario(),                 
+                h.getDni(),                       
+                h.getCelular(),                    
+                h.getNombre_apellidos(),           
+                h.getDescripcion(),
                 h.getLunes_he() + " - " + h.getLunes_hs(),
                 h.getMartes_he() + " - " + h.getMartes_hs(),
                 h.getMiercoles_he() + " - " + h.getMiercoles_hs(),
