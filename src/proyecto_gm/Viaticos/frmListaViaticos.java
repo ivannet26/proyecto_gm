@@ -11,7 +11,7 @@ public class frmListaViaticos extends javax.swing.JInternalFrame {
     private static frmListaViaticos instancia;
     public frmListaViaticos() {
         initComponents();
-        personalizarTabla();
+        //personalizarTabla();
         cargarDatos();
     }
     public static frmListaViaticos getInstancia() {

@@ -57,6 +57,7 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         initComponents();
         this.panelPadre = panel;
         cargarAreas();
+        ocultarColumnas();
     }
     
     public static frmListaEmpleado getInstancia(JDesktopPane panel) {
@@ -139,7 +140,6 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         tblEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblEmpleados.setFocusable(false);
         tblEmpleados.setRowHeight(25);
-        tblEmpleados.setSelectionBackground(new java.awt.Color(153, 153, 153));
         tblEmpleados.setShowGrid(true);
         tblEmpleados.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblEmpleados);
@@ -216,7 +216,7 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btnImportar);
 
-        btnExportarExcel.setText("Excel");
+        btnExportarExcel.setText("Exportar Excel");
         btnExportarExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportarExcelActionPerformed(evt);
@@ -258,8 +258,8 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
                 .addGap(4, 4, 4)
                 .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnExportarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 386, Short.MAX_VALUE))
+                .addComponent(btnExportarExcel)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,7 +325,7 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
                 .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +358,13 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void ocultarColumnas() {
+        TableColumnModel tcm = tblEmpleados.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(14)); 
+        tcm.removeColumn(tcm.getColumn(11)); 
+        tcm.removeColumn(tcm.getColumn(9));  
+    }
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
      frmEmpleado frm = new frmEmpleado(null,Utilitario.EstadoProceso.NUEVO);
      panelPadre.add(frm);
@@ -718,7 +724,8 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnImportarActionPerformed
 
     private void btnExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExcelActionPerformed
-      proyecto_gm.ControladorExportar.exportarTablaExcel(tblEmpleados); 
+        proyecto_gm.ControladorExportar.exportarTablaExcel(tblEmpleados);
+        JOptionPane.showMessageDialog(this, "Exportación exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnExportarExcelActionPerformed
 
 

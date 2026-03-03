@@ -12,6 +12,12 @@ public class frmListaTransferencias extends javax.swing.JInternalFrame {
 
     public frmListaTransferencias() {
         initComponents();
+        modelo = new DefaultTableModel() {
+        @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         // Configurar el modelo de la tabla
         modelo = new DefaultTableModel();
         modelo.addColumn("ID");
@@ -85,7 +91,7 @@ public class frmListaTransferencias extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -94,7 +100,6 @@ public class frmListaTransferencias extends javax.swing.JInternalFrame {
         });
         tblTransferencias.setFocusable(false);
         tblTransferencias.setRowHeight(25);
-        tblTransferencias.setSelectionBackground(new java.awt.Color(153, 153, 153));
         tblTransferencias.setShowGrid(true);
         tblTransferencias.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblTransferencias);

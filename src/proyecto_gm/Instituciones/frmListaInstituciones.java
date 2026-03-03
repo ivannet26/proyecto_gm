@@ -12,14 +12,25 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
 
     public frmListaInstituciones() {
         initComponents();
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel() {
+        @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+       
         modelo.addColumn("ID");
         modelo.addColumn("RUC");
         modelo.addColumn("RAZÓN SOCIAL");
         modelo.addColumn("DIRECCIÓN");
         modelo.addColumn("SEDE");
-        this.tblInstituciones.setModel(modelo);
+       this.tblInstituciones.setModel(modelo);
 
+        tblInstituciones.setShowGrid(true); 
+        tblInstituciones.setGridColor(java.awt.Color.BLACK);
+        tblInstituciones.setShowHorizontalLines(true);
+        tblInstituciones.setShowVerticalLines(true);
+       
         // cargar datos desde la BD
         DatosInstituciones.mostrarDatos(modelo);
 

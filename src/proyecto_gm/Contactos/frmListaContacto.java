@@ -207,7 +207,15 @@ public class frmListaContacto extends javax.swing.JInternalFrame {
             new String [] {
                 "Id", "Nombre", "Fecha Nacimiento", "Personas Rel.", "Empresa", "Cargo", "Correo", "Telefono", "Departamento", "Direccion", "Notas"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblContacto);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

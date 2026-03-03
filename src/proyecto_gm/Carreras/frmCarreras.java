@@ -20,8 +20,13 @@ public class frmCarreras extends javax.swing.JInternalFrame {
 
     public frmCarreras() {
         initComponents();
+        modelo = new DefaultTableModel() {
+        @Override
+            public boolean isCellEditable(int row, int column) {
+            return false; 
+            }
+        };
         
-        modelo = new DefaultTableModel();
         modelo.addColumn("ID");
         modelo.addColumn("DESCRIPCIÓN");
         tblCarreras.setModel(modelo);
@@ -33,6 +38,11 @@ public class frmCarreras extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblCarreras.getModel();
         sorter = new javax.swing.table.TableRowSorter<>(modelo);
         tblCarreras.setRowSorter(sorter);
+        tblCarreras.setRowSorter(sorter);
+        tblCarreras.setShowGrid(true); 
+        tblCarreras.setGridColor(java.awt.Color.BLACK);
+        tblCarreras.setShowHorizontalLines(true);
+        tblCarreras.setShowVerticalLines(true);
 
         // Buscar al presionar Enter
         txtBusqueda.addActionListener(e -> filtrarCarreras(txtBusqueda.getText().trim()));
@@ -174,7 +184,15 @@ public class frmCarreras extends javax.swing.JInternalFrame {
             new String [] {
                 "ID", "DESCRIPCIÓN"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCarreras);
 
         jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -293,7 +311,8 @@ public class frmCarreras extends javax.swing.JInternalFrame {
                 .addGap(7, 7, 7)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -2,13 +2,13 @@ package proyecto_gm;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 
 public class ControladorExportar {
 
@@ -28,21 +28,21 @@ public class ControladorExportar {
                 ruta += ".xlsx";
             }
 
-            try (Workbook workbook = new XSSFWorkbook()) {
+            Workbook workbook = new XSSFWorkbook();
+            try {
                 Sheet sheet = workbook.createSheet("Datos");
 
-               
                 Font headerFont = workbook.createFont();
-                headerFont.setBold(true);
+                headerFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
                 headerFont.setColor(IndexedColors.WHITE.getIndex());
 
                 CellStyle headerCellStyle = workbook.createCellStyle();
                 headerCellStyle.setFont(headerFont);
                 headerCellStyle.setFillForegroundColor(IndexedColors.DARK_BLUE.getIndex());
-                headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-                headerCellStyle.setAlignment(HorizontalAlignment.CENTER);
+                
+                headerCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+                headerCellStyle.setAlignment(CellStyle.ALIGN_CENTER);
 
-              
                 Row headerRow = sheet.createRow(0);
                 for (int i = 0; i < tabla.getColumnCount(); i++) {
                     Cell cell = headerRow.createCell(i);
@@ -50,7 +50,6 @@ public class ControladorExportar {
                     cell.setCellStyle(headerCellStyle);
                 }
 
-             
                 for (int f = 0; f < tabla.getRowCount(); f++) {
                     Row row = sheet.createRow(f + 1);
                     for (int c = 0; c < tabla.getColumnCount(); c++) {
@@ -61,22 +60,20 @@ public class ControladorExportar {
                     }
                 }
 
-               
                 for (int i = 0; i < tabla.getColumnCount(); i++) {
                     sheet.autoSizeColumn(i);
                 }
 
-                
                 try (FileOutputStream out = new FileOutputStream(new File(ruta))) {
                     workbook.write(out);
-                    JOptionPane.showMessageDialog(null, "Archivo exportado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 }
 
             } catch (NoClassDefFoundError e) {
-                JOptionPane.showMessageDialog(null, "Error: Librería faltante o desactualizada (Commons IO).", "Error Crítico", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error: Librería faltante o desactualizada.", "Error Crítico", JOptionPane.ERROR_MESSAGE);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error al exportar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
         }
     }
 }

@@ -16,8 +16,15 @@ public class frmListaHorarios extends javax.swing.JInternalFrame {
 
 public frmListaHorarios() {
         initComponents();
-
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel() {
+        @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Esto hace que ninguna celda se pueda editar
+            }
+        };
+        
+        
+       
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Celular");
@@ -30,6 +37,7 @@ public frmListaHorarios() {
         modelo.addColumn("Viernes");
         modelo.addColumn("Sábado");
         modelo.addColumn("Domingo");
+        
         tblHorario.setModel(modelo);
  
         sorter = new TableRowSorter<>(modelo);
@@ -108,7 +116,15 @@ public frmListaHorarios() {
             new String [] {
                 "ID", "DNI", "TELEFONO", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblHorario);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

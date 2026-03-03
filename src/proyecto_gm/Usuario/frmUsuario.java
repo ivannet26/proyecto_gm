@@ -133,7 +133,15 @@ public class frmUsuario extends frmMantenimientoBasico {
             new String [] {
                 "ID", "Username", "Contraseña", "Estado", "Perfil"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblUsuario);
 
         jLabel8.setText("Perfil");

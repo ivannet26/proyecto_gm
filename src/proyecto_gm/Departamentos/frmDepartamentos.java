@@ -205,7 +205,15 @@ public class frmDepartamentos extends javax.swing.JInternalFrame {
             new String [] {
                 "ID", "DESCRIPCIÓN"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblDepartamentos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

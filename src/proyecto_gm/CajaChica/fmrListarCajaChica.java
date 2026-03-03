@@ -16,7 +16,7 @@ public class fmrListarCajaChica extends javax.swing.JInternalFrame {
     private static fmrListarCajaChica instancia;
     public fmrListarCajaChica() {
         initComponents();
-        personalizarHeader();
+        //personalizarHeader();
         refrescarTabla();
     }
     
@@ -145,7 +145,15 @@ public class fmrListarCajaChica extends javax.swing.JInternalFrame {
             new String [] {
                 "Id", "N° Transacción:", "Fecha", "Descripcion", "Entrada", "Salida", "Saldo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblCajaChica.setFocusable(false);
         tblCajaChica.setRowHeight(25);
         tblCajaChica.setSelectionBackground(new java.awt.Color(153, 153, 153));

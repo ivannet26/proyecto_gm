@@ -40,8 +40,7 @@ public class frmListaRecibosHonorarios extends javax.swing.JInternalFrame {
             "Imp. Total", "Fec. Emisión"
         };
 
-        modelo = new DefaultTableModel(null, titulos);
-        tblHonorarios.setModel(modelo);
+        modelo = (DefaultTableModel) tblHonorarios.getModel();
         DatosRecibosHonorarios.Mostrar(modelo);
     }
     
@@ -89,7 +88,6 @@ public class frmListaRecibosHonorarios extends javax.swing.JInternalFrame {
         });
         tblHonorarios.setFocusable(false);
         tblHonorarios.setRowHeight(25);
-        tblHonorarios.setSelectionBackground(new java.awt.Color(153, 153, 153));
         tblHonorarios.setShowGrid(true);
         tblHonorarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblHonorarios);

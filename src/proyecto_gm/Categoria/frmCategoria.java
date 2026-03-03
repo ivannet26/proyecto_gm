@@ -16,11 +16,12 @@ public class frmCategoria extends javax.swing.JInternalFrame {
     public frmCategoria() {
         initComponents();
         setTitle("Categorías");
-        modelo = new DefaultTableModel();
-        modelo.addColumn("ID");
-        modelo.addColumn("DESCRIPCIÓN");
-        tblCategoria.setModel(modelo);
-        
+        modelo = (DefaultTableModel) tblCategoria.getModel();
+        tblCategoria.setShowGrid(true); 
+        tblCategoria.setGridColor(java.awt.Color.BLACK);
+        tblCategoria.setShowHorizontalLines(true);
+        tblCategoria.setShowVerticalLines(true);
+        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK));
         cargarDatos();
         gestionarControles(false); 
     }

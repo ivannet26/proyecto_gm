@@ -34,7 +34,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
     public frmListaArticulo() {
         initComponents();
         
-        modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel) tblarticulo.getModel();
         modelo.addColumn("ID");
         modelo.addColumn("Descripción");
         modelo.addColumn("Características");
@@ -46,7 +46,11 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         // Asignar el sorter para permitir filtrado dinámico
         sorter = new TableRowSorter<>(modelo);
         tblarticulo.setRowSorter(sorter);
- 
+        tblarticulo.setShowGrid(true); 
+        tblarticulo.setGridColor(java.awt.Color.BLACK);
+        tblarticulo.setShowHorizontalLines(true);
+        tblarticulo.setShowVerticalLines(true);
+        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK));
         cargarDatos();
         cargarComboCategorias();
     }
@@ -143,7 +147,15 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
             new String [] {
                 "IdArticulo", "Categoria", "Marca", "Caracteristicas", "Descripcion", "Cantidad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblarticulo);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -256,7 +268,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(cmbCategoria);
 
-        btnExportarExcel.setText("Exportar");
+        btnExportarExcel.setText("Exportar Excel");
         btnExportarExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportarExcelActionPerformed(evt);
@@ -427,6 +439,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
 
     private void btnExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExcelActionPerformed
         proyecto_gm.ControladorExportar.exportarTablaExcel(tblarticulo);
+        JOptionPane.showMessageDialog(this, "Exportación exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnExportarExcelActionPerformed
 
     // Método para filtrar por descripción, categoría o marca

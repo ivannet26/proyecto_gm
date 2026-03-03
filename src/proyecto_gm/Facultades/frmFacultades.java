@@ -18,12 +18,22 @@ public class frmFacultades extends javax.swing.JInternalFrame {
 
     public frmFacultades() {
         initComponents();
-        
+        modelo = new DefaultTableModel() {
+        @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; 
+            }
+        };
         // Configuración inicial de la tabla
-        modelo = new DefaultTableModel();
         modelo.addColumn("ID");
         modelo.addColumn("DESCRIPCIÓN");
         tblFacultades.setModel(modelo);
+        
+        tblFacultades.setShowGrid(true); 
+        tblFacultades.setGridColor(java.awt.Color.BLACK);
+        tblFacultades.setShowHorizontalLines(true);
+        tblFacultades.setShowVerticalLines(true);
+        
         
         cargarDatos();
         gestionarControles(false); 
@@ -228,7 +238,15 @@ public class frmFacultades extends javax.swing.JInternalFrame {
             new String [] {
                 "ID", "DESCRIPCIÓN"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblFacultades);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

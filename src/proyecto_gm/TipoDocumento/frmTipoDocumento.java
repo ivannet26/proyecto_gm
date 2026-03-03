@@ -19,6 +19,12 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblTipoDocumento.getModel();
         DatosTipoDocumento.Habilitar(escritorio, false);
         inicializaComboCategoria();
+        
+        tblTipoDocumento.setShowGrid(true); 
+        tblTipoDocumento.setGridColor(java.awt.Color.BLACK);
+        tblTipoDocumento.setShowHorizontalLines(true);
+        tblTipoDocumento.setShowVerticalLines(true);
+        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK));
 
         DatosTipoDocumento.Mostrar(modelo);
         tblTipoDocumento.setCellSelectionEnabled(false);

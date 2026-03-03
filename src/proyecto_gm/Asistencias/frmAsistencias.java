@@ -55,8 +55,8 @@ public class frmAsistencias extends javax.swing.JInternalFrame {
                     int column) {
                 super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
-                setBackground(Color.DARK_GRAY);
-                setForeground(Color.WHITE);
+                //setBackground(Color.DARK_GRAY);
+                //setForeground(Color.WHITE);
                 setFont(getFont().deriveFont(Font.BOLD, 13));
                 return this;
             }
@@ -204,7 +204,7 @@ public class frmAsistencias extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -223,17 +223,11 @@ public class frmAsistencias extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblAsistencias);
         if (tblAsistencias.getColumnModel().getColumnCount() > 0) {
-            tblAsistencias.getColumnModel().getColumn(0).setResizable(false);
             tblAsistencias.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tblAsistencias.getColumnModel().getColumn(1).setResizable(false);
             tblAsistencias.getColumnModel().getColumn(1).setPreferredWidth(30);
-            tblAsistencias.getColumnModel().getColumn(2).setResizable(false);
             tblAsistencias.getColumnModel().getColumn(2).setPreferredWidth(30);
-            tblAsistencias.getColumnModel().getColumn(3).setResizable(false);
             tblAsistencias.getColumnModel().getColumn(3).setPreferredWidth(30);
-            tblAsistencias.getColumnModel().getColumn(4).setResizable(false);
             tblAsistencias.getColumnModel().getColumn(4).setPreferredWidth(30);
-            tblAsistencias.getColumnModel().getColumn(5).setResizable(false);
             tblAsistencias.getColumnModel().getColumn(5).setPreferredWidth(260);
         }
 

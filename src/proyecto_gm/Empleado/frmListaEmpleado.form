@@ -158,9 +158,6 @@
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="rowHeight" type="int" value="25"/>
-            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="99" red="99" type="rgb"/>
-            </Property>
             <Property name="showGrid" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
@@ -193,8 +190,8 @@
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="btnReporte" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnExportarExcel" min="-2" pref="60" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="386" max="32767" attributes="0"/>
+                  <Component id="btnExportarExcel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -358,7 +355,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnExportarExcel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Excel"/>
+            <Property name="text" type="java.lang.String" value="Exportar Excel"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportarExcelActionPerformed"/>
@@ -432,7 +429,7 @@
                   <Component id="cboEstado" min="-2" pref="108" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="256" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
