@@ -11,11 +11,12 @@ import proyecto_gm.ConexionBD;
 
 public class DatosDepartamentos {
     
+    static final Connection conn = ConexionBD.getConnection();
+    
     public List<Departamentos> listar() {
         List<Departamentos> lista = new ArrayList<>();
         // Usamos try-with-resources para asegurar que la conexión se cierre
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL listar_departamentos() }");
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_departamentos() }");
              ResultSet rs = cstmt.executeQuery()) {
             
             while (rs.next()) {
@@ -34,8 +35,7 @@ public class DatosDepartamentos {
     public boolean insertar(Departamentos departamento) {
       // Asumiendo que el SP para insertar solo necesita la descripción
       String sql = "{ CALL insertar_departamentos(?, ?) }"; 
-      try (Connection conn = ConexionBD.getConnection();
-           CallableStatement cstmt = conn.prepareCall(sql)) {
+      try (CallableStatement cstmt = conn.prepareCall(sql)) {
           cstmt.setInt(1, 0);
           cstmt.setString(2, departamento.getDescripcion());
           return cstmt.executeUpdate() > 0;
@@ -48,8 +48,7 @@ public class DatosDepartamentos {
 
     public boolean actualizar(Departamentos departamento) {
       String sql = "{ CALL actualizar_departamentos(?, ?) }";
-      try (Connection conn = ConexionBD.getConnection();
-           CallableStatement cstmt = conn.prepareCall(sql)) {
+      try (CallableStatement cstmt = conn.prepareCall(sql)) {
           cstmt.setInt(1, departamento.getId());
           cstmt.setString(2, departamento.getDescripcion());
           return cstmt.executeUpdate() > 0;
@@ -63,8 +62,7 @@ public class DatosDepartamentos {
     public boolean eliminar(int idDepartamento) {
         String sql = "{ CALL eliminar_departamentos(?) }";
         
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
             
             cstmt.setInt(1, idDepartamento);
             return cstmt.executeUpdate() > 0;

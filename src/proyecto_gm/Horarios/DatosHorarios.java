@@ -10,10 +10,11 @@ import javax.swing.JOptionPane;
 import proyecto_gm.ConexionBD;
 
 public class DatosHorarios {
+    
+    static final Connection conn = ConexionBD.getConnection();
 
     public static List<Horarios> listar() {
         List<Horarios> lista = new ArrayList<>();
-        Connection conn = ConexionBD.getConnection();
 
         try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_horario() }")) {
             ResultSet rs = cstmt.executeQuery();
@@ -47,7 +48,6 @@ public class DatosHorarios {
     }
 
     public static void insertar(Horarios h) {
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_horario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             cstmt.setString(1, h.getDni());
             cstmt.setString(2, h.getNombre_apellidos()); 
@@ -75,8 +75,6 @@ public class DatosHorarios {
     }
 
     public static void actualizar(Horarios h) {
-        Connection conn = ConexionBD.getConnection();
- 
         try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_horario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             cstmt.setInt(1, h.getIdhorario());
             cstmt.setString(2, h.getDni());
@@ -105,8 +103,6 @@ public class DatosHorarios {
     }
 
     public static void eliminar(int id) {
-        Connection conn = ConexionBD.getConnection();
-
         try (CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_horario(?) }")) {
             cstmt.setInt(1, id);
             cstmt.execute();

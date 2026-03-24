@@ -62,7 +62,6 @@ public class DatosInstituciones {
 
 
     public static void eliminarDatos(JTable tabla, int filaModelo) { 
-
     String id = tabla.getModel().getValueAt(filaModelo, 0).toString(); 
     int confirm = JOptionPane.showConfirmDialog(null, "¿Está seguro de que quiere eliminar la fila seleccionada?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 

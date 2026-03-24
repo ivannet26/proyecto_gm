@@ -11,11 +11,11 @@ import proyecto_gm.ConexionBD;
 
 public class DatosArea {
 
+    static final Connection conn = ConexionBD.getConnection();
+    
     public static List<Area> listar() {
         List<Area> listaAreas = new ArrayList<>();
-        Connection conn = null;
-        try {
-            conn = ConexionBD.getConnection();
+        
             try (CallableStatement stmt = conn.prepareCall("CALL listar_areas()"); 
                  ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -23,7 +23,7 @@ public class DatosArea {
                     listaAreas.add(area);
                 }
             }
-        } catch (SQLException ex) {
+        catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             // CORRECCIÓN AQUÍ
@@ -37,15 +37,12 @@ public class DatosArea {
     }
 
     public static boolean insertar(Area area) {
-        Connection conn = null;
         boolean exito = false;
-        try {
-            conn = ConexionBD.getConnection();
             try (CallableStatement stmt = conn.prepareCall("{CALL insertar_areas(?)}")) {
                 stmt.setString(1, area.getDescripcionArea());
                 if (stmt.executeUpdate() > 0) exito = true;
             }
-        } catch (SQLException ex) {
+        catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al insertar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             // CORRECCIÓN AQUÍ
@@ -59,16 +56,13 @@ public class DatosArea {
     }
 
     public static boolean actualizar(Area area) {
-        Connection conn = null;
         boolean exito = false;
-        try {
-            conn = ConexionBD.getConnection();
             try (CallableStatement stmt = conn.prepareCall("{CALL actualizar_areas(?, ?)}")) {
                 stmt.setInt(1, area.getIdArea());
                 stmt.setString(2, area.getDescripcionArea());
                 if (stmt.executeUpdate() > 0) exito = true;
             }
-        } catch (SQLException ex) {
+            catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al actualizar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             // CORRECCIÓN AQUÍ
@@ -82,16 +76,13 @@ public class DatosArea {
     }
 
     public static boolean eliminar(int idArea) {
-        Connection conn = null;
         boolean exito = false;
-        try {
-            conn = ConexionBD.getConnection();
             try (CallableStatement stmt = conn.prepareCall("{CALL eliminar_areas(?)}")) {
                 stmt.setInt(1, idArea);
                 stmt.execute();
                 exito = true;
             }
-        } catch (SQLException ex) {
+            catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             // CORRECCIÓN AQUÍ

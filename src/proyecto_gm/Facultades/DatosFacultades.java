@@ -10,11 +10,9 @@ import javax.swing.JOptionPane;
 import proyecto_gm.ConexionBD;
 
 public class DatosFacultades {
-
+    static final Connection conn = ConexionBD.getConnection();
     public static List<Facultades> listar() {
             List<Facultades> lista = new ArrayList<>();
-            Connection conn = ConexionBD.getConnection();
-
             try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_facultades() }")) {
                 ResultSet rs = cstmt.executeQuery();
                 while (rs.next()) {
@@ -30,7 +28,6 @@ public class DatosFacultades {
         }
 
     public static void insertar(Facultades facultad) {
-        Connection conn = ConexionBD.getConnection();
         
         try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_facultades(?) }")) {
             cstmt.setString(1, facultad.getDescripcion());
@@ -41,10 +38,8 @@ public class DatosFacultades {
         }
     }
 
-
     public static void actualizar(Facultades facultad) {
-        Connection conn = ConexionBD.getConnection();
-        
+
         try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_facultades(?, ?) }")) {
             cstmt.setInt(1, facultad.getId());
             cstmt.setString(2, facultad.getDescripcion());
@@ -55,9 +50,7 @@ public class DatosFacultades {
         }
     }
 
-
     public static void eliminar(int id) {
-        Connection conn = ConexionBD.getConnection();
         
         try (CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_facultades(?) }")) {
             cstmt.setInt(1, id);

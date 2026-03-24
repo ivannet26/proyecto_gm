@@ -145,7 +145,6 @@ public class DatosAsistencia {
         ArrayList<String> empleados = new ArrayList<>();
 
         try ( 
-                Connection conn = ConexionBD.getConnection();  
                 PreparedStatement stmt = conn.prepareCall("CALL ObtenerEmpleadosOrdenados()");  
                 java.sql.ResultSet rs = stmt.executeQuery()) {
 

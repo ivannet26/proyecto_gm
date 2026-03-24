@@ -14,10 +14,11 @@ import proyecto_gm.ConexionBD;
 
 public class DatosArchivos {
 
+    static final Connection con = ConexionBD.getConnection();
+    
     public boolean guardarPDF(File archivo) {
         String sql = "INSERT INTO documentos_pdf (nombre_archivo, extension, contenido_bytes, fecha_guardado) VALUES (?, ?, ?, ?)";
-        try (Connection con = ConexionBD.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             byte[] pdfBytes = Files.readAllBytes(archivo.toPath());
             String nombre = archivo.getName();
@@ -39,8 +40,7 @@ public class DatosArchivos {
     public List<Object[]> listarArchivos() {
         List<Object[]> lista = new ArrayList<>();
         String sql = "SELECT nombre_archivo, extension, fecha_guardado FROM documentos_pdf";
-        try (Connection con = ConexionBD.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql);
+        try (PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
@@ -58,8 +58,7 @@ public class DatosArchivos {
 
     public byte[] obtenerBytes(String nombre) {
         String sql = "SELECT contenido_bytes FROM documentos_pdf WHERE nombre_archivo = ?";
-        try (Connection con = ConexionBD.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
             
             ps.setString(1, nombre);
             try (ResultSet rs = ps.executeQuery()) {

@@ -13,11 +13,13 @@ import proyecto_gm.Cuentas.Cuentas;
 import proyecto_gm.Periodos.Periodos;
 
 public class DatosTransferencias {
+    
+    static final Connection conn = ConexionBD.getConnection();
 
     // Obtener todos los periodos
     public static List<Periodos> getPeriodos() {
         List<Periodos> lista = new ArrayList<>();
-        Connection conn = ConexionBD.getConnection();
+        
         try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_periodos() }")) {
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
@@ -35,7 +37,6 @@ public class DatosTransferencias {
     // Obtener todas las cuentas bancarias para transferencias
     public static List<Cuentas> getCuentas() {
         List<Cuentas> cuentas = new ArrayList<>();
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("CALL listar_ctransferencias()")) {
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
@@ -53,7 +54,6 @@ public class DatosTransferencias {
     // Obtener todas las transferencias
     public static List<Transferencia> listar() {
         List<Transferencia> lista = new ArrayList<>();
-        Connection conn = ConexionBD.getConnection();
         try (PreparedStatement pstmt = conn.prepareStatement("CALL listar_transferencias");
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
@@ -74,7 +74,6 @@ public class DatosTransferencias {
 
     // Insertar una nueva transferencia
     public static void insertar(Transferencia transferencia) {
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_transferencia(?, ?, ?, ?, ?) }")) {
             cstmt.setInt(1, Integer.parseInt(transferencia.getPeriodo()));
             cstmt.setString(2, transferencia.getNroOperacion());
@@ -90,7 +89,6 @@ public class DatosTransferencias {
 
     // Actualizar una transferencia existente
     public static void actualizar(Transferencia transferencia) {
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_transferencia(?, ?, ?, ?, ?, ?) }")) {
             cstmt.setInt(1, transferencia.getId());
             cstmt.setString(2, transferencia.getPeriodo());
@@ -107,7 +105,6 @@ public class DatosTransferencias {
 
     // Eliminar una transferencia por su ID
     public static void eliminar(int id) {
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_transferencia(?) }")) {
             cstmt.setInt(1, id);
             cstmt.execute();

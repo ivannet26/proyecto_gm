@@ -11,13 +11,14 @@ import javax.swing.table.DefaultTableModel;
 import proyecto_gm.ConexionBD;
 
 public class DatosPeriodo {
+    
+    static final Connection conn = ConexionBD.getConnection();
 
     public static void listar(DefaultTableModel modelo) {
         modelo.setRowCount(0); // Limpiar la tabla antes de cargar
         String sql = "{CALL listar_periodos()}";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql);
+        try (CallableStatement cstmt = conn.prepareCall(sql);
              ResultSet rs = cstmt.executeQuery()) {
             
             // Definir las columnas
@@ -41,8 +42,7 @@ public class DatosPeriodo {
         
         String sql = "{CALL insertar_periodos(?, ?, ?)}";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
             cstmt.setInt(1, 0); 
             int mesActual = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) + 1;
             cstmt.setInt(2, mesActual);
@@ -58,8 +58,7 @@ public class DatosPeriodo {
     public static boolean actualizar(Periodos periodo) {
         String sql = "{CALL actualizar_periodos(?, ?)}";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
             
             
             // El ID se convierte a entero para enviarlo a la BD
@@ -77,8 +76,7 @@ public class DatosPeriodo {
     public static boolean eliminar(int id) {
         String sql = "{CALL eliminar_periodos(?)}";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
 
             cstmt.setInt(1, id);
             cstmt.executeUpdate();
@@ -94,8 +92,7 @@ public class DatosPeriodo {
         List<Periodos> listaPeriodos = new ArrayList<>();
         String sql = "{CALL listar_periodos()}";
         
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql);
+        try (CallableStatement cstmt = conn.prepareCall(sql);
              ResultSet rs = cstmt.executeQuery()) {
             
             while(rs.next()) {

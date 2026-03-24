@@ -12,7 +12,6 @@ public class DatosCarrera {
 
     public static List<Carreras> listar() {
         List<Carreras> lista = new ArrayList<>();
-        Connection conn = ConexionBD.getConnection();
 
         try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_carreras() }")) {
             ResultSet rs = cstmt.executeQuery();
@@ -29,7 +28,6 @@ public class DatosCarrera {
     }
 
     public static void insertar(Carreras carrera) {
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_carreras(?) }")) { 
             cstmt.setString(1, carrera.getDescripcion());
             cstmt.execute();
@@ -40,8 +38,6 @@ public class DatosCarrera {
     }
 
     public static void actualizar(Carreras carrera) {
-        Connection conn = ConexionBD.getConnection();
-
         try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_carreras(?, ?) }")) {
             cstmt.setInt(1, carrera.getId());
             cstmt.setString(2, carrera.getDescripcion());
@@ -53,7 +49,6 @@ public class DatosCarrera {
     }
 
     public static void eliminar(int id) {
-        Connection conn = ConexionBD.getConnection();
 
         try (CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_carreras(?) }")) {
             cstmt.setInt(1, id);

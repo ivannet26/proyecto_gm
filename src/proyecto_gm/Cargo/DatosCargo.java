@@ -10,12 +10,13 @@ import java.util.List;
 import proyecto_gm.ConexionBD;
 
 public class DatosCargo {
+    
+    static final Connection conn = ConexionBD.getConnection();
 
     public List<Cargo> listarCargo() throws SQLException {
         List<Cargo> lista = new ArrayList<>();
         // Usamos try-with-resources para asegurar que la conexión y el statement se cierren
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement stmt = conn.prepareCall("{ CALL listar_cargos() }");
+        try (CallableStatement stmt = conn.prepareCall("{ CALL listar_cargos() }");
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -30,8 +31,7 @@ public class DatosCargo {
     }
 
     public boolean insertar(Cargo cargo) throws SQLException {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement stmt = conn.prepareCall("{ CALL insertar_cargos(?, ?) }")) {
+        try (CallableStatement stmt = conn.prepareCall("{ CALL insertar_cargos(?, ?) }")) {
             
             stmt.setString(1, cargo.getDescripcion());
             stmt.registerOutParameter(2, Types.INTEGER);
@@ -47,8 +47,7 @@ public class DatosCargo {
     }
 
     public boolean actualizar(Cargo cargo) throws SQLException {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement stmt = conn.prepareCall("{ CALL actualizar_cargos(?, ?) }")) {
+        try (CallableStatement stmt = conn.prepareCall("{ CALL actualizar_cargos(?, ?) }")) {
             
             stmt.setInt(1, cargo.getIdCargo());
             stmt.setString(2, cargo.getDescripcion());
@@ -59,8 +58,7 @@ public class DatosCargo {
     }
 
     public boolean eliminar(int idCargo) throws SQLException {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement stmt = conn.prepareCall("{ CALL eliminar_cargos(?) }")) {
+        try (CallableStatement stmt = conn.prepareCall("{ CALL eliminar_cargos(?) }")) {
             
             stmt.setInt(1, idCargo);
             

@@ -13,13 +13,14 @@ import javax.swing.table.TableColumnModel;
 import proyecto_gm.ConexionBD;
 public class DatosProveedores {
 
-
+    static final Connection conn = ConexionBD.getConnection();
+    
 public List<Proveedores> listar() {
+    
     List<Proveedores> lista = new ArrayList<>();
     String sql = "{ CALL listar_proveedores() }";
 
-    try (Connection conn = ConexionBD.getConnection();
-         CallableStatement cstmt = conn.prepareCall(sql);
+    try (CallableStatement cstmt = conn.prepareCall(sql);
          ResultSet rs = cstmt.executeQuery()) {
 
         while (rs.next()) {
@@ -70,8 +71,7 @@ public List<Proveedores> listar() {
     public boolean insertar(Proveedores proveedor) {
         String sql = "{ CALL insertar_proveedores(?, ?, ?, ?, ?, ?, ?, ?, ?) }";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
 
             cstmt.setString(1, proveedor.getIdUbigeo());
             cstmt.setString(2, proveedor.getNombres());
@@ -93,8 +93,7 @@ public List<Proveedores> listar() {
     public boolean actualizar(Proveedores proveedor) {
         String sql = "{ CALL actualizar_proveedores(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
 
             cstmt.setInt(1, proveedor.getIdProveedor());
             cstmt.setString(2, proveedor.getIdUbigeo());
@@ -117,8 +116,7 @@ public List<Proveedores> listar() {
  public boolean eliminar(int idProveedor) {
         String sql = "{ CALL eliminar_proveedores(?) }";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
 
             cstmt.setInt(1, idProveedor);
             return cstmt.executeUpdate() > 0;
@@ -131,8 +129,7 @@ public List<Proveedores> listar() {
   public List<Ubigeo> listarDepartamentosUbigeo() {
         List<Ubigeo> lista = new ArrayList<>();
         String sql = "{CALL ListaDepartamentosUbigeo()}";
-        try (Connection cn = ConexionBD.getConnection();
-             CallableStatement cs = cn.prepareCall(sql);
+        try (CallableStatement cs = conn.prepareCall(sql);
              ResultSet rs = cs.executeQuery()) {
 
             while (rs.next()) {
@@ -150,8 +147,7 @@ public List<Proveedores> listar() {
         List<Ubigeo> lista = new ArrayList<>();
         String sql = "{CALL ListaProvinciaUbigeo(?)}";
 
-        try (Connection cn = ConexionBD.getConnection();
-             CallableStatement cs = cn.prepareCall(sql)) {
+        try (CallableStatement cs = conn.prepareCall(sql)) {
 
             cs.setString(1, idDepartamento);
 
@@ -170,8 +166,7 @@ public List<Proveedores> listar() {
         List<Ubigeo> lista = new ArrayList<>();
         String sql = "{CALL ListaDistritoUbigeo(?, ?)}";
 
-        try (Connection cn = ConexionBD.getConnection();
-             CallableStatement cs = cn.prepareCall(sql)) {
+        try (CallableStatement cs = conn.prepareCall(sql)) {
 
             cs.setString(1, idDepartamento);
             cs.setString(2, idProvincia);
@@ -191,8 +186,7 @@ public List<EstadoProveedor> listarEstadosProveedor() {
     List<EstadoProveedor> lista = new ArrayList<>();
     String sql = "{ CALL listar_estadospv() }";
 
-    try (Connection conn = ConexionBD.getConnection();
-         CallableStatement cstmt = conn.prepareCall(sql);
+    try (CallableStatement cstmt = conn.prepareCall(sql);
          ResultSet rs = cstmt.executeQuery()) {
 
         while (rs.next()) {
@@ -215,8 +209,7 @@ public List<EstadoProveedor> listarEstadosProveedor() {
     public Proveedores obtenerPorId(int idProveedor) {
     Proveedores prov = null;
 
-    try (Connection cn = ConexionBD.getConnection();
-         CallableStatement cs = cn.prepareCall("{ CALL obtener_proveedor(?) }")) {
+    try (CallableStatement cs = conn.prepareCall("{ CALL obtener_proveedor(?) }")) {
 
         cs.setInt(1, idProveedor);
 
@@ -243,8 +236,7 @@ public List<EstadoProveedor> listarEstadosProveedor() {
     
     public boolean insertarDesdeExcel(String idUbigeo, String nombres, String direccion, String correo, String telefono, String celular, String ruc, String rubro, String estado) {
         String sql = "{ CALL insertar_proveedores(?, ?, ?, ?, ?, ?, ?, ?, ?) }";
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
             cstmt.setString(1, idUbigeo);
             cstmt.setString(2, nombres);
             cstmt.setString(3, direccion);

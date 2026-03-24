@@ -10,12 +10,13 @@ import javax.swing.JOptionPane;
 import proyecto_gm.ConexionBD;
 
 public class DatosCategoria {
+    
+    static final Connection conn = ConexionBD.getConnection();
 
     public static List<Categoria> listar() {
         List<Categoria> lista = new ArrayList<>();
         
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL listar_categorias() }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_categorias() }")) {
             
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
@@ -31,8 +32,7 @@ public class DatosCategoria {
     }
 
     public static void insertar(Categoria categoria) {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL insertar_categorias(?, ?) }")) { 
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_categorias(?, ?) }")) { 
             
             cstmt.setString(1, categoria.getDescripcion());
             cstmt.registerOutParameter(2, java.sql.Types.INTEGER);
@@ -49,8 +49,7 @@ public class DatosCategoria {
     }
 
     public static void actualizar(Categoria categoria) {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_categorias(?, ?) }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_categorias(?, ?) }")) {
             
             cstmt.setInt(1, categoria.getId());
             cstmt.setString(2, categoria.getDescripcion());
@@ -62,8 +61,7 @@ public class DatosCategoria {
     }
 
     public static void eliminar(int id) {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_categorias(?) }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_categorias(?) }")) {
             
             cstmt.setInt(1, id);
             cstmt.execute();

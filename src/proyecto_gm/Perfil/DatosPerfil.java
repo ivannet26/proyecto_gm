@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
 import proyecto_gm.ConexionBD;
 
 public class DatosPerfil {
+    
+    static final Connection conn = ConexionBD.getConnection();
 
     public static List<Perfil> listar() {
         List<Perfil> listaPerfiles = new ArrayList<>();
-        Connection conn = null;
         try {
-            conn = ConexionBD.getConnection();
             try (CallableStatement stmt = conn.prepareCall("CALL listar_perfiles()");
                  ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -41,10 +41,8 @@ public class DatosPerfil {
 
     // Método para insertar un perfil
     public static boolean insertar(Perfil perfil) {
-        Connection conn = null;
         boolean exito = false;
         try {
-            conn = ConexionBD.getConnection();
             try (CallableStatement stmt = conn.prepareCall("{CALL insertar_perfil(?, ?, ?)}")) {
                 stmt.setString(1, perfil.getCodigo());
                 stmt.setString(2, perfil.getNombre());
@@ -65,10 +63,8 @@ public class DatosPerfil {
 
     // Método para actualizar un perfil
     public static boolean actualizar(Perfil perfil) {
-        Connection conn = null;
         boolean exito = false;
         try {
-            conn = ConexionBD.getConnection();
             try (CallableStatement stmt = conn.prepareCall("{CALL actualizar_perfil(?, ?, ?)}")) {
                 stmt.setString(1, perfil.getCodigo());
                 stmt.setString(2, perfil.getNombre());
@@ -89,10 +85,8 @@ public class DatosPerfil {
 
     // Método para eliminar un perfil
     public static boolean eliminar(String codigo) {
-        Connection conn = null;
         boolean exito = false;
         try {
-            conn = ConexionBD.getConnection();
             try (CallableStatement stmt = conn.prepareCall("{CALL eliminar_perfil(?, ?)}")) {
                 stmt.setString(1, codigo);
                 stmt.setString(2, "01");  

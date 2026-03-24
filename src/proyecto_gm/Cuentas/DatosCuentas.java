@@ -11,13 +11,14 @@ import javax.swing.JComboBox;
 import proyecto_gm.ConexionBD;
 
 public class DatosCuentas {
+    
+    static final Connection conn = ConexionBD.getConnection();
 
     // Método para obtener una lista de todas las cuentas
     public static List<Cuentas> listar() throws SQLException {
         List<Cuentas> listaCuentas = new ArrayList<>();
         // Usar try-with-resources para asegurar que la conexión se cierre
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL listar_cuentas() }");
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_cuentas() }");
              ResultSet rs = cstmt.executeQuery()) {
 
             while (rs.next()) {
@@ -50,8 +51,7 @@ public class DatosCuentas {
 
     // Insertar una nueva cuenta
     public static void insertar(Cuentas cuenta) throws SQLException {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL insertar_cuenta(?, ?, ?, ?, ?, ?, ?) }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_cuenta(?, ?, ?, ?, ?, ?, ?) }")) {
             
             cstmt.setInt(1, cuenta.getIdCuenta());
             cstmt.setString(2, cuenta.getTipoPropietario());
@@ -66,8 +66,7 @@ public class DatosCuentas {
 
     // Actualizar una cuenta existente
     public static void actualizar(Cuentas cuenta) throws SQLException {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_cuenta(?, ?, ?, ?, ?, ?, ?) }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_cuenta(?, ?, ?, ?, ?, ?, ?) }")) {
             
             cstmt.setInt(1, cuenta.getIdCuenta());
             cstmt.setString(2, cuenta.getTipoPropietario());
@@ -82,8 +81,7 @@ public class DatosCuentas {
 
     // Eliminar una cuenta por su ID
     public static void eliminar(int idCuenta) throws SQLException {
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_cuenta(?) }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_cuenta(?) }")) {
             
             cstmt.setInt(1, idCuenta);
             cstmt.executeUpdate();
@@ -93,8 +91,7 @@ public class DatosCuentas {
     // Generar un nuevo código para una cuenta
     public static int generarNuevoId() throws SQLException {
         int idGenerado = 0;
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL generar_codigo(?, ?, ?) }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL generar_codigo(?, ?, ?) }")) {
             
             cstmt.setString(1, "cuentasbancarias");
             cstmt.setString(2, "IdCuentaBancaria");
@@ -108,8 +105,7 @@ public class DatosCuentas {
     // Cargar los bancos en un JComboBox
     public static void cargarBancos(JComboBox<Banco> combo) {
         combo.removeAllItems();
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall("{ CALL listar_bancos() }");
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_bancos() }");
              ResultSet rs = cstmt.executeQuery()) {
             
             while (rs.next()) {

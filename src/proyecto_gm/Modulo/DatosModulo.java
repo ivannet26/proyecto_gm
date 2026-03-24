@@ -10,6 +10,8 @@ import proyecto_gm.ConexionBD;
 
 public class DatosModulo {
 
+    static final Connection conn = ConexionBD.getConnection();
+    
     public static void listar(DefaultTableModel modelo) {
         // Limpiamos el modelo para evitar datos duplicados
         modelo.setRowCount(0);
@@ -17,8 +19,7 @@ public class DatosModulo {
         // Procedimiento almacenado para listar
         String sql = "{CALL listar_modulo()}";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql);
+        try (CallableStatement cstmt = conn.prepareCall(sql);
              ResultSet rs = cstmt.executeQuery()) {
 
             // Columnas que se mostrarán en la tabla
@@ -42,8 +43,7 @@ public class DatosModulo {
         // Procedimiento almacenado para insertar
         String sql = "{CALL insertar_modulo(?, ?)}";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
 
             cstmt.setInt(1, 0);
             cstmt.setString(2, modulo.getDescripcion());
@@ -60,8 +60,7 @@ public class DatosModulo {
         // Procedimiento almacenado para actualizar
         String sql = "{CALL actualizar_modulo(?, ?)}";
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
 
             cstmt.setInt(1, modulo.getId());
             cstmt.setString(2, modulo.getDescripcion());
@@ -78,8 +77,7 @@ public class DatosModulo {
         // Procedimiento almacenado para eliminar
         String sql = "{CALL eliminar_modulo(?)}"; 
 
-        try (Connection conn = ConexionBD.getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (CallableStatement cstmt = conn.prepareCall(sql)) {
 
             cstmt.setInt(1, id);
             cstmt.executeUpdate();

@@ -11,6 +11,7 @@ import java.util.Date;
 import proyecto_gm.inicio;
 
 public class DatosMac {
+    static final Connection con = ConexionBD.getConnection();
 
     public String validarAcceso(int idUsuario) {
          if (proyecto_gm.inicio.esModoDev) {
@@ -54,7 +55,6 @@ public class DatosMac {
         String sql = "INSERT INTO control_mac (id_usuario, mac_address, nombre_pc, ultima_sesion, inicio_instalacion, dia_finalizacion, estado) " +
                      "VALUES (?, ?, ?, ?, ?, DATE_ADD(?, INTERVAL 30 DAY), 'PENDIENTE')";
         try {
-            Connection con = ConexionBD.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             
             Timestamp horaLocal = new Timestamp(System.currentTimeMillis());
@@ -79,7 +79,6 @@ public class DatosMac {
         ControlMac cm = null;
         String sql = "SELECT * FROM control_mac WHERE id_usuario = ? AND mac_address = ?";
         try {
-            Connection con = ConexionBD.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idUsuario);
             ps.setString(2, mac);
@@ -102,7 +101,6 @@ public class DatosMac {
         if (inicio.esModoDev) return;
 
         try {
-            Connection con = ConexionBD.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE control_mac SET ultima_sesion = ? WHERE id_control = ?");
             ps.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
             ps.setInt(2, idControl);

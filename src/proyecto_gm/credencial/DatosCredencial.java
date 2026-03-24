@@ -11,11 +11,12 @@ import proyecto_gm.ConexionBD;
 
 
 public class DatosCredencial {
+    
+    static final Connection conn = ConexionBD.getConnection();
 
     public static List<Credencial> listar() {
         List<Credencial> lista = new ArrayList<>();
-        Connection conn = ConexionBD.getConnection();
-
+        
         try (CallableStatement cstmt = conn.prepareCall("{ CALL listar_credencial() }")) {
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
@@ -35,7 +36,6 @@ public class DatosCredencial {
     }
 
     public static void insertar(Credencial c) {
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("{ CALL insertar_credencial(?, ?, ?, ?) }")) {
             cstmt.setString(1, c.getCorreo());
             cstmt.setString(2, c.getClave());
@@ -51,7 +51,6 @@ public class DatosCredencial {
     }
 
     public static void actualizar(Credencial c) {
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("{ CALL actualizar_credencial(?, ?, ?, ?, ?) }")) {
             cstmt.setString(1, c.getIdCredencial());
             cstmt.setString(2, c.getCorreo());
@@ -68,7 +67,6 @@ public class DatosCredencial {
     }
 
     public static void eliminar(String id) {
-        Connection conn = ConexionBD.getConnection();
         try (CallableStatement cstmt = conn.prepareCall("{ CALL eliminar_credencial(?) }")) {
             cstmt.setString(1, id);
             cstmt.execute();

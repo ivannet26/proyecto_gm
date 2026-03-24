@@ -358,9 +358,8 @@ public class DatosEmpleados {
     
     public static Empleados buscarPorDni(String dni) {
         Empleados emp = null;
-        Connection cn = ConexionBD.getConnection(); // usa tu conexión actual
 
-        try (CallableStatement cstmt = cn.prepareCall("{ CALL buscar_empleado_por_dni(?) }")) {
+        try (CallableStatement cstmt = conn.prepareCall("{ CALL buscar_empleado_por_dni(?) }")) {
             cstmt.setString(1, dni);
             ResultSet rs = cstmt.executeQuery();
 
