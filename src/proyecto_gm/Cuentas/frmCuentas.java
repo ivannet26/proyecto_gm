@@ -85,7 +85,8 @@ public class frmCuentas extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnGuardar = new javax.swing.JButton();
-        btnRegresar = new javax.swing.JButton();
+
+        setClosable(true);
 
         txtNombres.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -147,17 +148,6 @@ public class frmCuentas extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnGuardar);
-
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
-        btnRegresar.setToolTipText("Cancelar");
-        btnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegresar.setName("cancelar"); // NOI18N
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnRegresar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -321,14 +311,9 @@ public class frmCuentas extends javax.swing.JInternalFrame {
         } 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnGuardar;
-    public static javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<Banco> cboBanco;
     private javax.swing.JComboBox<String> cboTipoPropietario;
     private javax.swing.JLabel jLabel1;

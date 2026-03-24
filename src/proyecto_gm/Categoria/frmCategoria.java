@@ -39,12 +39,39 @@ public class frmCategoria extends javax.swing.JInternalFrame {
         instancia = null;
     }
     
-    private void cargarDatos() {
-        modelo.setRowCount(0);
-        listaCategorias = DatosCategoria.listar();
-        for (Categoria cat : listaCategorias) {
-            modelo.addRow(new Object[]{cat.getId(), cat.getDescripcion()});
-        }
+   private void cargarDatos() {
+        
+        javax.swing.SwingWorker<List<Categoria>, Void> worker = new javax.swing.SwingWorker<List<Categoria>, Void>() {
+            
+            @Override
+            protected List<Categoria> doInBackground() throws Exception {
+                return DatosCategoria.listar();
+            }
+
+            @Override
+            protected void done() {
+
+                try {
+                    listaCategorias = get(); 
+                    modelo.setRowCount(0);  
+                    
+                    tblCategoria.setVisible(false); 
+                    
+                
+                    for (Categoria cat : listaCategorias) {
+                        modelo.addRow(new Object[]{cat.getId(), cat.getDescripcion()});
+                    }
+                    
+                    tblCategoria.setVisible(true); 
+                    
+                } catch (Exception e) {
+                    System.out.println("Error cargando categorías: " + e.getMessage());
+                }
+            }
+        };
+        
+        // Ejecutamos al trabajador
+        worker.execute();
     }
     
     private void gestionarControles(boolean activo) {

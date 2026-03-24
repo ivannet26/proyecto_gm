@@ -128,7 +128,6 @@ public class fmrDetalleCajaChica extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnGuardar = new javax.swing.JButton();
-        btnDeshacer = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -144,6 +143,8 @@ public class fmrDetalleCajaChica extends javax.swing.JInternalFrame {
         txtSalida = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
+
+        setClosable(true);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -164,19 +165,6 @@ public class fmrDetalleCajaChica extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnGuardar);
-
-        btnDeshacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
-        btnDeshacer.setToolTipText("Cancelar");
-        btnDeshacer.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDeshacer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnDeshacer.setName("deshacer"); // NOI18N
-        btnDeshacer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnDeshacer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeshacerActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnDeshacer);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -365,10 +353,6 @@ public class fmrDetalleCajaChica extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnDeshacerActionPerformed
-
     private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaActionPerformed
@@ -387,7 +371,6 @@ public class fmrDetalleCajaChica extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDeshacer;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<CajaChica> cbontransferencias;
     private javax.swing.JLabel jLabel1;

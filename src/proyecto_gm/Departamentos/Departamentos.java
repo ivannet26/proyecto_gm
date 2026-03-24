@@ -19,7 +19,8 @@ public class Departamentos {
     }
 
     public Departamentos(String id, String descripcion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.id = Integer.parseInt(id); 
+        this.descripcion = descripcion;
     }
 
     // Getters y Setters

@@ -69,6 +69,7 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
     }
     
     public void cargarDatos() {
+        tblarticulo.setModel(new DefaultTableModel()); 
         modelo.setRowCount(0);
         listaArticulos = DatosArticulos.listar();
         for (Articulo art : listaArticulos) {
@@ -81,6 +82,8 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
                 art.getCantidad()
             });
         }
+        tblarticulo.setModel(modelo);
+        tblarticulo.setRowSorter(sorter); 
     }
     
     public void generarReporteJasper(int idCategoria, String nombreCategoria) {
@@ -103,13 +106,32 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         }
     }
     
-    private void cargarComboCategorias() {
-        cmbCategoria.removeAllItems();
-        List<Categoria> lista = DatosCategoria.listar();
-        System.out.println("Categorías encontradas: " + lista.size());
-        for (Categoria cat : lista) {
-            cmbCategoria.addItem(cat);
-        }
+   private void cargarComboCategorias() {
+  
+        javax.swing.SwingWorker<List<Categoria>, Void> worker = new javax.swing.SwingWorker<List<Categoria>, Void>() {
+            @Override
+            protected List<Categoria> doInBackground() throws Exception {
+                return DatosCategoria.listar();
+            }
+            @Override
+            protected void done() {
+                try {
+                    List<Categoria> lista = get(); 
+                    for (java.awt.event.ActionListener al : cmbCategoria.getActionListeners()) {
+                        cmbCategoria.removeActionListener(al);
+                    }
+                    cmbCategoria.removeAllItems();
+                    for (Categoria cat : lista) {
+                        cmbCategoria.addItem(cat);
+                    }
+                    cmbCategoria.addActionListener(e -> cmbCategoriaActionPerformed(e));
+                } catch (Exception e) {
+                    System.out.println("Error cargando categorías en segundo plano: " + e.getMessage());
+                }
+            }
+        };
+
+        worker.execute();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

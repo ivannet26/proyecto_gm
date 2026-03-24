@@ -20,6 +20,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
     public frmTipo() {
         initComponents();
         JTableHeader header = tblTipo.getTableHeader();
+        habilitarBotonesMantenimiento(true);
         header.setDefaultRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table,
@@ -45,8 +46,6 @@ public class frmTipo extends javax.swing.JInternalFrame {
     
         DefaultTableModel modelo = (DefaultTableModel) tblTipo.getModel();
 
-        btnGuardar.setEnabled(false);
-        btnDeshacer.setEnabled(false);
         DatosTipo.HabilitarTipo(escritorio, false);
         DatosTipo.MostrarTipo(modelo);
 
@@ -66,7 +65,39 @@ public class frmTipo extends javax.swing.JInternalFrame {
         super.dispose();
         instancia = null;
     }
+     private void habilitarBotonesMantenimiento(boolean estado) {
+        btnAgregar.setEnabled(estado);
+        btnEditar.setEnabled(estado);
+        btnEliminar.setEnabled(estado);
+        btnGuardar.setEnabled(!estado);
+        btnDeshacer.setEnabled(!estado);
+        tblTipo.setEnabled(estado); 
+    }
+    private void limpiarCampos() {
+        txtCodigo.setText("");
+        txtDescripcion.setText("");
+    }
+    
+    private void configurarEstadoInicial() {
+        // Habilitar/deshabilitar campos
+        txtCodigo.setEnabled(false);
+        txtDescripcion.setEnabled(false);
 
+
+        // Habilitar/deshabilitar botones
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnAgregar.setEnabled(true);
+        btnDeshacer.setEnabled(false);
+        
+        // Limpiar campos
+        limpiarCampos();
+        
+        // Permitir selección en la tabla
+        tblTipo.setEnabled(true);
+        tblTipo.clearSelection();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -269,6 +300,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
         DatosTipo.EditarTipo(escritorio, tblTipo, cod);
 
         esNuevo = false;
+        habilitarBotonesMantenimiento(false);
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -318,11 +350,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
-        DatosTipo.LimpiarTipo(rootPane);
-        DatosTipo.HabilitarTipo(escritorio, false);
-        tblTipo.clearSelection();
-        // Habilitamos la seleccion de filas de la tabla
-        tblTipo.setRowSelectionAllowed(true);
+       configurarEstadoInicial();
     }//GEN-LAST:event_btnDeshacerActionPerformed
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
@@ -347,6 +375,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
         esNuevo = true;
         tblTipo.clearSelection();
         tblTipo.setRowSelectionAllowed(false);
+        habilitarBotonesMantenimiento(false);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
 

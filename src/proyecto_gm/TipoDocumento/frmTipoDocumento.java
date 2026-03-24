@@ -29,6 +29,7 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
         DatosTipoDocumento.Mostrar(modelo);
         tblTipoDocumento.setCellSelectionEnabled(false);
         tblTipoDocumento.setRowSelectionAllowed(true);
+        configurarEstadoInicial();
 
     }
     
@@ -261,16 +262,59 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void limpiarCampos() {
+        txtId.setText("");
+        txtDescripcion.setText("");
+        cboModulo.setSelectedIndex(0);
+    } 
+    
+    private void configurarEstadoInicial() {
+        // Habilitar/deshabilitar campos
+        txtId.setEnabled(false);
+        txtDescripcion.setEnabled(false);
+        cboModulo.setEnabled(true);
 
+        // Habilitar/deshabilitar botones
+        btnAgregar.setEnabled(true);
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnDeshacer.setEnabled(false);
+        
+        // Limpiar campos
+        limpiarCampos();
+        
+        // Permitir selección en la tabla
+        tblTipoDocumento.setEnabled(true);
+        tblTipoDocumento.clearSelection();
+    }
+    
+     private void configurarEstadoFormulario() {
+        txtId.setEnabled(false);
+        txtDescripcion.setEnabled(true);
+        cboModulo.setEnabled(true);
+        
+        btnAgregar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnGuardar.setEnabled(true);
+        btnDeshacer.setEnabled(true);
+        
+        tblTipoDocumento.setEnabled(false);
+    }
+    
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if (tblTipoDocumento.getSelectedRow() >= 0) {
+            JTextField[] camposTexto = {txtId, txtDescripcion};
 
-        JTextField[] camposTexto = {txtId, txtDescripcion};
+            JComboBox[] combos = {cboModulo};
+            DatosTipoDocumento.Editar(escritorio, tblTipoDocumento, camposTexto, combos);
 
-        JComboBox[] combos = {cboModulo};
-        DatosTipoDocumento.Editar(escritorio, tblTipoDocumento, camposTexto, combos);
-
-        esNuevo = false;
-
+            esNuevo = false;
+            configurarEstadoFormulario();
+       } else {
+            Utilitario.MostrarMensaje("Debe seleccionar un registro de la tabla para editar.", Utilitario.TipoMensaje.alerta);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -324,12 +368,7 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
-        DatosTipoDocumento.Limpiar(escritorio);
-        DatosTipoDocumento.Habilitar(escritorio, false);
-        // Limpiamos alguna seleccion previa de alguna fila de la tabla
-        tblTipoDocumento.clearSelection();
-        // Habilitamos la seleccion de filas de la tabla
-        tblTipoDocumento.setRowSelectionAllowed(true);
+        configurarEstadoInicial();
     }//GEN-LAST:event_btnDeshacerActionPerformed
 
     private void txtIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyTyped
@@ -351,6 +390,7 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
         txtId.requestFocus();               
         esNuevo = true;
         tblTipoDocumento.setRowSelectionAllowed(false);
+        configurarEstadoFormulario();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cboModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboModuloActionPerformed

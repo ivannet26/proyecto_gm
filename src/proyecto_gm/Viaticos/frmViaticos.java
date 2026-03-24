@@ -70,7 +70,6 @@ public class frmViaticos extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnGuardar = new javax.swing.JButton();
-        btnRegresar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
 
         setClosable(true);
@@ -128,17 +127,6 @@ public class frmViaticos extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnGuardar);
-
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
-        btnRegresar.setToolTipText("Cancelar");
-        btnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegresar.setName("cancelar"); // NOI18N
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnRegresar);
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
         btnLimpiar.setToolTipText("Limpiar");
@@ -287,11 +275,6 @@ public class frmViaticos extends javax.swing.JInternalFrame {
     }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        limpiarCampos();
-        dispose();
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         txtDescripcion.setText("");
         txtPasaje.setText("");
@@ -337,7 +320,6 @@ public class frmViaticos extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
-    public static javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<Empleados> cboEmpleado;
     private javax.swing.JComboBox<Periodos> cboPeriodo;
     private javax.swing.JLabel jLabel1;

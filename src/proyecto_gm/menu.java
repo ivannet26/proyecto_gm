@@ -1334,11 +1334,11 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuTransferenciaActionPerformed
 
     private void subMenuCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuCategoriaActionPerformed
-        cargarFormulario(() -> frmCategoria.getInstancia());
+        Abrircategorias();
     }//GEN-LAST:event_subMenuCategoriaActionPerformed
 
     private void subMenuArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuArticulosActionPerformed
-        cargarFormulario(() -> frmListaArticulo.getInstancia());
+        Abrirarticulos();
     }//GEN-LAST:event_subMenuArticulosActionPerformed
 
     private void subMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuClientesActionPerformed

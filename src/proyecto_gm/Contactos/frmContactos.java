@@ -125,7 +125,6 @@ public class frmContactos extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnGuardar = new javax.swing.JButton();
-        btnRegresar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
 
         setClosable(true);
@@ -216,16 +215,6 @@ public class frmContactos extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnGuardar);
-
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
-        btnRegresar.setToolTipText("Cancelar");
-        btnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnRegresar);
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
         btnLimpiar.setToolTipText("Limpiar");
@@ -467,14 +456,9 @@ public class frmContactos extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<Cargo> cboCargo;
     private javax.swing.JComboBox<Departamentos> cboDepartamento;
     private java.awt.Choice choice1;

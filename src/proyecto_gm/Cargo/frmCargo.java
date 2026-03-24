@@ -117,6 +117,27 @@ public class frmCargo extends javax.swing.JInternalFrame {
             System.err.println("Error en el filtro: " + ex.getMessage());
         }
     }
+    
+    private void configurarEstadoInicial() {
+        // Habilitar/deshabilitar campos
+        txtCodigo.setEnabled(false);
+        txtDescripcion.setEnabled(false);
+        txtBusqueda.setEnabled(true);
+
+        // Habilitar/deshabilitar botones
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnAgregar.setEnabled(true);
+        btnDeshacer.setEnabled(false);
+        
+        // Limpiar campos
+        limpiarCampos();
+        
+        // Permitir selección en la tabla
+        tblCargo.setEnabled(true);
+        tblCargo.clearSelection();
+    }
 
 
     @SuppressWarnings("unchecked")
@@ -490,7 +511,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBusquedaKeyTyped
 
     private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
-        // TODO add your handling code here:
+       configurarEstadoInicial();
     }//GEN-LAST:event_btnDeshacerActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
