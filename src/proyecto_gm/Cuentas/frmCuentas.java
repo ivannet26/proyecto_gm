@@ -5,6 +5,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 public class frmCuentas extends javax.swing.JInternalFrame {
+
     private Cuentas cuentaActual;
     private final frmListaCuentas frmLista; // Referencia al formulario de lista para poder refrescarlo
     private boolean esNuevo;
@@ -14,10 +15,9 @@ public class frmCuentas extends javax.swing.JInternalFrame {
         this.cuentaActual = cuenta;
         this.frmLista = frmLista;
 
-        
         // Cargar combos
         DatosCuentas.cargarBancos(cboBanco);
-        
+
         if (cuentaActual == null) {
             this.setTitle("Nueva Cuenta");
             esNuevo = true;
@@ -62,7 +62,7 @@ public class frmCuentas extends javax.swing.JInternalFrame {
             rbDolares.setSelected(true);
         }
     }
-   
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -85,6 +85,7 @@ public class frmCuentas extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnGuardar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -148,6 +149,19 @@ public class frmCuentas extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnGuardar);
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
+        btnLimpiar.setToolTipText("Limpiar");
+        btnLimpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimpiar.setFocusable(false);
+        btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnLimpiar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,15 +280,14 @@ public class frmCuentas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Validación", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (txtCCC.getText().trim().length() != 20) {
-             JOptionPane.showMessageDialog(this, "El número de cuenta debe tener 14 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
+        if (txtCCC.getText().trim().length() != 14) {
+            JOptionPane.showMessageDialog(this, "El número de cuenta debe tener 14 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (txtCCI.getText().trim().length() != 25) {
-             JOptionPane.showMessageDialog(this, "El CCI debe tener 20 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
+        if (txtCCI.getText().trim().length() != 20) {
+            JOptionPane.showMessageDialog(this, "El CCI debe tener 20 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
 
         // 2. Recolectar datos del formulario
         Cuentas cuentaParaGuardar = new Cuentas();
@@ -308,12 +321,25 @@ public class frmCuentas extends javax.swing.JInternalFrame {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } 
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        Limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void Limpiar() {
+        txtCCC.setText("");
+        txtCCI.setText("");
+        txtId.setText("");
+        txtNombres.setText("");
+        cboBanco.setSelectedIndex(0);
+        cboTipoPropietario.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<Banco> cboBanco;
     private javax.swing.JComboBox<String> cboTipoPropietario;
     private javax.swing.JLabel jLabel1;

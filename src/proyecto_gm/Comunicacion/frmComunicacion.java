@@ -129,11 +129,8 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         cboFlujo1 = new javax.swing.JComboBox<>();
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        btnAgregar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        btnDeshacer = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -278,36 +275,6 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         jToolBar1.setRollover(true);
         jToolBar1.add(jSeparator1);
 
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
-        btnAgregar.setToolTipText("Nuevo");
-        btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnAgregar);
-
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
-        btnEditar.setToolTipText("Editar");
-        btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnEditar);
-
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
-        btnEliminar.setToolTipText("Eliminar");
-        btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnEliminar);
-
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
         btnGuardar.setToolTipText("Guardar");
         btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -318,15 +285,18 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btnGuardar);
 
-        btnDeshacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
-        btnDeshacer.setToolTipText("Cancelar");
-        btnDeshacer.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDeshacer.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
+        btnLimpiar.setToolTipText("Limpiar");
+        btnLimpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimpiar.setFocusable(false);
+        btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeshacerActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnDeshacer);
+        jToolBar1.add(btnLimpiar);
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(10, 0, 750, 30);
@@ -458,15 +428,6 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         }
 
     }
-    private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
-        // TODO add your handling code here:
-        Limpiar();
-        HabilitarBotones(true);
-        HabilitarControles(false);
-        estado = Utilitario.EstadoProceso.CONSULTAR;
-
-    }//GEN-LAST:event_btnDeshacerActionPerformed
-
     public void setDatos(
             String id, String periodo, String proyecto, String tipo,
             String codDoc, String origen, String destino, String flujo,
@@ -595,14 +556,13 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
             if (procesoExitoso) {
                 MostrarMensaje("Operación realizada con éxito", TipoMensaje.INFORMACION);
                 Limpiar();
-                HabilitarBotones(true);
-                HabilitarControles(false);
                 estado = Utilitario.EstadoProceso.CONSULTAR;
 
                 // Refrescar lista
                 for (JInternalFrame frame : getDesktopPane().getAllFrames()) {
                     if (frame instanceof frmListaComunicacion) {
                         ((frmListaComunicacion) frame).RefrescarTabla();
+                        this.dispose();
                         break;
                     }
                 }
@@ -614,60 +574,11 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
             MostrarMensaje("Error al procesar los datos: " + e.getMessage(), TipoMensaje.ERROR);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (txtId.getText().isEmpty()) {
-            MostrarMensaje("Debe seleccionar un registro para eliminar", TipoMensaje.ALERTA);
-            return;
-        }
-
-        int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar este registro?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (opcion == JOptionPane.YES_OPTION) {
-            Comunicacion entidadEliminar = new Comunicacion();
-            entidadEliminar.setId(txtId.getText());
-            boolean resultado = DatosComunicacion.Eliminar(entidadEliminar);
-            if (resultado) {
-                MostrarMensaje("Registro eliminado con éxito", TipoMensaje.INFORMACION);
-                Limpiar();
-                HabilitarBotones(true);
-                HabilitarControles(false);
-                estado = Utilitario.EstadoProceso.CONSULTAR;
-            } else {
-                MostrarMensaje("No se pudo eliminar el registro", TipoMensaje.ERROR);
-            }
-        }
-
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
-        if (txtId.getText().equals("")) {
-            Utilitario.MostrarMensaje("Debe tener un valor en id para editar", Utilitario.TipoMensaje.alerta);
-            return;
-        }
-        estado = Utilitario.EstadoProceso.EDITAR;
-        HabilitarBotones(true);
-        HabilitarControles(true);
-        txtId.setEnabled(false);
-    }//GEN-LAST:event_btnEditarActionPerformed
     List<Proyectos> lista = DatosProyectos.listar();
     String[] codigos = new String[lista.size()];
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        //desbloquear();btnGuardar.setEnabled(true);btnDeshacer.setEnabled(true);
-        estado = Utilitario.EstadoProceso.NUEVO;
-        HabilitarBotones(false);
-        HabilitarControles(true);
-        Limpiar();
-        //Iniciarvalores(); 
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
     private void HabilitarBotones(boolean estado) {
-        btnAgregar.setEnabled(!estado);
-        btnEditar.setEnabled(!estado);
-        btnEliminar.setEnabled(!estado);
         btnGuardar.setEnabled(estado);
-        btnDeshacer.setEnabled(estado);
     }
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         //JOptionPane.showMessageDialog(this, entidad.getNombreProyecto());
@@ -711,6 +622,10 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_cboNomProyectoItemStateChanged
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        Limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
     /*
     -- formateo de fecha java 
          
@@ -726,11 +641,8 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnDeshacer;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> cboEstado;
     private javax.swing.JComboBox<String> cboFlujo1;
     private javax.swing.JComboBox<String> cboNomProyecto;

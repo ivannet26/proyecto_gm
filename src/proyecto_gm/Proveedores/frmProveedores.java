@@ -159,6 +159,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnGuardar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -208,6 +209,19 @@ public class frmProveedores extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnGuardar);
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
+        btnLimpiar.setToolTipText("Limpiar");
+        btnLimpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimpiar.setFocusable(false);
+        btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnLimpiar);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -616,15 +630,17 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         proveedorActual.setRubro(txtRubro.getText());
 
         EstadoProveedor ep = (EstadoProveedor) cmbEstado.getSelectedItem();
-        if (ep != null) proveedorActual.setEstado(ep.getDescripcion());
+        if (ep != null) {
+            proveedorActual.setEstado(ep.getDescripcion());
+        }
 
         // Obtener los objetos seleccionados
-        Ubigeo dep  = (Ubigeo) cmbDepartamento.getSelectedItem();
+        Ubigeo dep = (Ubigeo) cmbDepartamento.getSelectedItem();
         Ubigeo prov = (Ubigeo) cmbprovincia.getSelectedItem();
         Ubigeo dist = (Ubigeo) cmbdistrito.getSelectedItem();
 
         // Extraer correctamente el código de 2 dígitos
-        String codDep  = dep  != null ? dep.getCodigo().substring(0, 2) : "00";
+        String codDep = dep != null ? dep.getCodigo().substring(0, 2) : "00";
         String codProv = prov != null ? prov.getCodigo().substring(prov.getCodigo().length() - 2) : "00";
         String codDist = dist != null ? dist.getCodigo().substring(dist.getCodigo().length() - 2) : "00";
 
@@ -643,9 +659,27 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        Limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void Limpiar() {
+        txtCelular.setText("");
+        txtCorreo.setText("");
+        txtDireccion.setText("");
+        txtNombres.setText("");
+        txtRubro.setText("");
+        txtRuc.setText("");
+        txtTelefono.setText("");
+        cmbDepartamento.setSelectedIndex(0);
+        cmbEstado.setSelectedIndex(0);
+        cmbdistrito.setSelectedIndex(0);
+        cmbprovincia.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<Ubigeo> cmbDepartamento;
     private javax.swing.JComboBox<EstadoProveedor> cmbEstado;
     private javax.swing.JComboBox<Ubigeo> cmbdistrito;

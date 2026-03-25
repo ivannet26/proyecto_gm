@@ -16,14 +16,14 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
     boolean esNuevo;
     Transferencia transferenciaActual;
     frmListaTransferencias frmLista;
-
+    
     public frmTransferencias(frmListaTransferencias parent, Transferencia transf) {
         initComponents();
         this.frmLista = parent;
         this.transferenciaActual = transf;
-
+        
         cargarCombos();
-
+        
         if (transferenciaActual == null) {
             setTitle("Nueva Transferencia");
             esNuevo = true;
@@ -48,7 +48,7 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
     private void cargarDatos() {
         txtId.setText(String.valueOf(transferenciaActual.getId()));
         txtNroOperacion.setText(transferenciaActual.getNroOperacion());
-
+        
         try {
             String fechaOriginal = transferenciaActual.getFecha();
             SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
@@ -58,12 +58,12 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
             txtFecha.setDate(null);
             System.err.println("Error al parsear fecha: " + e.getMessage());
         }
-
+        
         seleccionarItemComboPeriodo(cboPeriodo, transferenciaActual.getPeriodo());
         seleccionarItemComboCuenta(cboOrigen, transferenciaActual.getCuentaOrigen());
         seleccionarItemComboCuenta(cboDestino, transferenciaActual.getCuentaDestino());
     }
-    
+
     // Métodos para seleccionar el item correcto en los combos
     private void seleccionarItemComboPeriodo(JComboBox<Periodos> combo, String id) {
         for (int i = 0; i < combo.getItemCount(); i++) {
@@ -73,7 +73,7 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     private void seleccionarItemComboCuenta(JComboBox<Cuentas> combo, String id) {
         for (int i = 0; i < combo.getItemCount(); i++) {
             if (String.valueOf(combo.getItemAt(i).getIdCuenta()).equals(id)) {
@@ -102,7 +102,6 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
         }
         return true;
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -123,6 +122,7 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnGuardar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("TRANSFERENCIAS");
@@ -164,6 +164,19 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnGuardar);
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
+        btnLimpiar.setToolTipText("Limpiar");
+        btnLimpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimpiar.setFocusable(false);
+        btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnLimpiar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,11 +261,11 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
         if (!validarCampos()) {
             return;
         }
-
+        
         Periodos periodo = (Periodos) cboPeriodo.getSelectedItem();
         Cuentas cuentaOrigen = (Cuentas) cboOrigen.getSelectedItem();
         Cuentas cuentaDestino = (Cuentas) cboDestino.getSelectedItem();
-
+        
         Transferencia transferencia = new Transferencia();
         transferencia.setPeriodo(periodo.getId());
         transferencia.setNroOperacion(txtNroOperacion.getText().trim());
@@ -261,21 +274,35 @@ public class frmTransferencias extends javax.swing.JInternalFrame {
         SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaSeleccionada = txtFecha.getDate();
         transferencia.setFecha(formatoSalida.format(fechaSeleccionada));
-
+        
         if (esNuevo) {
             DatosTransferencias.insertar(transferencia);
         } else {
             transferencia.setId(Integer.parseInt(txtId.getText()));
             DatosTransferencias.actualizar(transferencia);
         }
-
+        
         frmLista.cargarDatos();
         this.dispose();     // Cierra este formulario                                        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        Limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+    
+    private void Limpiar() {
+        txtNroOperacion.setText("");
+        cboPeriodo.setSelectedIndex(0);
+        cboOrigen.setSelectedIndex(0);
+        cboDestino.setSelectedIndex(0);
+        txtFecha.setDate(new java.util.Date());
+        
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<Cuentas> cboDestino;
     private javax.swing.JComboBox<Cuentas> cboOrigen;
     private javax.swing.JComboBox<Periodos> cboPeriodo;

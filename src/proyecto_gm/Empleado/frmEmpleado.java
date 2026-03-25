@@ -123,14 +123,14 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        btnNuevo = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        jLabel13 = new javax.swing.JLabel();
-        btnExportar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        jToolBar2 = new javax.swing.JToolBar();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        btnExportar1 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
         btnDatAcad = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -196,54 +196,9 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         jToolBar1.setRollover(true);
         jToolBar1.add(jSeparator1);
 
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
-        btnNuevo.setToolTipText("Nuevo");
-        btnNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnNuevo.setFocusable(false);
-        btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnNuevo.setMaximumSize(new java.awt.Dimension(30, 28));
-        btnNuevo.setMinimumSize(new java.awt.Dimension(30, 28));
-        btnNuevo.setName("nuevo"); // NOI18N
-        btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnNuevo);
-
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editar.png"))); // NOI18N
-        btnEditar.setToolTipText("editor");
-        btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnEditar.setFocusable(false);
-        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEditar.setName("editar"); // NOI18N
-        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnEditar);
-
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
-        btnEliminar.setToolTipText("Eliminar");
-        btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnEliminar.setFocusable(false);
-        btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEliminar.setName("eliminar"); // NOI18N
-        btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnEliminar);
-
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
         btnGuardar.setToolTipText("Guardar");
         btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnGuardar.setFocusable(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setName("guardar"); // NOI18N
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -254,39 +209,44 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btnGuardar);
 
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
-        btnCancelar.setToolTipText("Cancelar");
-        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnCancelar.setFocusable(false);
-        btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCancelar.setName("cancelar"); // NOI18N
-        btnCancelar.setNextFocusableComponent(txtApe);
-        btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnCancelar);
-
         jSeparator2.setPreferredSize(new java.awt.Dimension(10, 0));
         jToolBar1.add(jSeparator2);
 
-        jLabel13.setText("Exportar informacion");
-        jToolBar1.add(jLabel13);
-
-        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-doc-25.png"))); // NOI18N
-        btnExportar.setToolTipText("Exportar a Excel");
-        btnExportar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnExportar.setMaximumSize(new java.awt.Dimension(35, 33));
-        btnExportar.setMinimumSize(new java.awt.Dimension(35, 33));
-        btnExportar.setName("exportar"); // NOI18N
-        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
+        btnLimpiar.setToolTipText("Limpiar");
+        btnLimpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportarActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnExportar);
+        jToolBar1.add(btnLimpiar);
+
+        jToolBar2.setRollover(true);
+        jToolBar2.add(jSeparator3);
+
+        jSeparator4.setPreferredSize(new java.awt.Dimension(10, 0));
+        jToolBar2.add(jSeparator4);
+
+        btnExportar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-doc-25.png"))); // NOI18N
+        btnExportar1.setToolTipText("Exportar a Excel");
+        btnExportar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnExportar1.setMaximumSize(new java.awt.Dimension(35, 33));
+        btnExportar1.setMinimumSize(new java.awt.Dimension(35, 33));
+        btnExportar1.setName("exportar"); // NOI18N
+        btnExportar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportar1ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(btnExportar1);
+
+        jLabel16.setText("Exportar informacion");
+        jToolBar2.add(jLabel16);
+
+        jToolBar1.add(jToolBar2);
 
         btnDatAcad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-importar-25.png"))); // NOI18N
         btnDatAcad.setToolTipText("Registrar Datos Académicos");
@@ -569,7 +529,7 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 577, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -582,19 +542,6 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // Habilitamos los campos:
-//        tblEmpleados.clearSelection();
-//        tblEmpleados.setRowSelectionAllowed(false);
-        //DatosEmpleados.Habilitar(escritorio, opcionesTipo, true);
-        String codigo = DatosEmpleados.GenerarCodigo("empleados", "IdEmpleado", "E", 4);
-        txtId.setText(codigo);
-        txtId.setEnabled(false);
-        txtApe.requestFocus();
-
-        esNuevo = true; // Indicamos que sera un nuevo registro
-    }//GEN-LAST:event_btnNuevoActionPerformed
     private <T> T ObtenerIdCombo(JComboBox cbo,int indiceSeleccionado){
           //clase =  cbo.getModel().getElementAt(indiceSeleccionado);
         return (T)cbo.getModel().getElementAt(indiceSeleccionado);
@@ -610,71 +557,7 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         }
         return resultadoId;
     }
-    
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // Crear un objeto Empleados y asignar los valores
-        Empleados empleado = new Empleados();
-        empleado.setId(txtId.getText());
-        empleado.setApellidos(txtApe.getText());
-        empleado.setNombres(txtNom.getText());
-        empleado.setfNacimiento(txtFecNac.getText());
-        empleado.setCorreo(txtCorreo.getText());
-        empleado.setDni(txtDni.getText());
-        empleado.setCelular(txtCel.getText());
-        empleado.setDistrito(txtDistrito.getText());
-        empleado.setDireccion(txtDirec.getText());
-
-        // Capturar los IDs reales desde métodos separados
         
-        //empleado.setIdArea(Integer.parseInt(DatosEmpleados.CapturarArea(cboArea)));
-        //empleado.setIdCargo(Integer.parseInt(DatosEmpleados.CapturarCargo(cboCargo)));
-        //empleado.setIdTipo(Integer.parseInt(DatosEmpleados.CapturarTipoEmpleado(opcionesTipo)));
-            
-        //obtneer el id seleccion del combo
-         int indice = 0;           
-        //int idArea =  ((Area)this.cboArea.getModel().getSelectedItem()).getIdArea();
-        Area areaSeleccionada = (Area)this.cboArea.getModel().getSelectedItem();
-        empleado.setArea(areaSeleccionada);
-         //empleado.setIdArea(idArea); 
-         
-        indice = 0;         
-        
-        //int idCargo = ((Cargo)this.cboCargo.getModel().getSelectedItem()).getIdCargo();
-        //empleado.setIdCargo(idCargo);
-        Cargo cargoSeleccionado = (Cargo)this.cboCargo.getModel().getSelectedItem();
-        empleado.setCargo(cargoSeleccionado);
-        
-        empleado.setIdTipo(ObtenerIdTipo());
-        
-        
-        // Insertar o actualizar según sea el caso
-        if (estadoProceso == estadoProceso.NUEVO) {
-            DatosEmpleados.Insertar(empleado);
-            //DatosEmpleados.cargarTabla(this.tblEmpleados);
-        } else if(estadoProceso == estadoProceso.EDITAR) {
-            DatosEmpleados.Actualizar(empleado);
-        }
-        
-        frmListaEmpleado.CargarLista();
-
-        HabilitaBotonesMantenimiento(true);
-        
-  
-        //actualizar la grilla del fromulario frmListaEmpleado
-        
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // Limpiamos y bloqueamos los campos:
-        //DatosEmpleados.Limpiar(escritorio, rbPartime);
-        //DatosEmpleados.Habilitar(escritorio, opcionesTipo, false);
-        HabilitaBotonesMantenimiento(true);
-        HabilitaControles(false);
-        this.dispose();
-        //tblEmpleados.clearSelection();
-        //tblEmpleados.setRowSelectionAllowed(true);
-    }//GEN-LAST:event_btnCancelarActionPerformed
-    
     private void btnDatAcadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatAcadActionPerformed
         // TODO add your handling code here:
         Datosacad verventana = new Datosacad();
@@ -707,15 +590,6 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_btnDatAcadActionPerformed
-
-    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
-//        try {
-//            Exportar obj = new Exportar();
-//            obj.exportarExcel(tblEmpleados);
-//        } catch (IOException ex) {
-//            Logger.getLogger(frmEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_btnExportarActionPerformed
 
     private void txtCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusLost
         // TODO add your handling code here:
@@ -803,13 +677,23 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbPracticanteActionPerformed
     private void HabilitaBotonesMantenimiento(boolean estado){
-        
-            btnNuevo.setEnabled(estado);
-            btnEditar.setEnabled(estado);
-            btnEliminar.setEnabled(estado);
             btnGuardar.setEnabled(!estado);
-            btnCancelar.setEnabled(!estado);
+            btnLimpiar.setEnabled(!estado);
     }
+    
+    private void Limpiar(){
+        this.txtApe.setText("");
+        this.txtCel.setText("");
+        this.txtCorreo.setText("");
+        this.txtDirec.setText("");
+        this.txtDistrito.setText("");
+        this.txtDni.setText("");
+        this.txtFecNac.setText("");
+        this.txtNom.setText("");
+        this.cboArea.setSelectedIndex(0);
+        this.cboCargo.setSelectedIndex(0);
+    }
+    
     private void HabilitaControles(boolean estado){
         this.txtApe.setEnabled(estado);
         this.txtCel.setEnabled(estado);
@@ -854,45 +738,78 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_cboAreaActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // Agrupar las cajas de texto
-        JTextField[] campos = {txtId, txtApe, txtNom, txtFecNac, txtCorreo,
-            txtDni, txtCel, txtDistrito, txtDirec};
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // Crear un objeto Empleados y asignar los valores
+        Empleados empleado = new Empleados();
+        empleado.setId(txtId.getText());
+        empleado.setApellidos(txtApe.getText());
+        empleado.setNombres(txtNom.getText());
+        empleado.setfNacimiento(txtFecNac.getText());
+        empleado.setCorreo(txtCorreo.getText());
+        empleado.setDni(txtDni.getText());
+        empleado.setCelular(txtCel.getText());
+        empleado.setDistrito(txtDistrito.getText());
+        empleado.setDireccion(txtDirec.getText());
 
-        // Agrupar los combo boxes y cargar el radio button correspondiente
-        // que esta en el button group
-        JComboBox[] combos = {cboArea, cboCargo};
-        //DatosEmpleados.Editar(escritorio,  campos, combos, opcionesTipo);
+        // Capturar los IDs reales desde métodos separados
 
-        esNuevo = false; // Indicamos que no sera un nuevo registro
-    }//GEN-LAST:event_btnEditarActionPerformed
+        //empleado.setIdArea(Integer.parseInt(DatosEmpleados.CapturarArea(cboArea)));
+        //empleado.setIdCargo(Integer.parseInt(DatosEmpleados.CapturarCargo(cboCargo)));
+        //empleado.setIdTipo(Integer.parseInt(DatosEmpleados.CapturarTipoEmpleado(opcionesTipo)));
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // Eliminamos el registro seleccionado y bloqueamos los campos
-        boolean respuesta = Utilitario.MostrarMensajePregunta("¿Desea elminar el registro?", Utilitario.TipoMensaje.pregunta);
-        if(respuesta == true){
-            //DatosEmpleados.Eliminar(tblEmpleados);
+        //obtneer el id seleccion del combo
+        int indice = 0;
+        //int idArea =  ((Area)this.cboArea.getModel().getSelectedItem()).getIdArea();
+        Area areaSeleccionada = (Area)this.cboArea.getModel().getSelectedItem();
+        empleado.setArea(areaSeleccionada);
+        //empleado.setIdArea(idArea);
+
+        indice = 0;
+
+        //int idCargo = ((Cargo)this.cboCargo.getModel().getSelectedItem()).getIdCargo();
+        //empleado.setIdCargo(idCargo);
+        Cargo cargoSeleccionado = (Cargo)this.cboCargo.getModel().getSelectedItem();
+        empleado.setCargo(cargoSeleccionado);
+
+        empleado.setIdTipo(ObtenerIdTipo());
+
+        // Insertar o actualizar según sea el caso
+        if (estadoProceso == estadoProceso.NUEVO) {
+            DatosEmpleados.Insertar(empleado);
+            //DatosEmpleados.cargarTabla(this.tblEmpleados);
+        } else if(estadoProceso == estadoProceso.EDITAR) {
+            DatosEmpleados.Actualizar(empleado);
         }
-        //actualizar la lista del formulario padre
-    }//GEN-LAST:event_btnEliminarActionPerformed
+
+        frmListaEmpleado.CargarLista();
+        HabilitaBotonesMantenimiento(true);
+        this.dispose();
+        //actualizar la grilla del fromulario frmListaEmpleado
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        Limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnExportar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExportar1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDatAcad;
-    public static javax.swing.JButton btnEditar;
-    public static javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnExportar;
-    public static javax.swing.JButton btnGuardar;
-    public static javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnExportar1;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<Area> cboArea;
     private javax.swing.JComboBox<Cargo> cboCargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -905,7 +822,10 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
     private javax.swing.ButtonGroup opcionesTipo;
     private javax.swing.JRadioButton rbEstable;
     private javax.swing.JRadioButton rbPartime;
