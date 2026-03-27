@@ -27,7 +27,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="subMenuTipoEmpleado">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tipos de empleados"/>
+                <Property name="text" type="java.lang.String" value="Tipos de personal"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subMenuTipoEmpleadoActionPerformed"/>
@@ -178,7 +178,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuRecursosHumanos">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Recursos humanos"/>
+            <Property name="text" type="java.lang.String" value="Gestion Personal"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="subMenuExpLaboral">

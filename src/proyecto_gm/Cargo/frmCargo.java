@@ -394,31 +394,60 @@ public class frmCargo extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = tblCargo.getSelectedRow();
-    if (fila >= 0) {
-        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this,"¿Está seguro de eliminar este cargo?","Confirmar Eliminación",javax.swing.JOptionPane.YES_NO_OPTION
-        );
-        if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
-            try {
-                int idCargo = Integer.parseInt(tblCargo.getValueAt(fila, 0).toString());
-                boolean eliminado = datosCargo.eliminar(idCargo);
-                if (eliminado) {
-                    javax.swing.JOptionPane.showMessageDialog(this,"Cargo eliminado correctamente.","Información",javax.swing.JOptionPane.INFORMATION_MESSAGE
+        if (fila >= 0) {
+            
+            Object[] opciones = {"Sí", "No"};
+
+          
+            int confirmacion = javax.swing.JOptionPane.showOptionDialog(
+                this,
+                "¿Está seguro de eliminar este cargo?",
+                "Confirmar Eliminación",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE, 
+                null,
+                opciones,
+                opciones[0] 
+            );
+
+            
+            if (confirmacion == 0) { 
+                try {
+                    int idCargo = Integer.parseInt(tblCargo.getValueAt(fila, 0).toString());
+                    boolean eliminado = datosCargo.eliminar(idCargo);
+                    if (eliminado) {
+                        javax.swing.JOptionPane.showMessageDialog(
+                            this,
+                            "Cargo eliminado correctamente.",
+                            "Información",
+                            javax.swing.JOptionPane.INFORMATION_MESSAGE
+                        );
+                        cargarTabla(); 
+                    }
+                } catch (NumberFormatException e) {
+                    javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "El ID del cargo no es válido.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE
                     );
-                    cargarTabla(); 
+                } catch (SQLException ex) {
+                    javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "Error al eliminar el cargo: " + ex.getMessage(),
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE
+                    );
                 }
-            } catch (NumberFormatException e) {
-                javax.swing.JOptionPane.showMessageDialog(this,"El ID del cargo no es válido.","Error",javax.swing.JOptionPane.ERROR_MESSAGE
-                );
-            } catch (SQLException ex) {
-                javax.swing.JOptionPane.showMessageDialog(this,"Error al eliminar el cargo: " + ex.getMessage(),"Error",javax.swing.JOptionPane.ERROR_MESSAGE
-                );
             }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Debe seleccionar una fila para eliminar.",
+                "Advertencia",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+            );
         }
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(
-            this,"Debe seleccionar una fila para eliminar.","Advertencia",javax.swing.JOptionPane.WARNING_MESSAGE
-        );
-    }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed

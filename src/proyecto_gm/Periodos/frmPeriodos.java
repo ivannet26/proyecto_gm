@@ -265,8 +265,19 @@ public class frmPeriodos extends javax.swing.JInternalFrame {
             return;
         }
 
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el periodo?", "Confirmación", JOptionPane.YES_NO_OPTION);
-        if (confirmacion == JOptionPane.YES_OPTION) {
+        Object[] opciones = {"Sí", "No"};
+        int confirmacion = JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de eliminar el periodo?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[0]
+        );
+
+        if (confirmacion == 0) {
             int id = (int) modeloTabla.getValueAt(fila, 0);
             if (DatosPeriodo.eliminar(id)) {
                 JOptionPane.showMessageDialog(this, "Periodo eliminado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

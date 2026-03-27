@@ -475,7 +475,7 @@ public class menu extends javax.swing.JFrame {
         });
         menuAdministracion.add(subMenuAreas);
 
-        subMenuTipoEmpleado.setText("Tipos de empleados");
+        subMenuTipoEmpleado.setText("Tipos de personal");
         subMenuTipoEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subMenuTipoEmpleadoActionPerformed(evt);
@@ -617,7 +617,7 @@ public class menu extends javax.swing.JFrame {
 
         jMenuBar1.add(menuProyecto);
 
-        menuRecursosHumanos.setText("Recursos humanos");
+        menuRecursosHumanos.setText("Gestion Personal");
 
         subMenuExpLaboral.setText("Experiencia laboral");
         subMenuExpLaboral.addActionListener(new java.awt.event.ActionListener() {
@@ -1314,7 +1314,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_submenuAsistenciaActionPerformed
 
     private void subMenuTipoDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuTipoDocumentoActionPerformed
-        cargarFormulario(() -> frmTipoDocumento.getInstancia());
+        Abrirtiposdocumentos();
     }//GEN-LAST:event_subMenuTipoDocumentoActionPerformed
 
     private void submenuContratosPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submenuContratosPersonalActionPerformed
@@ -1363,7 +1363,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuExpLaboralActionPerformed
 
     private void subMenuCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuCarrerasActionPerformed
-        cargarFormulario(() -> frmCarreras.getInstancia());
+        Abrircarreras();
     }//GEN-LAST:event_subMenuCarrerasActionPerformed
 
     private void subMenuInstitucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuInstitucionesActionPerformed
@@ -1371,7 +1371,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuInstitucionesActionPerformed
 
     private void subMenuFacultadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuFacultadesActionPerformed
-        cargarFormulario(() -> frmFacultades.getInstancia());
+       Abrirfacultades();
     }//GEN-LAST:event_subMenuFacultadesActionPerformed
 
     private void subMenuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuProveedoresActionPerformed
@@ -1431,7 +1431,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuCajaChicaActionPerformed
 
     private void subMenuPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuPerfilActionPerformed
-         cargarFormulario(() -> frmPerfil.getInstancia());
+        AbrirPerfil();
     }//GEN-LAST:event_subMenuPerfilActionPerformed
 
     private void subMenuHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuHorariosActionPerformed
@@ -1439,7 +1439,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuHorariosActionPerformed
 
     private void subMenuArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuArchivosActionPerformed
-       cargarFormulario(() -> proyecto_gm.Archivos.frmArchivos.getInstancia());
+       AbrirArchivos();
     }//GEN-LAST:event_subMenuArchivosActionPerformed
 
    

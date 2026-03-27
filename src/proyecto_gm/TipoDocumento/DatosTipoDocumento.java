@@ -138,21 +138,31 @@ public class DatosTipoDocumento {
     }
 
     public static void Eliminar(JTable tabla) {
-        int fila = tabla.getSelectedRow();
+       int fila = tabla.getSelectedRow();
         if (fila >= 0) {
             String codigoTipo = tabla.getModel().getValueAt(fila, 0).toString();
-            boolean confirmar = Utilitario.MostrarMensajePregunta("¿Eliminar tipo de documento?", Utilitario.TipoMensaje.pregunta);
-            if (confirmar) {
-                try ( CallableStatement stmt = conn.prepareCall("{ CALL eliminar_tipodocumento(?) }")) {
+            
+            Object[] opciones = {"Sí", "No"};
+            int confirmar = javax.swing.JOptionPane.showOptionDialog(
+                    null, 
+                    "¿Eliminar tipo de documento?", 
+                    "Confirmación", 
+                    javax.swing.JOptionPane.YES_NO_OPTION, 
+                    javax.swing.JOptionPane.QUESTION_MESSAGE, 
+                    null, 
+                    opciones, 
+                    opciones[0]
+            );
+
+            if (confirmar == 0) {
+                try (CallableStatement stmt = conn.prepareCall("{ CALL eliminar_tipodocumento(?) }")) {
                     stmt.setString(1, codigoTipo);
                     stmt.execute();
 
-                    // Refrescar la tabla completa
                     DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
                     modelo.setRowCount(0); 
                     Mostrar(modelo);       
 
-                    // Confirmación
                     Utilitario.MostrarMensaje("Registro eliminado correctamente.", Utilitario.TipoMensaje.informativo);
 
                 } catch (SQLException ex) {

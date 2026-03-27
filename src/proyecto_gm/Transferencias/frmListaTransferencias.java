@@ -193,17 +193,23 @@ public class frmListaTransferencias extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = tblTransferencias.getSelectedRow();
         if (fila >= 0) {
-            // Se obtiene el ID directamente de la tabla
             int idTransferencia = (int) tblTransferencias.getValueAt(fila, 0);
 
-            // Diálogo de confirmación
-            int confirmacion = JOptionPane.showConfirmDialog(this,
+            Object[] opciones = {"Sí", "No"};
+            int confirmacion = JOptionPane.showOptionDialog(
+                    this,
                     "¿Está seguro de que quiere eliminar la transferencia seleccionada?",
-                    "Confirmación de Eliminación", JOptionPane.YES_NO_OPTION);
+                    "Confirmación de Eliminación", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, 
+                    null, 
+                    opciones, 
+                    opciones[0]
+            );
 
-            if (confirmacion == JOptionPane.YES_OPTION) {
+            if (confirmacion == 0) {
                 DatosTransferencias.eliminar(idTransferencia);
-                cargarDatos(); // Actualizar la tabla después de eliminar
+                cargarDatos();
             }
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);

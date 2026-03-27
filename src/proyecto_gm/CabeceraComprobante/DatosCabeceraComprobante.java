@@ -118,25 +118,30 @@ public class DatosCabeceraComprobante {
     // Eliminar datos
     public static void Eliminar(JTable tabla) {
         try {
-            // Obtener el indice de la fila seleccionada
             int fila = tabla.getSelectedRow();
 
             if (fila >= 0) {
-                String[] options = {"Sí", "No", "Cancelar"};
-                int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro de que quiere eliminar la fila seleccionada?", "Confirmación", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
-                if (opcion == JOptionPane.YES_OPTION) {
-                    // Obtener los datos de fila seleccionada
-                    String id = tabla.getModel().getValueAt(fila, 0).toString(); //Se asume que el ID se encuentra en la primera columna
+                Object[] opciones = {"Sí", "No"};
+                int opcion = JOptionPane.showOptionDialog(
+                        null, 
+                        "¿Está seguro de que quiere eliminar la fila seleccionada?", 
+                        "Confirmación", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, 
+                        null, 
+                        opciones, 
+                        opciones[0]
+                );
+                
+                if (opcion == 0) {
+                    String id = tabla.getModel().getValueAt(fila, 0).toString(); 
 
-                    // Ejecutar el procedimiento almacenado
                     CallableStatement stmt = conn.prepareCall("{ CALL eliminar_cabeceracomprobante(?) }");
                     stmt.setString(1, id);
                     stmt.execute();
 
-                    // Actualizar el JTable
                     DefaultTableModel model = (DefaultTableModel) tabla.getModel();
                     model.removeRow(fila);
-                    // JOptionPane.showMessageDialog(null, "La fila ha sido eliminada exitosamente");                
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila para eliminar.");

@@ -327,15 +327,25 @@ public class frmDepartamentos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblDepartamentos.getSelectedRow();
+       int fila = tblDepartamentos.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de que quiere eliminar el departamento seleccionado?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+        Object[] opciones = {"Sí", "No"};
+        int confirm = JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de que quiere eliminar el departamento seleccionado?", 
+                "Confirmar Eliminación", 
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
 
-        if (confirm == JOptionPane.YES_OPTION) {
+        if (confirm == 0) {
             int id = Integer.parseInt(tblDepartamentos.getValueAt(fila, 0).toString());
             if (datos.eliminar(id)) {
                 JOptionPane.showMessageDialog(this, "Departamento eliminado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

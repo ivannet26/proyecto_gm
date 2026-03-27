@@ -104,7 +104,6 @@ public class MAC_ADDRESS extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         btnDenegar = new javax.swing.JButton();
 
@@ -130,20 +129,6 @@ public class MAC_ADDRESS extends javax.swing.JInternalFrame {
 
         jToolBar1.setRollover(true);
         jToolBar1.add(jSeparator1);
-
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regresar.png"))); // NOI18N
-        btnCancelar.setToolTipText("Cancelar");
-        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnCancelar.setFocusable(false);
-        btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCancelar.setName("deshacer"); // NOI18N
-        btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnCancelar);
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
         btnAceptar.setToolTipText("Aceptar");
@@ -209,24 +194,6 @@ public class MAC_ADDRESS extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       frmPerfil ventanaPerfil = new frmPerfil();
-    
-   
-        javax.swing.JDesktopPane escritorio = this.getDesktopPane();
-
-        if (escritorio != null) {
-            escritorio.add(ventanaPerfil);
-
-
-            java.awt.Dimension tamanoEscritorio = escritorio.getSize();
-            java.awt.Dimension tamanoVentana = ventanaPerfil.getSize();
-
-            ventanaPerfil.setVisible(true);
-            this.dispose();
-        }
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
      actualizarEstado("ACEPTADO");
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -238,7 +205,6 @@ public class MAC_ADDRESS extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDenegar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

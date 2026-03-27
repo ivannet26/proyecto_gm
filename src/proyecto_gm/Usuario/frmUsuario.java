@@ -336,10 +336,24 @@ public class frmUsuario extends frmMantenimientoBasico {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblUsuario.getSelectedRow();
+       int fila = tblUsuario.getSelectedRow();
         if (fila >= 0) {
-            String idUsuario = tblUsuario.getValueAt(fila, 0).toString();
-            DatosUsuario.Eliminar(tblUsuario);
+            Object[] opciones = {"Sí", "No"};
+            int confirmacion = JOptionPane.showOptionDialog(
+                    null, 
+                    "¿Está seguro de eliminar este usuario?", 
+                    "Confirmación", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, 
+                    null, 
+                    opciones, 
+                    opciones[0]
+            );
+
+            if (confirmacion == 0) {
+                String idUsuario = tblUsuario.getValueAt(fila, 0).toString();
+                DatosUsuario.Eliminar(tblUsuario);
+            }
         } else {
             Utilitario.MostrarMensaje("Debe seleccionar un usuario para eliminar", Utilitario.TipoMensaje.alerta);
         }

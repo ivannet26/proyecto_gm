@@ -223,19 +223,30 @@ public class frmListaCuentas extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        int filaSeleccionada = tblCuentas.getSelectedRow();
+       int filaSeleccionada = tblCuentas.getSelectedRow();
         if (filaSeleccionada == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar esta cuenta?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-        if (confirmacion == JOptionPane.YES_OPTION) {
+        Object[] opciones = {"Sí", "No"};
+        int confirmacion = JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de que desea eliminar esta cuenta?", 
+                "Confirmar Eliminación", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[0]
+        );
+        
+        if (confirmacion == 0) {
             try {
                 int idCuenta = (int) tblCuentas.getValueAt(filaSeleccionada, 0);
                 DatosCuentas.eliminar(idCuenta);
                 JOptionPane.showMessageDialog(this, "Cuenta eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                cargarDatosTabla(); // Recargar la tabla
+                cargarDatosTabla();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Error al eliminar la cuenta: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }

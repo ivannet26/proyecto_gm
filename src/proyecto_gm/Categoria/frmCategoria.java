@@ -303,11 +303,21 @@ public class frmCategoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblCategoria.getSelectedRow();
+       int fila = tblCategoria.getSelectedRow();
         if (fila >= 0) {
-            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar esta categoría?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+            Object[] opciones = {"Sí", "No"};
+            int confirmacion = JOptionPane.showOptionDialog(
+                    this, 
+                    "¿Está seguro de eliminar esta categoría?", 
+                    "Confirmar Eliminación", 
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]
+            );
             
-            if (confirmacion == JOptionPane.YES_OPTION) {
+            if (confirmacion == 0) {
                 int idCategoria = (int) tblCategoria.getValueAt(fila, 0);
                 DatosCategoria.eliminar(idCategoria);
                 cargarDatos();

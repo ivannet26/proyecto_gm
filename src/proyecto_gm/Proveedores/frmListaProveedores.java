@@ -337,12 +337,23 @@ public void cargarTabla() {
             return;
         }
 
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar este proveedor?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
+        Object[] opciones = {"Sí", "No"};
+        int confirm = JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de eliminar este proveedor?", 
+                "Confirmar Eliminación", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[0]
+        );
+
+        if (confirm == 0) {
             int idProveedor = (int) tblProveedor.getValueAt(fila, 0);
             if (datos.eliminar(idProveedor)) {
                 JOptionPane.showMessageDialog(this, "Proveedor eliminado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                cargarTabla(); // Refrescar la tabla
+                cargarTabla();
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo eliminar el proveedor.", "Error", JOptionPane.ERROR_MESSAGE);
             }

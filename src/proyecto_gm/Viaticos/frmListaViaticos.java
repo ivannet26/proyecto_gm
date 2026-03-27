@@ -205,10 +205,24 @@ public class frmListaViaticos extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = tblViatico.getSelectedRow();
         if (fila >= 0) {
-            int id = Integer.parseInt(tblViatico.getValueAt(fila, 0).toString());
-            if (DatosViaticos.eliminar(id)) {
-                cargarDatos();
-                Utilitario.MostrarMensaje("Eliminado correctamente", Utilitario.TipoMensaje.informativo);
+            Object[] opciones = {"Sí", "No"};
+            int confirmacion = JOptionPane.showOptionDialog(
+                    this, 
+                    "¿Está seguro de que desea eliminar este viático?", 
+                    "Confirmar Eliminación", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, 
+                    null, 
+                    opciones, 
+                    opciones[0]
+            );
+
+            if (confirmacion == 0) {
+                int id = Integer.parseInt(tblViatico.getValueAt(fila, 0).toString());
+                if (DatosViaticos.eliminar(id)) {
+                    cargarDatos();
+                    Utilitario.MostrarMensaje("Eliminado correctamente", Utilitario.TipoMensaje.informativo);
+                }
             }
         } else {
             Utilitario.MostrarMensaje("Seleccione un registro para eliminar", Utilitario.TipoMensaje.alerta);

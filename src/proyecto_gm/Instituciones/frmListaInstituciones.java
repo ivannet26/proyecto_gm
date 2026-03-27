@@ -267,10 +267,22 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int filaVista = tblInstituciones.getSelectedRow();
         if (filaVista >= 0) {
-            int filaModelo = tblInstituciones.convertRowIndexToModel(filaVista);
-            
-            DatosInstituciones.eliminarDatos(tblInstituciones, filaModelo); 
-            
+            Object[] opciones = {"Sí", "No"};
+            int confirmacion = JOptionPane.showOptionDialog(
+                    null, 
+                    "¿Está seguro de eliminar esta institución?", 
+                    "Confirmación", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, 
+                    null, 
+                    opciones, 
+                    opciones[0]
+            );
+
+            if (confirmacion == 0) {
+                int filaModelo = tblInstituciones.convertRowIndexToModel(filaVista);
+                DatosInstituciones.eliminarDatos(tblInstituciones, filaModelo); 
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila para eliminar.");
         }

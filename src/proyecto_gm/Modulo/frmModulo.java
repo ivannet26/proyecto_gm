@@ -292,9 +292,19 @@ public class frmModulo extends javax.swing.JInternalFrame {
             return;
         }
 
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar el módulo seleccionado?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+        Object[] opciones = {"Sí", "No"};
+        int confirmacion = JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de que desea eliminar el módulo seleccionado?", 
+                "Confirmar Eliminación", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[0]
+        );
 
-        if (confirmacion == JOptionPane.YES_OPTION) {
+        if (confirmacion == 0) {
             int id = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
             if (DatosModulo.eliminar(id)) {
                 JOptionPane.showMessageDialog(this, "Módulo eliminado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

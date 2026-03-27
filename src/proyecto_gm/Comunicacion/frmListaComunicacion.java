@@ -454,12 +454,23 @@ public class frmListaComunicacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblDatos.getSelectedRow();
+       int fila = tblDatos.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else {
-            int confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el registro?");
-            if (confirmar == JOptionPane.OK_OPTION) {
+            Object[] opciones = {"Sí", "No"};
+            int confirmar = JOptionPane.showOptionDialog(
+                    null, 
+                    "¿Está seguro que desea eliminar el registro?", 
+                    "Confirmar Eliminación", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, 
+                    null, 
+                    opciones, 
+                    opciones[0]
+            );
+            
+            if (confirmar == 0) {
                 int id = Integer.parseInt(tblDatos.getValueAt(fila, 0).toString());
                 Comunicacion c = new Comunicacion();
                 c.setId(String.valueOf(id));

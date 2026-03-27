@@ -25,14 +25,7 @@ public class DatosArea {
             }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            // CORRECCIÓN AQUÍ
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar conexión: " + e.getMessage());
-            }
-        }
+        } 
         return listaAreas;
     }
 
@@ -44,14 +37,7 @@ public class DatosArea {
             }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al insertar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            // CORRECCIÓN AQUÍ
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar conexión: " + e.getMessage());
-            }
-        }
+        } 
         return exito;
     }
 
@@ -64,14 +50,7 @@ public class DatosArea {
             }
             catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al actualizar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            // CORRECCIÓN AQUÍ
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar conexión: " + e.getMessage());
-            }
-        }
+        } 
         return exito;
     }
 
@@ -84,14 +63,7 @@ public class DatosArea {
             }
             catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            // CORRECCIÓN AQUÍ
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar conexión: " + e.getMessage());
-            }
-        }
+        } 
         return exito;
     }
 }

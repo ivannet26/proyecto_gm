@@ -358,16 +358,28 @@ public class frmCarreras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblCarreras.getSelectedRow();
+    int fila = tblCarreras.getSelectedRow();
     if (fila >= 0) {
-        boolean confirmar = Utilitario.MostrarMensajePregunta(
-                "¿Está seguro de eliminar esta carrera?",Utilitario.TipoMensaje.pregunta);
+        Object[] opciones = {"Sí", "No"};
+        int confirmacion = javax.swing.JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de eliminar esta carrera?", 
+                "Confirmación", 
+                javax.swing.JOptionPane.YES_NO_OPTION, 
+                javax.swing.JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[0]
+        );
         
-        if (confirmar) {
-            int idCarrera = (int) tblCarreras.getValueAt(fila, 0);DatosCarrera.eliminar(idCarrera);
-            cargarDatos();}
+        if (confirmacion == 0) {
+            int idCarrera = (int) tblCarreras.getValueAt(fila, 0);
+            DatosCarrera.eliminar(idCarrera);
+            cargarDatos();
+        }
     } else {
-        Utilitario.MostrarMensaje("Debes seleccionar una fila para eliminar.", Utilitario.TipoMensaje.alerta);}
+        Utilitario.MostrarMensaje("Debes seleccionar una fila para eliminar.", Utilitario.TipoMensaje.alerta);
+    }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 

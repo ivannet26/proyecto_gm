@@ -217,8 +217,19 @@ public class fmrListarCajaChica extends javax.swing.JInternalFrame {
             return;
         }
 
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar este registro?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (confirmacion == JOptionPane.YES_OPTION) {
+        Object[] opciones = {"Sí", "No"};
+        int confirmacion = JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de eliminar este registro?", 
+                "Confirmar", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[0]
+        );
+        
+        if (confirmacion == 0) {
             String id = tblCajaChica.getValueAt(filaSeleccionada, 0).toString();
             DatosCajaChica.Eliminar(id);
             refrescarTabla();

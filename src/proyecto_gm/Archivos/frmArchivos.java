@@ -231,16 +231,35 @@ public class frmArchivos extends javax.swing.JInternalFrame {
         }
 
         String nombre = tblArchivos.getValueAt(fila, 0).toString();
-        try (Connection con = ConexionBD.getConnection()) {
-            String sql = "DELETE FROM documentos_pdf WHERE nombre_archivo = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, nombre);
-            ps.executeUpdate();
-            
-            actualizarTabla();
-            JOptionPane.showMessageDialog(this, "Registro eliminado");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error de seguridad: " + e.getMessage());
+
+        
+        Object[] opciones = {"Sí", "No"};
+
+        
+        int confirmacion = JOptionPane.showOptionDialog(
+                this,
+                "¿Está seguro de eliminar el archivo seleccionado?",
+                "Confirmar Eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0] 
+        );
+
+       
+        if (confirmacion == 0) {
+            try (Connection con = ConexionBD.getConnection()) {
+                String sql = "DELETE FROM documentos_pdf WHERE nombre_archivo = ?";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setString(1, nombre);
+                ps.executeUpdate();
+
+                actualizarTabla();
+                JOptionPane.showMessageDialog(this, "Registro eliminado");
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error de seguridad: " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
 

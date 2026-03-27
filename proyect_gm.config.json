@@ -13,5 +13,5 @@
     "url_github": "https://api.github.com/repos/DiegoChu0434/Sistema-Inventario/releases/latest",
     "flag_modo_actualiza": "true"
   },
-  "modo_desarrollador": "true"
+  "modo_desarrollador": "false"
 }

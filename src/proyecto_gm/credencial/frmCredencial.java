@@ -4,6 +4,7 @@ package proyecto_gm.credencial;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Toolkit;
 import java.util.List;
+import javax.swing.JOptionPane;
 import proyecto_gm.Utilitario;
     
 
@@ -301,12 +302,22 @@ private void cargarDatosEnTabla() {
         int filaSeleccionada = tblCredenciales.getSelectedRow();
         
         if (filaSeleccionada >= 0) {
-            boolean confirmacion = Utilitario.MostrarMensajePregunta("¿Está seguro de eliminar esta credencial?", Utilitario.TipoMensaje.pregunta);
+            Object[] opciones = {"Sí", "No"};
+            int confirmacion = JOptionPane.showOptionDialog(
+                    this, 
+                    "¿Está seguro de eliminar esta credencial?", 
+                    "Confirmar Eliminación", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, 
+                    null, 
+                    opciones, 
+                    opciones[0]
+            );
             
-            if (confirmacion) {
+            if (confirmacion == 0) {
                 String idCredencial = listaCredenciales.get(filaSeleccionada).getIdCredencial();
                 DatosCredencial.eliminar(idCredencial);
-                cargarDatosEnTabla(); // Refrescar la tabla
+                cargarDatosEnTabla();
             }
         } else {
             Utilitario.MostrarMensaje("Debe seleccionar una credencial para eliminar.", Utilitario.TipoMensaje.alerta);

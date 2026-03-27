@@ -318,12 +318,19 @@ public frmListaHorarios() {
         if (fila >= 0) {
             Horarios seleccionado = listaHorarios.get(tblHorario.convertRowIndexToModel(fila));
 
-            int confirm = JOptionPane.showConfirmDialog(this, 
-                "¿Seguro que deseas eliminar el horario de este empleado?", 
-                "Confirmar Eliminación", 
-                JOptionPane.YES_NO_OPTION);
+            Object[] opciones = {"Sí", "No"};
+            int confirm = JOptionPane.showOptionDialog(
+                    this, 
+                    "¿Seguro que deseas eliminar el horario de este empleado?", 
+                    "Confirmar Eliminación", 
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]
+            );
 
-            if (confirm == JOptionPane.YES_OPTION) {
+            if (confirm == 0) {
                 DatosHorarios.eliminar(seleccionado.getIdhorario());
                 cargarDatos();
             }

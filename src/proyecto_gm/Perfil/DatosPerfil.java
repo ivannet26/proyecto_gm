@@ -29,13 +29,8 @@ public class DatosPerfil {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar perfiles: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
-        }
+        } 
+        
         return listaPerfiles;
     }
 
@@ -51,13 +46,8 @@ public class DatosPerfil {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al insertar perfil: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
-        }
+        } 
+        
         return exito;
     }
 
@@ -73,13 +63,8 @@ public class DatosPerfil {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al actualizar perfil: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
         }
+        
         return exito;
     }
 
@@ -95,13 +80,7 @@ public class DatosPerfil {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar perfil: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
-        }
+        } 
         return exito;
     }
 }

@@ -120,7 +120,7 @@ public class frmTipo extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("TIPO EMPLEADO");
+        setTitle("TIPO PERSONAL");
 
         jLabel1.setText("Id:");
 

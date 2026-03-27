@@ -413,9 +413,24 @@ public class frmArea extends javax.swing.JInternalFrame {
         }
 
         int idArea = (int) tblArea.getValueAt(fila, 0);
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar esta área?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
-        if (confirm == JOptionPane.YES_OPTION) {
+        
+        Object[] opciones = {"Sí", "No"};
+
+       
+        int confirm = JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de eliminar esta área?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[0] 
+        );
+
+        
+        if (confirm == 0) {
             if (DatosArea.eliminar(idArea)) {
                 JOptionPane.showMessageDialog(this, "Área eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 cargarTabla();

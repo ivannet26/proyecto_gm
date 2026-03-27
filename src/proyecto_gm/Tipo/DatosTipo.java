@@ -74,9 +74,25 @@ public class DatosTipo {
         int fila = tabla.getSelectedRow();
         if (fila >= 0) {
             int idTipo = Integer.parseInt(tabla.getModel().getValueAt(fila, 0).toString());
-            int confirm = JOptionPane.showConfirmDialog(null, "¿Eliminar tipo de empleado?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                try ( CallableStatement stmt = conn.prepareCall("{CALL eliminar_tipoempleado(?)}")) {
+            
+          
+            Object[] opciones = {"Sí", "No"};
+            
+            
+            int confirm = JOptionPane.showOptionDialog(
+                    null, 
+                    "¿Eliminar tipo de empleado?", 
+                    "Confirmar", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, 
+                    null, 
+                    opciones, 
+                    opciones[0] 
+            );
+            
+           
+            if (confirm == 0) {
+                try (CallableStatement stmt = conn.prepareCall("{CALL eliminar_tipoempleado(?)}")) {
                     stmt.setInt(1, idTipo);
                     stmt.execute();
                     ((DefaultTableModel) tabla.getModel()).removeRow(fila);

@@ -319,16 +319,27 @@ private void configurarEstadoInicial() {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-   int fila = tblPerfil.getSelectedRow();
+        int fila = tblPerfil.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         String codigoPerfil = (String) tblPerfil.getValueAt(fila, 0);
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar este perfil?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        Object[] opciones = {"Sí", "No"};
+        int confirm = JOptionPane.showOptionDialog(
+                this, 
+                "¿Está seguro de eliminar este perfil?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[0]
+        );
 
-        if (confirm == JOptionPane.YES_OPTION) {
+        if (confirm == 0) {
             if (DatosPerfil.eliminar(codigoPerfil)) {
                 JOptionPane.showMessageDialog(this, "Perfil eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 cargarTabla();
