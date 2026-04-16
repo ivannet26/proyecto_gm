@@ -531,14 +531,25 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
     }
     protected void Cargar() {
         DefaultTableModel modelo = (DefaultTableModel) tblEmpleados.getModel();
+
+        
+        modelo.setRowCount(0); 
+
+       
         DatosEmpleados.Listar(modelo);
 
-        if (tblEmpleados.getColumnCount() > 15) {
-            TableColumnModel tcm = tblEmpleados.getColumnModel();
-            tcm.removeColumn(tcm.getColumn(14)); 
-            tcm.removeColumn(tcm.getColumn(11)); 
-            tcm.removeColumn(tcm.getColumn(9));  
+       
+        if (tblEmpleados.getColumnCount() > 14) {
+            try {
+                TableColumnModel tcm = tblEmpleados.getColumnModel();
+                tcm.removeColumn(tcm.getColumn(14)); 
+                tcm.removeColumn(tcm.getColumn(11)); 
+                tcm.removeColumn(tcm.getColumn(9));  
+            } catch (Exception e) {
+                System.err.println("Error al ocultar columnas: " + e.getMessage());
+            }
         }
+
         tblEmpleados.setCellSelectionEnabled(false);
         tblEmpleados.setRowSelectionAllowed(true);
     }

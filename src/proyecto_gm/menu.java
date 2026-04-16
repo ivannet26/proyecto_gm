@@ -376,6 +376,7 @@ public class menu extends javax.swing.JFrame {
         submenuContratosPersonal = new javax.swing.JMenuItem();
         subMenuRelojActividad = new javax.swing.JMenuItem();
         subMenuHorarios = new javax.swing.JMenuItem();
+        subReportes = new javax.swing.JMenuItem();
         menuFacturacion = new javax.swing.JMenu();
         subMenuReciboHonorario = new javax.swing.JMenuItem();
         subMenuComprobante = new javax.swing.JMenuItem();
@@ -522,6 +523,14 @@ public class menu extends javax.swing.JFrame {
             }
         });
         menuAdministracion.add(subMenuHorarios);
+
+        subReportes.setText("Reportes");
+        subReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subReportesActionPerformed(evt);
+            }
+        });
+        menuAdministracion.add(subReportes);
 
         jMenuBar1.add(menuAdministracion);
 
@@ -1282,6 +1291,21 @@ public class menu extends javax.swing.JFrame {
               System.err.println("Error al enfocar la ventana: " + e.getMessage());
             }
         }
+       
+        private void AbrirReportes() {
+            proyecto_gm.Reportes_Semanales.frmReportes verventana = proyecto_gm.Reportes_Semanales.frmReportes.getInstancia();
+            if (!verventana.isShowing()) {
+                escritorio.add(verventana);
+            }
+            try {
+                verventana.show();
+                verventana.setSelected(true); 
+                verventana.toFront();        
+            } catch (java.beans.PropertyVetoException e) {
+                System.err.println("Error al enfocar la ventana de reportes: " + e.getMessage());
+            }
+        }
+        
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         /*    
         try ( 
@@ -1442,6 +1466,10 @@ public class menu extends javax.swing.JFrame {
        AbrirArchivos();
     }//GEN-LAST:event_subMenuArchivosActionPerformed
 
+    private void subReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subReportesActionPerformed
+       AbrirReportes(); 
+    }//GEN-LAST:event_subReportesActionPerformed
+
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1522,6 +1550,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem subMenuTransferencia;
     private javax.swing.JMenuItem subMenuUsuario;
     private javax.swing.JMenuItem subMenuViaticos;
+    private javax.swing.JMenuItem subReportes;
     private javax.swing.JMenuItem submenuAsistencia;
     private javax.swing.JMenuItem submenuContratoProyecto;
     private javax.swing.JMenuItem submenuContratosPersonal;

@@ -16,6 +16,7 @@ import proyecto_gm.Area.Area;
 import proyecto_gm.Cargo.Cargo;
 import proyecto_gm.ConexionBD;
 import proyecto_gm.Utilitario;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -413,5 +414,23 @@ public class DatosEmpleados {
             System.err.println("Error Excel: " + e.getMessage());
             return false;
         }
+    }
+    
+    
+    public static boolean existeEmpleado(String dni) {
+        boolean existe = false;
+        String sql = "SELECT COUNT(*) FROM empleados WHERE Dni = ?";
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, dni);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                existe = rs.getInt(1) > 0; 
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return existe;
     }
 }
