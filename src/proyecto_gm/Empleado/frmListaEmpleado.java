@@ -56,8 +56,9 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
     public frmListaEmpleado(JDesktopPane panel) {
         initComponents();
         this.panelPadre = panel;
+        Cargar();
+        cargarFiltroTabla();
         cargarAreas();
-        ocultarColumnas();
     }
     
     public static frmListaEmpleado getInstancia(JDesktopPane panel) {
@@ -589,45 +590,7 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-            proyecto_gm.SplashCarga splash = new proyecto_gm.SplashCarga();
-            splash.setVisible(true);
-
-            Thread hiloCarga = new Thread() {
-                @Override
-                public void run() {
-                    try {
-               
-                        for (int i = 0; i <= 80; i++) {
-                            Thread.sleep(15);
-                            splash.progreso.setValue(i);
-                        }
-
-                        java.awt.EventQueue.invokeLater(() -> {
-                            Cargar();
-                            cargarFiltroTabla();
-                        });
-
-                    
-                        for (int i = 81; i <= 100; i++) {
-                            Thread.sleep(10);
-                            splash.progreso.setValue(i);
-                        }
-
-                   
-                        java.awt.EventQueue.invokeLater(() -> {
-                            splash.dispose();
-                        });
-
-                    } catch (Exception e) {
-                        java.awt.EventQueue.invokeLater(() -> {
-                            splash.dispose();
-                        });
-                    }
-                }
-            };
-
-            hiloCarga.start();
-                                
+                              
     }//GEN-LAST:event_formInternalFrameOpened
    
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -748,7 +711,6 @@ public class frmListaEmpleado extends javax.swing.JInternalFrame {
 
     private void btnExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExcelActionPerformed
         proyecto_gm.ControladorExportar.exportarTablaExcel(tblEmpleados);
-        JOptionPane.showMessageDialog(this, "Exportación exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnExportarExcelActionPerformed
 
 

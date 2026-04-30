@@ -2,7 +2,7 @@ package proyecto_gm;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.awt.Desktop; 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -28,20 +28,21 @@ public class ControladorExportar {
                 ruta += ".xlsx";
             }
 
-            Workbook workbook = new XSSFWorkbook();
-            try {
+            try (Workbook workbook = new XSSFWorkbook()) {
                 Sheet sheet = workbook.createSheet("Datos");
 
+         
                 Font headerFont = workbook.createFont();
-                headerFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+                headerFont.setBold(true); 
                 headerFont.setColor(IndexedColors.WHITE.getIndex());
 
                 CellStyle headerCellStyle = workbook.createCellStyle();
                 headerCellStyle.setFont(headerFont);
                 headerCellStyle.setFillForegroundColor(IndexedColors.DARK_BLUE.getIndex());
                 
-                headerCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                headerCellStyle.setAlignment(CellStyle.ALIGN_CENTER);
+            
+                headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                headerCellStyle.setAlignment(HorizontalAlignment.CENTER); 
 
                 Row headerRow = sheet.createRow(0);
                 for (int i = 0; i < tabla.getColumnCount(); i++) {
@@ -66,6 +67,12 @@ public class ControladorExportar {
 
                 try (FileOutputStream out = new FileOutputStream(new File(ruta))) {
                     workbook.write(out);
+                    JOptionPane.showMessageDialog(null, "Reporte exportado exitosamente.");
+                    
+                    
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().open(new File(ruta));
+                    }
                 }
 
             } catch (NoClassDefFoundError e) {
@@ -73,7 +80,6 @@ public class ControladorExportar {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error al exportar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
         }
     }
 }

@@ -40,38 +40,30 @@ public class frmCategoria extends javax.swing.JInternalFrame {
     }
     
    private void cargarDatos() {
-        
-        javax.swing.SwingWorker<List<Categoria>, Void> worker = new javax.swing.SwingWorker<List<Categoria>, Void>() {
-            
-            @Override
-            protected List<Categoria> doInBackground() throws Exception {
-                return DatosCategoria.listar();
+        try {
+           
+            listaCategorias = DatosCategoria.listar(); 
+
+          
+            Object[][] matrizDatos = new Object[listaCategorias.size()][2];
+
+           
+            for (int i = 0; i < listaCategorias.size(); i++) {
+                Categoria cat = listaCategorias.get(i);
+                matrizDatos[i][0] = cat.getId();
+                matrizDatos[i][1] = cat.getDescripcion();
             }
 
-            @Override
-            protected void done() {
+           
+            String[] columnas = {"ID", "DESCRIPCIÓN"};
 
-                try {
-                    listaCategorias = get(); 
-                    modelo.setRowCount(0);  
-                    
-                    tblCategoria.setVisible(false); 
-                    
-                
-                    for (Categoria cat : listaCategorias) {
-                        modelo.addRow(new Object[]{cat.getId(), cat.getDescripcion()});
-                    }
-                    
-                    tblCategoria.setVisible(true); 
-                    
-                } catch (Exception e) {
-                    System.out.println("Error cargando categorías: " + e.getMessage());
-                }
-            }
-        };
-        
-        // Ejecutamos al trabajador
-        worker.execute();
+           
+            modelo.setDataVector(matrizDatos, columnas);
+
+        } catch (Exception e) {
+            System.out.println("Error cargando categorías: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void gestionarControles(boolean activo) {
