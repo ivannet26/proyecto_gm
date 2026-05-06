@@ -310,9 +310,9 @@ public class frmTipo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Tipo tip = new Tipo();
+       Tipo tip = new Tipo();
 
-        // Validación de descripción
+        
         if (txtDescripcion.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese una descripción válida.");
             return;
@@ -321,28 +321,28 @@ public class frmTipo extends javax.swing.JInternalFrame {
         tip.setDescripcionTipo(txtDescripcion.getText().trim());
 
         if (esNuevo) {
-            // INSERTAR
+           
             if (DatosTipo.InsertarTipo(tip, tblTipo)) {
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente");
-                DatosTipo.LimpiarTipo(escritorio);
-                DatosTipo.HabilitarTipo(escritorio, false);
-                tblTipo.clearSelection();
-                tblTipo.setRowSelectionAllowed(true);
+                
+                
+                configurarEstadoInicial(); 
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Error al guardar los datos", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            // ACTUALIZAR
+           
             try {
                 int idTipo = Integer.parseInt(txtCodigo.getText().trim());
                 tip.setIdTipo(idTipo);
 
                 DatosTipo.ActualizarTipo(tip, tblTipo);
                 JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
-                DatosTipo.LimpiarTipo(escritorio);
-                DatosTipo.HabilitarTipo(escritorio, false);
-                tblTipo.clearSelection();
-                tblTipo.setRowSelectionAllowed(true);
+                
+               
+                configurarEstadoInicial();
+                
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "ID inválido para actualizar.", "Error", JOptionPane.ERROR_MESSAGE);
             }

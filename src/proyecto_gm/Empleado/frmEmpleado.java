@@ -91,6 +91,8 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         this.estadoProceso = estado;
  
         rbPartime.setSelected(true);
+        
+        txtId.setEditable(false);
 
     }
     
@@ -702,7 +704,7 @@ public class frmEmpleado extends javax.swing.JInternalFrame {
         this.txtDistrito.setEnabled(estado);
         this.txtDni.setEnabled(estado);
         this.txtFecNac.setEnabled(estado);
-        this.txtId.setEnabled(estado);
+        this.txtId.setEditable(false); 
         this.txtNom.setEnabled(estado);
         this.cboArea.setEnabled(estado);
         this.cboCargo.setEnabled(estado);

@@ -380,9 +380,10 @@ public void cargarTabla() {
     
     
     
-    public void importarDesdeExcel(String ruta) {
+   public void importarDesdeExcel(String ruta) {
         try (java.io.FileInputStream fis = new java.io.FileInputStream(new java.io.File(ruta))) {
-            org.apache.poi.ss.usermodel.Workbook workbook = new org.apache.poi.xssf.usermodel.XSSFWorkbook(fis);
+            
+            org.apache.poi.ss.usermodel.Workbook workbook = org.apache.poi.ss.usermodel.WorkbookFactory.create(fis);
             org.apache.poi.ss.usermodel.Sheet sheet = workbook.getSheetAt(0);
             org.apache.poi.ss.usermodel.DataFormatter formatter = new org.apache.poi.ss.usermodel.DataFormatter();
 
@@ -393,17 +394,17 @@ public void cargarTabla() {
                 org.apache.poi.ss.usermodel.Row row = sheet.getRow(i);
                 if (row == null) continue;
 
-                String ruc = formatter.formatCellValue(row.getCell(0));
+                String ruc = formatter.formatCellValue(row.getCell(1));
                 if (ruc == null || ruc.trim().isEmpty()) continue;
 
-                String nombres = formatter.formatCellValue(row.getCell(1));
-                String direccion = formatter.formatCellValue(row.getCell(2));
-                String rubro = formatter.formatCellValue(row.getCell(3));
-                String correo = formatter.formatCellValue(row.getCell(4));
-                String telefono = formatter.formatCellValue(row.getCell(5));
-                String celular = formatter.formatCellValue(row.getCell(6));
-                String idUbigeo = formatter.formatCellValue(row.getCell(7));
-                String estado = formatter.formatCellValue(row.getCell(8));
+                String nombres = formatter.formatCellValue(row.getCell(2));
+                String direccion = formatter.formatCellValue(row.getCell(3));
+                String rubro = formatter.formatCellValue(row.getCell(4));
+                String correo = formatter.formatCellValue(row.getCell(5));
+                String telefono = formatter.formatCellValue(row.getCell(6));
+                String celular = formatter.formatCellValue(row.getCell(7));
+                String idUbigeo = formatter.formatCellValue(row.getCell(8));
+                String estado = formatter.formatCellValue(row.getCell(9));
 
                 if (datos.insertarDesdeExcel(idUbigeo, nombres, direccion, correo, telefono, celular, ruc, rubro, estado)) {
                     contador++;
@@ -412,9 +413,10 @@ public void cargarTabla() {
 
             JOptionPane.showMessageDialog(this, "Se importaron " + contador + " proveedores.");
             cargarTabla();
+            workbook.close();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error de archivo: " + e.getMessage());
         }
     }
     

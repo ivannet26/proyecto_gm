@@ -414,12 +414,26 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int fila = tblarticulo.getSelectedRow();
+    
         if (fila >= 0) {
+            JDesktopPane desktopPane = getDesktopPane();
+            for (javax.swing.JInternalFrame frame : desktopPane.getAllFrames()) {
+                if (frame instanceof frmArticulo) {
+                    try {
+                        if (frame.isIcon()) {
+                            frame.setIcon(false);
+                        }
+                        frame.setSelected(true);
+                    } catch (java.beans.PropertyVetoException e) {
+                        System.out.println("Error al enfocar la ventana: " + e.getMessage());
+                    }
+                    return; 
+                }
+            }
             int filaModelo = tblarticulo.convertRowIndexToModel(fila);
             Articulo artSeleccionado = listaArticulos.get(filaModelo);
             frmArticulo frm = new frmArticulo(this, artSeleccionado);
 
-            JDesktopPane desktopPane = getDesktopPane();
             desktopPane.add(frm);
             frm.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
                 @Override
@@ -435,9 +449,29 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        frmArticulo frm = new frmArticulo(this, null);
         JDesktopPane desktopPane = getDesktopPane();
+        for (javax.swing.JInternalFrame frame : desktopPane.getAllFrames()) {
+            if (frame instanceof frmArticulo) {
+                try {
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                } catch (java.beans.PropertyVetoException e) {
+                    System.out.println("Error al enfocar la ventana: " + e.getMessage());
+                }
+                return; 
+            }
+        }
+        frmArticulo frm = new frmArticulo(this, null);
         desktopPane.add(frm);
+        frm.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent e) {
+                cargarDatos();
+            }
+        });
+
         frm.setVisible(true);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -475,10 +509,8 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
 
     private void btnExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExcelActionPerformed
         proyecto_gm.ControladorExportar.exportarTablaExcel(tblarticulo);
-        JOptionPane.showMessageDialog(this, "Exportación exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnExportarExcelActionPerformed
 
-    // Método para filtrar por descripción, categoría o marca
     private void filtrarArticulos(String texto) {
         try {
             if (texto.trim().isEmpty()) {

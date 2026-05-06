@@ -21,6 +21,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         setTitle("Nuevo Proveedor");
         cargarDepartamentos();
         cargarEstadoProveedor();
+        cargarRubros();
         txtId.setEnabled(false);
     }
 
@@ -31,6 +32,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         setTitle("Editar Proveedor");
         cargarDepartamentos();
         cargarEstadoProveedor();
+        cargarRubros();
         cmbDepartamento.setSelectedIndex(-1);
         cmbprovincia.setModel(new DefaultComboBoxModel<>());
         cmbdistrito.setModel(new DefaultComboBoxModel<>());
@@ -73,6 +75,16 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         cmbEstado.setSelectedIndex(-1);
     }
 
+    private void cargarRubros() {
+        List<Rubro> lista = datos.listarRubros();
+        DefaultComboBoxModel<Rubro> modelo = new DefaultComboBoxModel<>();
+        for (Rubro r : lista) {
+            modelo.addElement(r);
+        }
+        cmbRubro.setModel(modelo);
+        cmbRubro.setSelectedIndex(-1); 
+    }
+    
     private void cargarDatosEnFormulario() {
         txtId.setText(String.valueOf(proveedorActual.getIdProveedor()));
         txtNombres.setText(proveedorActual.getNombres());
@@ -81,9 +93,19 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         txtTelefono.setText(proveedorActual.getTelefono());
         txtCelular.setText(proveedorActual.getCelular());
         txtRuc.setText(proveedorActual.getRuc());
-        txtRubro.setText(proveedorActual.getRubro());
 
-        // estado
+      
+        if (proveedorActual.getRubro() != null) {
+            for (int i = 0; i < cmbRubro.getItemCount(); i++) {
+                Rubro r = cmbRubro.getItemAt(i);
+                if (r.getCodigo().equals(proveedorActual.getRubro()) || r.getDescripcion().equals(proveedorActual.getRubro())) {
+                    cmbRubro.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
+
+   
         EstadoProveedor epSeleccionado = null;
         for (int i = 0; i < cmbEstado.getItemCount(); i++) {
             EstadoProveedor ep = cmbEstado.getItemAt(i);
@@ -94,7 +116,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         }
         cmbEstado.setSelectedItem(epSeleccionado);
 
-        // ubigeo
+       
         String idUbigeo = proveedorActual.getIdUbigeo();
         if (idUbigeo == null || idUbigeo.length() != 6) {
             return;
@@ -104,7 +126,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         String codProv = idUbigeo.substring(2, 4);
         String codDist = idUbigeo.substring(4, 6);
 
-        // Departamento
+     
         for (int i = 0; i < cmbDepartamento.getItemCount(); i++) {
             Ubigeo dep = cmbDepartamento.getItemAt(i);
             if (dep.getCodigo().startsWith(codDep)) {
@@ -170,8 +192,8 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         txtNombres = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtRubro = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        cmbRubro = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
@@ -269,19 +291,10 @@ public class frmProveedores extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Rubro");
 
-        txtRubro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRubroActionPerformed(evt);
-            }
-        });
-        txtRubro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtRubroKeyTyped(evt);
-            }
-        });
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("DATOS PRINCIPALES");
+
+        cmbRubro.setMaximumSize(new java.awt.Dimension(206, 206));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -297,9 +310,6 @@ public class frmProveedores extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtRubro)
-                                .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -309,7 +319,10 @@ public class frmProveedores extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel10)
                                 .addGap(9, 9, 9)
-                                .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cmbRubro, javax.swing.GroupLayout.Alignment.LEADING, 0, 206, Short.MAX_VALUE)
+                                .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addComponent(jLabel13))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -318,7 +331,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,7 +346,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
@@ -558,17 +571,6 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEstadoActionPerformed
 
-    private void txtRubroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRubroKeyTyped
-        if (!Character.isDigit(evt.getKeyChar()) || txtRubro.getText().length() >= 4) {
-            evt.consume();
-            Toolkit.getDefaultToolkit().beep();
-        }
-    }//GEN-LAST:event_txtRubroKeyTyped
-
-    private void txtRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRubroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRubroActionPerformed
-
     private void cmbDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartamentoActionPerformed
         Ubigeo dep = (Ubigeo) cmbDepartamento.getSelectedItem();
         if (dep == null) {
@@ -587,7 +589,10 @@ public class frmProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbDepartamentoActionPerformed
 
     private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
-        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
         if (txtRuc.getText().length() >= 11) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
@@ -595,9 +600,8 @@ public class frmProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtRucKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
-        // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (!((c >= '0') && (c <= '9') || (c == evt.VK_BACK_SPACE) || (c == evt.VK_DELETE))) {
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
         if (txtTelefono.getText().length() >= 9) {
@@ -606,8 +610,19 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
+    private void txtCelularKeyTyped(java.awt.event.KeyEvent evt) {                                     
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+        if (txtCelular.getText().length() >= 9) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }
+    
     private void txtIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyTyped
-        // TODO add your handling code here:
+     
         if (txtId.getText().length() >= 4) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
@@ -615,9 +630,29 @@ public class frmProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIdKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
         if (txtNombres.getText().trim().isEmpty() || txtRuc.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Los campos Nombres y RUC son obligatorios.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (txtRuc.getText().length() != 11) {
+            JOptionPane.showMessageDialog(this, "El RUC debe tener exactamente 11 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!txtCelular.getText().trim().isEmpty() && txtCelular.getText().length() != 9) {
+            JOptionPane.showMessageDialog(this, "El celular debe tener exactamente 9 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if (!txtTelefono.getText().trim().isEmpty() && txtTelefono.getText().length() != 9) {
+            JOptionPane.showMessageDialog(this, "El teléfono debe tener exactamente 9 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        String correoIngresado = txtCorreo.getText().trim();
+        if (!correoIngresado.isEmpty() && !correoIngresado.contains("@")) {
+            JOptionPane.showMessageDialog(this, "El correo electrónico no es válido (debe contener '@').", "Validación", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -627,27 +662,31 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         proveedorActual.setTelefono(txtTelefono.getText());
         proveedorActual.setCelular(txtCelular.getText());
         proveedorActual.setRuc(txtRuc.getText());
-        proveedorActual.setRubro(txtRubro.getText());
+
+  
+        Rubro rubroSel = (Rubro) cmbRubro.getSelectedItem();
+        if (rubroSel != null) {
+            proveedorActual.setRubro(rubroSel.getCodigo()); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un rubro.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
         EstadoProveedor ep = (EstadoProveedor) cmbEstado.getSelectedItem();
         if (ep != null) {
             proveedorActual.setEstado(ep.getDescripcion());
         }
 
-        // Obtener los objetos seleccionados
         Ubigeo dep = (Ubigeo) cmbDepartamento.getSelectedItem();
         Ubigeo prov = (Ubigeo) cmbprovincia.getSelectedItem();
         Ubigeo dist = (Ubigeo) cmbdistrito.getSelectedItem();
 
-        // Extraer correctamente el código de 2 dígitos
         String codDep = dep != null ? dep.getCodigo().substring(0, 2) : "00";
         String codProv = prov != null ? prov.getCodigo().substring(prov.getCodigo().length() - 2) : "00";
         String codDist = dist != null ? dist.getCodigo().substring(dist.getCodigo().length() - 2) : "00";
 
-        // Unión final: 6 dígitos exactos
         proveedorActual.setIdUbigeo(codDep + codProv + codDist);
 
-        // Guardar
         boolean ok = esNuevo ? datos.insertar(proveedorActual) : datos.actualizar(proveedorActual);
 
         if (ok) {
@@ -668,20 +707,20 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         txtCorreo.setText("");
         txtDireccion.setText("");
         txtNombres.setText("");
-        txtRubro.setText("");
+        cmbRubro.setSelectedIndex(-1); 
         txtRuc.setText("");
         txtTelefono.setText("");
-        cmbDepartamento.setSelectedIndex(0);
-        cmbEstado.setSelectedIndex(0);
-        cmbdistrito.setSelectedIndex(0);
-        cmbprovincia.setSelectedIndex(0);
+        cmbDepartamento.setSelectedIndex(-1);
+        cmbEstado.setSelectedIndex(-1);
+        cmbdistrito.setSelectedIndex(-1);
+        cmbprovincia.setSelectedIndex(-1);
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<Ubigeo> cmbDepartamento;
     private javax.swing.JComboBox<EstadoProveedor> cmbEstado;
+    private javax.swing.JComboBox<Rubro> cmbRubro;
     private javax.swing.JComboBox<Ubigeo> cmbdistrito;
     private javax.swing.JComboBox<Ubigeo> cmbprovincia;
     private javax.swing.JPanel escritorio;
@@ -710,7 +749,6 @@ public class frmProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombres;
-    private javax.swing.JTextField txtRubro;
     private javax.swing.JTextField txtRuc;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

@@ -50,6 +50,10 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
         List<Modulo> listaCategoria = DatosTipoDocumento.obtenerModulos();
 
         DefaultComboBoxModel<Modulo> modelo = new DefaultComboBoxModel<>();
+
+    
+        modelo.addElement(new Modulo(0, "Seleccione")); 
+
         for (Modulo c : listaCategoria) {
             modelo.addElement(c);
         }
@@ -265,44 +269,46 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
     private void limpiarCampos() {
         txtId.setText("");
         txtDescripcion.setText("");
-        cboModulo.setSelectedIndex(0);
-    } 
-    
-    private void configurarEstadoInicial() {
-        // Habilitar/deshabilitar campos
-        txtId.setEnabled(false);
-        txtDescripcion.setEnabled(false);
-        cboModulo.setEnabled(true);
-
-        // Habilitar/deshabilitar botones
-        btnAgregar.setEnabled(true);
-        btnEditar.setEnabled(true);
-        btnEliminar.setEnabled(true);
-        btnGuardar.setEnabled(false);
-        btnDeshacer.setEnabled(false);
-        
-        // Limpiar campos
-        limpiarCampos();
-        
-        // Permitir selección en la tabla
-        tblTipoDocumento.setEnabled(true);
-        tblTipoDocumento.clearSelection();
+        if (cboModulo.getItemCount() > 0) {
+            cboModulo.setSelectedIndex(0);
+        }
     }
     
-     private void configurarEstadoFormulario() {
+    private void configurarEstadoInicial() {
+          txtId.setEnabled(false);
+          txtDescripcion.setEnabled(false);
+
+  
+          cboModulo.setEnabled(true); 
+
+          btnAgregar.setEnabled(true);
+          btnEditar.setEnabled(true);
+          btnEliminar.setEnabled(true);
+          btnGuardar.setEnabled(false);
+          btnDeshacer.setEnabled(false);
+
+          limpiarCampos();
+          tblTipoDocumento.setEnabled(true);
+          tblTipoDocumento.clearSelection();
+    }
+    
+    private void configurarEstadoFormulario() {
         txtId.setEnabled(false);
         txtDescripcion.setEnabled(true);
-        cboModulo.setEnabled(true);
-        
+
+        cboModulo.setEnabled(true); 
+
         btnAgregar.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnGuardar.setEnabled(true);
         btnDeshacer.setEnabled(true);
-        
+
         tblTipoDocumento.setEnabled(false);
     }
     
+
+
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if (tblTipoDocumento.getSelectedRow() >= 0) {
             JTextField[] camposTexto = {txtId, txtDescripcion};
@@ -324,41 +330,47 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (txtId.getText().isEmpty() || txtDescripcion.getText().isEmpty()) {
+        
+        if (txtDescripcion.getText().trim().isEmpty()) {
             Utilitario.MostrarMensaje("Completar bien los campos", Utilitario.TipoMensaje.error);
+            txtDescripcion.requestFocus();
             return;
         }
 
+       
         Modulo modSeleccionado = (Modulo) cboModulo.getSelectedItem();
-        if (modSeleccionado == null) {
-            Utilitario.MostrarMensaje("Seleccione un módulo válido.", Utilitario.TipoMensaje.error);
-
+        if (modSeleccionado == null || modSeleccionado.getId() == 0) {
+            Utilitario.MostrarMensaje("Debe seleccionar un módulo válido.", Utilitario.TipoMensaje.error);
+            cboModulo.requestFocus();
             return;
         }
 
-        int idTipoDocumento;
-        int idModulo;
+        int idModulo = modSeleccionado.getId();
+        int idTipoDocumento = 0; 
 
-        try {
-            idTipoDocumento = Integer.parseInt(txtId.getText());
-        } catch (NumberFormatException e) {
-            Utilitario.MostrarMensaje("El ID debe ser un número entero.", Utilitario.TipoMensaje.error);
-            txtId.requestFocus();
-            return;
+       
+        if (!esNuevo) {
+            try {
+                idTipoDocumento = Integer.parseInt(txtId.getText().trim());
+            } catch (NumberFormatException e) {
+                Utilitario.MostrarMensaje("El ID debe ser un número entero.", Utilitario.TipoMensaje.error);
+                return;
+            }
         }
-        idModulo = modSeleccionado.getId();
 
-        TipoDocumento tip = new TipoDocumento(idTipoDocumento, String.valueOf(idModulo), txtDescripcion.getText());
+        TipoDocumento tip = new TipoDocumento(idTipoDocumento, String.valueOf(idModulo), txtDescripcion.getText().trim());
 
+       
         if (esNuevo) {
             if (DatosTipoDocumento.Insertar(tip, tblTipoDocumento)) {
                 Utilitario.MostrarMensaje("Registro exitoso", Utilitario.TipoMensaje.informativo);
+                configurarEstadoInicial(); 
             } else {
                Utilitario.MostrarMensaje("Error al guardar los datos", Utilitario.TipoMensaje.error);
-                return;
             }
         } else {
             DatosTipoDocumento.Actualizar(tip, tblTipoDocumento, cboModulo);
+            configurarEstadoInicial(); 
         }
 
         DatosTipoDocumento.Limpiar(escritorio);
@@ -383,18 +395,31 @@ public class frmTipoDocumento extends javax.swing.JInternalFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         DatosTipoDocumento.Habilitar(escritorio, true);
 
-        txtId.setEnabled(true);            
+        txtId.setEnabled(false);
         txtId.setText("");                 
         txtDescripcion.setText("");         
 
-        txtId.requestFocus();               
+        txtDescripcion.requestFocus(); 
         esNuevo = true;
         tblTipoDocumento.setRowSelectionAllowed(false);
         configurarEstadoFormulario();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cboModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboModuloActionPerformed
-        // TODO add your handling code here:
+        Modulo seleccionado = (Modulo) cboModulo.getSelectedItem();
+
+        if (seleccionado != null) {
+            DefaultTableModel modelo = (DefaultTableModel) tblTipoDocumento.getModel();
+            if (seleccionado.getId() == 0) {
+                DatosTipoDocumento.Mostrar(modelo);
+            } else {
+                DatosTipoDocumento.MostrarPorModulo(
+                    modelo, 
+                    seleccionado.getId(), 
+                    seleccionado.getDescripcion()
+                );
+            }
+        }
     }//GEN-LAST:event_cboModuloActionPerformed
 
 

@@ -410,11 +410,13 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
     }
 
     private void MostrarMensaje(String contenido, TipoMensaje tipo) {
-
         if (null != tipo) {
             switch (tipo) {
                 case INFORMACION:
                     JOptionPane.showMessageDialog(this, contenido, "SISTEMA", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case ALERTA: // ¡Este era el caso que faltaba!
+                    JOptionPane.showMessageDialog(this, contenido, "SISTEMA", JOptionPane.WARNING_MESSAGE);
                     break;
                 case ERROR:
                     JOptionPane.showMessageDialog(this, contenido, "SISTEMA", JOptionPane.ERROR_MESSAGE);
@@ -426,7 +428,6 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
                     break;
             }
         }
-
     }
     public void setDatos(
             String id, String periodo, String proyecto, String tipo,
@@ -504,8 +505,9 @@ public class frmComunicacion extends javax.swing.JInternalFrame {
         boolean procesoExitoso = false;
 
         // Validación básica
-        if (cboNomProyecto.getSelectedIndex() == -1) {
-            MostrarMensaje("Seleccionar nombre de proyecto", TipoMensaje.ALERTA);
+        Object proyectoSeleccionado = cboNomProyecto.getSelectedItem();
+        if (proyectoSeleccionado == null || proyectoSeleccionado.toString().trim().isEmpty()) {
+            MostrarMensaje("Debe seleccionar un nombre de proyecto", TipoMensaje.ALERTA);
             return;
         }
 

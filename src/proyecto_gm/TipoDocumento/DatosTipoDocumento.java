@@ -37,15 +37,20 @@ public class DatosTipoDocumento {
     }
     
     public static void Habilitar(Container contenedor, boolean habilitar) {
-    for (Component component : contenedor.getComponents()) {
-        if (component instanceof JTextField || component instanceof JComboBox) {
-            component.setEnabled(habilitar);
-        } else if (component instanceof JButton) {
-            String button = ((JButton) component).getName();
-            boolean esEditable = "guardar".equals(button) || "deshacer".equals(button);
-            component.setEnabled(esEditable == habilitar);
-        }} 
-}
+       for (Component component : contenedor.getComponents()) {
+           if (component instanceof JTextField) {
+               component.setEnabled(habilitar);
+           } else if (component instanceof JComboBox) {
+               component.setEnabled(true); 
+           } else if (component instanceof JButton) {
+               String name = component.getName();
+               if (name != null) {
+                   boolean esGuardarODeshacer = name.equals("guardar") || name.equals("deshacer");
+                   component.setEnabled(esGuardarODeshacer == habilitar);
+               }
+           }
+       }
+    }
     public static List<Modulo> obtenerModulos() {
         List<Modulo> lista = new ArrayList<>();
         try ( CallableStatement cstmt = conn.prepareCall("{ CALL listar_modulo() }")) {
@@ -62,18 +67,21 @@ public class DatosTipoDocumento {
     }
 
     public static void Mostrar(DefaultTableModel modelo) {
-        try ( PreparedStatement pstmt = conn.prepareStatement("CALL listar_tipodocumento()")) {
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                modelo.addRow(new Object[]{
-                    rs.getString("IdTipoDocumento"),
-                    rs.getString("Descripcion"),
-                    rs.getString("Modulo")});
-            }
-        } catch (SQLException ex) {
-            Utilitario.MostrarMensaje(ex.getMessage(), Utilitario.TipoMensaje.error);
-        }
-    }
+      modelo.setRowCount(0); 
+
+      try (PreparedStatement pstmt = conn.prepareStatement("CALL listar_tipodocumento()")) {
+          ResultSet rs = pstmt.executeQuery();
+          while (rs.next()) {
+              modelo.addRow(new Object[]{
+                  rs.getString("IdTipoDocumento"),
+                  rs.getString("Descripcion"),
+                  rs.getString("Modulo") 
+              });
+          }
+      } catch (SQLException ex) {
+          Utilitario.MostrarMensaje(ex.getMessage(), Utilitario.TipoMensaje.error);
+      }
+   }
 
     public static boolean Insertar(TipoDocumento tip, JTable tabla) {
         try ( CallableStatement cstmt = conn.prepareCall("{ CALL insertar_tipodocumento(?, ?, ?) }")) {
@@ -173,4 +181,25 @@ public class DatosTipoDocumento {
             Utilitario.MostrarMensaje("Debes seleccionar una fila para eliminar.", Utilitario.TipoMensaje.alerta);
         }
     }
+    
+    public static void MostrarPorModulo(DefaultTableModel modelo, int idModulo, String nombreModulo) {
+      modelo.setRowCount(0); 
+
+      String sql = "SELECT IdTipoDocumento, Descripcion FROM tiposdocumentos WHERE IdModulo = ?";
+
+      try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+          pstmt.setInt(1, idModulo);
+          ResultSet rs = pstmt.executeQuery();
+
+          while (rs.next()) {
+              modelo.addRow(new Object[]{
+                  rs.getString("IdTipoDocumento"),
+                  rs.getString("Descripcion"),
+                  nombreModulo 
+              });
+          }
+      } catch (SQLException ex) {
+          Utilitario.MostrarMensaje("Error en SQL: " + ex.getMessage(), Utilitario.TipoMensaje.error);
+      }
+   }
 }

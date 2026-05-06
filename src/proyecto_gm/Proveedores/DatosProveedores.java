@@ -252,6 +252,22 @@ public List<EstadoProveedor> listarEstadosProveedor() {
             return false;
         }
     }
+    
+    public List<Rubro> listarRubros() {
+        List<Rubro> lista = new ArrayList<>();
+        String sql = "SELECT codigo, descripcion FROM actividadeseconomicas"; 
+
+        try (java.sql.PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Rubro(rs.getString("codigo"), rs.getString("descripcion")));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar rubros: " + e.getMessage());
+        }
+        return lista;
+    }
 
 
 

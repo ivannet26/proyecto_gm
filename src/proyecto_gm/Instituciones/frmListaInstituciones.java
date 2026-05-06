@@ -304,21 +304,21 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
 
     public void importarDesdeExcel(String ruta) {
         try (java.io.FileInputStream fis = new java.io.FileInputStream(new java.io.File(ruta))) {
-            org.apache.poi.ss.usermodel.Workbook workbook = new org.apache.poi.xssf.usermodel.XSSFWorkbook(fis);
+            org.apache.poi.ss.usermodel.Workbook workbook = org.apache.poi.ss.usermodel.WorkbookFactory.create(fis);
             org.apache.poi.ss.usermodel.Sheet sheet = workbook.getSheetAt(0);
             org.apache.poi.ss.usermodel.DataFormatter formatter = new org.apache.poi.ss.usermodel.DataFormatter();
-
+            
             int contador = 0;
             int totalFilas = sheet.getPhysicalNumberOfRows();
-
+            
             for (int i = 1; i < totalFilas; i++) {
                 org.apache.poi.ss.usermodel.Row row = sheet.getRow(i);
                 if (row == null) continue;
 
-                String ruc = formatter.formatCellValue(row.getCell(0));
-                String razon = formatter.formatCellValue(row.getCell(1));
-                String direccion = formatter.formatCellValue(row.getCell(2));
-                String sede = formatter.formatCellValue(row.getCell(3));
+                String ruc = formatter.formatCellValue(row.getCell(1));
+                String razon = formatter.formatCellValue(row.getCell(2));
+                String direccion = formatter.formatCellValue(row.getCell(3));
+                String sede = formatter.formatCellValue(row.getCell(4));
 
                 if (ruc == null || ruc.trim().isEmpty()) continue;
 
@@ -326,9 +326,10 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
                     contador++;
                 }
             }
-
+            
             JOptionPane.showMessageDialog(this, "Se importaron " + contador + " instituciones.");
             recargarTabla();
+            workbook.close();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error de archivo: " + e.getMessage());
@@ -338,7 +339,6 @@ public class frmListaInstituciones extends javax.swing.JInternalFrame {
     private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
         javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
         fc.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel", "xlsx", "xls"));
-
         if (fc.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
             importarDesdeExcel(fc.getSelectedFile().getAbsolutePath());
         }
