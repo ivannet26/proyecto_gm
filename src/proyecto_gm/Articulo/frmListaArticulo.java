@@ -35,12 +35,12 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         initComponents();
         
         modelo = (DefaultTableModel) tblarticulo.getModel();
-        modelo.addColumn("ID");
-        modelo.addColumn("Descripción");
-        modelo.addColumn("Características");
-        modelo.addColumn("Categoría");
-        modelo.addColumn("Marca");
-        modelo.addColumn("Cantidad");
+//        modelo.addColumn("ID");
+//        modelo.addColumn("Descripción");
+//        modelo.addColumn("Características");
+//        modelo.addColumn("Categoría");
+//        modelo.addColumn("Marca");
+//        modelo.addColumn("Cantidad");
         tblarticulo.setModel(modelo);
         
         // Asignar el sorter para permitir filtrado dinámico
@@ -75,10 +75,10 @@ public class frmListaArticulo extends javax.swing.JInternalFrame {
         for (Articulo art : listaArticulos) {
             modelo.addRow(new Object[]{
                 art.getId(),
-                art.getDescripcion(),
-                art.getCaracteristicas(),
                 art.getCategoria().getDescripcion(),
                 art.getMarca().getDescripcion(),
+                art.getCaracteristicas(),
+                art.getDescripcion(),                                                
                 art.getCantidad()
             });
         }

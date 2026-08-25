@@ -29,7 +29,7 @@ public class inicio extends javax.swing.JFrame {
     static Connection conn = ConexionBD.getConnection();
     public static String macAddressCalculada = "";
     public static String nombreEquipoCalculado = "";
-
+    
     public inicio() {
         this(false);
         

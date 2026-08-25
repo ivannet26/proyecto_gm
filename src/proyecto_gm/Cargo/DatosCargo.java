@@ -16,8 +16,11 @@ public class DatosCargo {
     public List<Cargo> listarCargo() throws SQLException {
         List<Cargo> lista = new ArrayList<>();
         // Usamos try-with-resources para asegurar que la conexión y el statement se cierren
-        try (CallableStatement stmt = conn.prepareCall("{ CALL listar_cargos() }");
-             ResultSet rs = stmt.executeQuery()) {
+        try (
+           CallableStatement stmt = conn.prepareCall("{ CALL listar_cargos() }");
+             ResultSet rs = stmt.executeQuery()
+                
+             ) {
 
             while (rs.next()) {
                 Cargo cargo = new Cargo(
